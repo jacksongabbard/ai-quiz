@@ -115,6 +115,7 @@ export async function addBotMessageToThread(threadID: string) {
     model: 'gpt-4-0613',
     messages: openaiMessages,
     stream: true,
+    max_tokens: 150,
   });
 
   await fetchCordRESTApi(
