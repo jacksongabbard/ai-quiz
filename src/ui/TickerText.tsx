@@ -20,9 +20,9 @@ export function TickerText({
     const tick = () => {
       if (_delayBy > 0 || _pos <= text.length) {
         if (_delayBy > 0) {
-          _delayBy -= 3;
+          _delayBy -= 1;
         } else {
-          setPos((_pos += 3));
+          setPos((_pos += 1));
         }
         timeoutID = setTimeout(tick, 35);
       } else {
@@ -41,5 +41,11 @@ export function TickerText({
   if (showDot && pos < text.length) {
     dot = '●';
   }
-  return <>{text.substring(0, pos) + dot}</>;
+
+  let t = text.substring(0, pos) + dot;
+  if (t === '') {
+    return <>&nbsp;</>;
+  }
+
+  return <>{t}</>;
 }

@@ -5,6 +5,7 @@ import { CordProvider } from '@cord-sdk/react';
 
 import { QuizQuestion } from '@/lib/questions';
 import Question from '@/ui/Question';
+import { Start } from '@/ui/Start';
 
 export function Quiz({
   questions,
@@ -16,11 +17,7 @@ export function Quiz({
   const [currentQuestion, setCurrentQuestion] = useState(-1);
 
   if (currentQuestion === -1) {
-    return (
-      <p>
-        <button onClick={() => setCurrentQuestion(0)}>Start</button>
-      </p>
-    );
+    return <Start onStart={() => setCurrentQuestion(0)} />;
   }
 
   let qs: React.ReactNode[] = [];

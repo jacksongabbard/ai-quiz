@@ -12,25 +12,29 @@ export default function Question({
   humanAnswer?: number;
   botAnswer?: number;
 }) {
+  let runningTotal = qq.question.length + 10;
   return (
     <div className={styles.question}>
       <div className={styles.questionText}>
         <TickerText text={qq.question} showDot={true} />
       </div>
       {qq.answers.map((text, idx) => {
-        return (
+        const q = (
           <button key={idx} className={styles.answer}>
             <span>
               <TickerText
                 text={indexToLetter(idx) + '. '}
-                delayBy={qq.question.length}
+                delayBy={runningTotal}
               />
             </span>
             <span>
-              <TickerText text={text} delayBy={qq.question.length + 3} />
+              <TickerText text={text} delayBy={runningTotal + 3} />
             </span>
           </button>
         );
+
+        runningTotal += text.length + 3;
+        return q;
       })}
     </div>
   );
