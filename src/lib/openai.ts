@@ -20,6 +20,10 @@ Similarly, you should also explain your reasoning. If you are confident about yo
 You should end your message with "So I think the answer is" followed by the single letter indicating your answer.
 `;
 
+const answerRegex = /So,? I think the answer is ./;
+
+const asciiCapitalsOffset = 'A'.charCodeAt(0);
+
 function questionSystemPrompt(q: BaseQuizQuestion): string {
   let prompt =
     baseSystemPrompt +
@@ -28,7 +32,8 @@ function questionSystemPrompt(q: BaseQuizQuestion): string {
     '\nThe possible answers are:\n';
 
   q.answers.forEach(
-    (a, i) => (prompt += `${String.fromCharCode(65 + i)}. ${a}\n`),
+    (a, i) =>
+      (prompt += `${String.fromCharCode(asciiCapitalsOffset + i)}. ${a}\n`),
   );
 
   return prompt;
@@ -60,6 +65,23 @@ async function getMessagesInThread(
     role: m.authorID.startsWith('h:') ? 'user' : 'assistant',
     content: m.plaintext,
   }));
+}
+
+async function maybeUpdateBotAnswer(threadID: string, full: string) {
+  const matches = full.match(answerRegex) ?? [];
+  if (matches.length < 1) {
+    return;
+  }
+
+  const match = matches[matches.length - 1];
+  const botAnswer = match.charCodeAt(match.length - 1) - asciiCapitalsOffset;
+
+  console.log('updating bot answer for thread', threadID, botAnswer);
+  await fetchCordRESTApi(
+    `/v1/threads/${threadID}`,
+    'PUT',
+    JSON.stringify({ metadata: { botAnswer } }),
+  );
 }
 
 export async function addBotMessageToThread(threadID: string) {
@@ -122,5 +144,8 @@ export async function addBotMessageToThread(threadID: string) {
     ]);
   }
 
-  await typing(threadID, botID, false);
+  await Promise.all([
+    maybeUpdateBotAnswer(threadID, full),
+    typing(threadID, botID, false),
+  ]);
 }

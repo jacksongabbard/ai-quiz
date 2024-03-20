@@ -6,7 +6,7 @@ import Image from 'next/image';
 import styles from '@/ui/Question.module.css';
 import { TickerText } from '@/ui/TickerText';
 import { indexToLetter } from '@/util/indexToLetter';
-import { Thread } from '@cord-sdk/react';
+import { Thread, thread } from '@cord-sdk/react';
 
 export default function Question({
   active,
@@ -24,7 +24,8 @@ export default function Question({
   onNext: () => void;
 }) {
   const [_humanAnswer, setHumanAnswer] = useState(humanAnswer);
-  const [_botAnswer, setBotAnswer] = useState(botAnswer || 0);
+  const threadData = thread.useThread(qq.cordThreadID);
+  const _botAnswer = Number(threadData.thread?.metadata?.botAnswer);
 
   const shellRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
