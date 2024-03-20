@@ -9,14 +9,14 @@ import { indexToLetter } from '@/util/indexToLetter';
 import { Thread } from '@cord-sdk/react';
 
 export default function Question({
-  idx,
+  active,
   qq,
   humanAnswer,
   botAnswer,
   onSubmit,
   onNext,
 }: {
-  idx: number;
+  active: boolean;
   qq: ClientQuizQuestion;
   humanAnswer?: number;
   botAnswer?: number;
@@ -28,10 +28,10 @@ export default function Question({
 
   const shellRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (shellRef.current) {
+    if (shellRef.current && active) {
       shellRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [idx]);
+  }, [active]);
 
   let runningTotal = qq.question.length + 10;
   return (
@@ -142,9 +142,11 @@ export default function Question({
             ) : (
               <TickerText text={'Incorrect!'} />
             )}
-            <button onClick={onNext} className={styles.nextQuestion}>
-              <TickerText text="Next" delayBy={20} />
-            </button>
+            {active && (
+              <button onClick={onNext} className={styles.nextQuestion}>
+                <TickerText text="Next" delayBy={20} />
+              </button>
+            )}
           </div>
         )}
       </div>

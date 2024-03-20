@@ -36,15 +36,15 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
     setCurrentQuestion(nextQuestion);
   }, [questions, currentQuestion]);
 
+  let content: React.ReactNode[] = [<Start onStart={showNextQuestion} />];
   if (currentQuestion === -1) {
-    return <Start onStart={showNextQuestion} />;
+    return content;
   }
 
-  let qs: React.ReactNode[] = [];
   for (let i = 0; i <= Math.min(questions.length - 1, currentQuestion); i++) {
-    qs.push(
+    content.push(
       <Question
-        idx={i}
+        active={i === currentQuestion}
         key={questions[i].question}
         qq={questions[i]}
         {...answers[i]}
@@ -59,8 +59,8 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
   }
 
   if (currentQuestion === questions.length) {
-    qs.push(<p>All done!</p>);
+    content.push(<p>All done!</p>);
   }
 
-  return <>{qs}</>;
+  return <>{content}</>;
 }
