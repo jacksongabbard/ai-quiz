@@ -1,23 +1,31 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { CordProvider } from '@cord-sdk/react';
 
-import { QuizQuestion } from '@/lib/questions';
 import Question from '@/ui/Question';
 import { Start } from '@/ui/Start';
+import type { QuizData } from '@/app/page';
 
 export function Quiz({
   questions,
   accessToken,
 }: {
-  questions: QuizQuestion[];
+  questions: QuizData['questions'];
   accessToken: string;
 }) {
   const [currentQuestion, setCurrentQuestion] = useState(-1);
+  const showNextQuestion = useCallback(() => {
+    const nextQuestion = currentQuestion + 1;
+    void fetch('/api/begin-question', {
+      body: JSON.stringify({ threadID: questions[nextQuestion].cordThreadID }),
+      method: 'POST',
+    });
+    setCurrentQuestion(nextQuestion);
+  }, [questions, currentQuestion]);
 
   if (currentQuestion === -1) {
-    return <Start onStart={() => setCurrentQuestion(0)} />;
+    return <Start onStart={showNextQuestion} />;
   }
 
   let qs: React.ReactNode[] = [];

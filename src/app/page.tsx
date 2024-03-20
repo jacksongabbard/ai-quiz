@@ -6,7 +6,7 @@ import { getClientAuthToken } from '@cord-sdk/server';
 import { CORD_API_SECRET, CORD_APPLICATION_ID } from '@/lib/env';
 import { Quiz } from '@/ui/Quiz';
 
-type QuizData = {
+export type QuizData = {
   cordAccessToken: string;
   questions: (QuizQuestion & {
     cordThreadID: string;
