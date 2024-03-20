@@ -57,8 +57,8 @@
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  justify-content: flex-start;
-  padding: 14px 36px 14px 14px;
+  justify-content: space-between;
+  padding: 14px;
   position: relative;
   text-align: left;
 }
@@ -76,25 +76,21 @@
   border: 1px #ffffff88 solid;
 }
 
+.avatars {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
 .botAvatar,
 .humanAvatar {
   align-items: center;
-  background: #ffffff33;
+  background: #00000033;
   border-radius: 100%;
   display: flex;
   justify-content: center;
-  height: 12px;
-  position: absolute;
-  right: 12px;
-  width: 12px;
-}
-
-.botAvatar {
-  bottom: 6px;
-}
-
-.humanAvatar {
-  top: 6px;
+  height: 18px;
+  width: 18px;
 }
 
 .submit {
@@ -127,6 +123,10 @@
   100% {
     background: #ffffff33;
   }
+}
+
+.correctAnswerBackground {
+  background: #016526cc;
 }
 
 .correctAnswer,

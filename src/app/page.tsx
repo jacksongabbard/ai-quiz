@@ -3,7 +3,7 @@ import styles from './page.module.css';
 import { uuid } from '@/lib/uuid';
 import { fetchCordRESTApi } from '@/lib/fetchCordRESTApi';
 import { getClientAuthToken } from '@cord-sdk/server';
-import { CORD_API_SECRET, CORD_APPLICATION_ID } from '@/lib/env';
+import { CORD_API_SECRET, CORD_APPLICATION_ID, SERVER } from '@/lib/env';
 import { Quiz } from '@/ui/Quiz';
 
 export type ClientQuizQuestion = BaseQuizQuestion & { cordThreadID: string };
@@ -48,7 +48,8 @@ async function getQuizData(): Promise<QuizData> {
       '/v1/users/' + human,
       'PUT',
       JSON.stringify({
-        name: 'Human',
+        name: 'You',
+        profilePictureURL: SERVER + '/avatar-black.svg',
         addGroups: [group],
       }),
     ),
@@ -57,6 +58,7 @@ async function getQuizData(): Promise<QuizData> {
       'PUT',
       JSON.stringify({
         name: 'AI',
+        profilePictureURL: SERVER + '/bot-black.svg',
         addGroups: [group],
       }),
     ),

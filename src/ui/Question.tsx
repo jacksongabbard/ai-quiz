@@ -69,20 +69,26 @@ export default function Question({
                   [styles.answer]: true,
                   [styles.selectedAnswer]:
                     _humanAnswer === idx || _botAnswer === idx,
+                  [styles.correctAnswerBackground]:
+                    humanAnswer !== undefined &&
+                    botAnswer !== undefined &&
+                    idx === qq.correctAnswerIndex,
                 })}
                 onClick={() => {
                   setHumanAnswer(idx);
                 }}
               >
                 <span>
-                  <TickerText
-                    text={indexToLetter(idx) + '.'}
-                    delayBy={runningTotal}
-                  />
-                </span>
-                &nbsp;
-                <span>
-                  <TickerText text={text} delayBy={runningTotal + 3} />
+                  <span>
+                    <TickerText
+                      text={indexToLetter(idx) + '.'}
+                      delayBy={runningTotal}
+                    />
+                  </span>
+                  &nbsp;
+                  <span>
+                    <TickerText text={text} delayBy={runningTotal + 3} />
+                  </span>
                 </span>
                 {idx === qq.correctAnswerIndex &&
                   (botAnswer !== undefined || humanAnswer !== undefined) && (
@@ -112,29 +118,31 @@ export default function Question({
                       </span>
                     </span>
                   )}
-                {_botAnswer === idx && (
-                  <span className={styles.botAvatar}>
-                    <Image
-                      src={'/bot.svg'}
-                      width={12}
-                      height={12}
-                      alt="Bot"
-                      title="Your AI teammate"
-                    />
-                  </span>
-                )}
-                {_humanAnswer === idx && (
-                  <span className={styles.humanAvatar}>
-                    <Image
-                      src={'/avatar.svg'}
-                      width={12}
-                      height={12}
-                      alt="You"
-                      title="You"
-                      className={styles.avatarImg}
-                    />
-                  </span>
-                )}
+                <span className={styles.avatars}>
+                  {_botAnswer === idx && (
+                    <span className={styles.botAvatar}>
+                      <Image
+                        src={'/bot.svg'}
+                        width={16}
+                        height={16}
+                        alt="Bot"
+                        title="Your AI teammate"
+                      />
+                    </span>
+                  )}
+                  {_humanAnswer === idx && (
+                    <span className={styles.humanAvatar}>
+                      <Image
+                        src={'/avatar.svg'}
+                        width={16}
+                        height={16}
+                        alt="You"
+                        title="You"
+                        className={styles.avatarImg}
+                      />
+                    </span>
+                  )}
+                </span>
               </button>
             );
 

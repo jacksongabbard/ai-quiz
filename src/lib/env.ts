@@ -7,6 +7,8 @@ function env(k: string): string {
   throw new Error('Missing key from .env: ' + k);
 }
 
+export const SERVER = env('SERVER');
+
 export const CORD_APPLICATION_ID = env('CORD_APPLICATION_ID');
 export const CORD_API_SECRET = env('CORD_API_SECRET');
 export const CORD_SERVER = env('CORD_SERVER');
