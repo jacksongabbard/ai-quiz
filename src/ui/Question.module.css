@@ -2,8 +2,8 @@
   box-sizing: border-box;
   display: flex;
   margin: 0 auto;
-  min-height: 90vh;
-  max-height: 90vh;
+  min-height: 100vh;
+  max-height: 100vh;
   padding: 12px;
 
   flex-direction: row;
@@ -18,9 +18,10 @@
     gap: 12px;
     width: min(80vw, 500px);
   }
-  .cordThread {
+  body .cordThread {
     max-height: 80vh;
     flex-grow: 1;
+    overflow: scroll;
   }
 }
 

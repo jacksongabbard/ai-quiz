@@ -1,0 +1,37 @@
+.scorecard {
+  box-sizing: border-box;
+  display: flex;
+  margin: 0 auto;
+  min-height: 100vh;
+  max-height: 100vh;
+  padding: 12px;
+
+  flex-direction: column;
+  gap: 4px;
+  width: min(80vw, 1024px);
+  padding: 10vh 0;
+}
+
+@media (max-width: 1024px) {
+  .scorecard {
+    width: min(80vw, 500px);
+  }
+}
+
+.section {
+  background: #ffffff33;
+  padding: 12px;
+  text-align: center;
+}
+
+.heading {
+  font-size: 18px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.footer {
+  font-size: 18px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}

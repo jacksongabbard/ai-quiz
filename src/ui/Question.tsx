@@ -25,7 +25,12 @@ export default function Question({
 }) {
   const [_humanAnswer, setHumanAnswer] = useState(humanAnswer);
   const threadData = thread.useThread(qq.cordThreadID);
-  const _botAnswer = Number(threadData.thread?.metadata?.botAnswer);
+  let _botAnswer: number | undefined = Number(
+    threadData.thread?.metadata?.botAnswer,
+  );
+  if (isNaN(_botAnswer)) {
+    _botAnswer = undefined;
+  }
 
   const shellRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -36,7 +41,6 @@ export default function Question({
 
   let runningTotal = qq.question.length + 10;
 
-  console.log({ _botAnswer, _humanAnswer });
   return (
     <div className={styles.questionContainer} ref={shellRef}>
       <div className={styles.question}>
@@ -67,7 +71,7 @@ export default function Question({
                 <TickerText text={text} delayBy={runningTotal + 3} />
               </span>
               {idx === qq.correctAnswerIndex &&
-                (botAnswer === idx || humanAnswer === idx) && (
+                (botAnswer !== undefined || humanAnswer !== undefined) && (
                   <span className={styles.correctAnswer}>
                     <span className={styles.inner}>
                       <Image

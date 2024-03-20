@@ -13,8 +13,9 @@ export const questions: BaseQuizQuestion[] = [
   },
   {
     question: `A hundred people are divided into two groups based on food
-preferences. The people in the first group individually believe they make up a
-majority. What is likely to be true of the second group?`,
+    preferences. No one knows how many people are in each group. The people in
+    the first group individually believe they make up a majority. What is likely
+    to be true of the second group?`,
     answers: [
       'They believe they are a minority',
       'They believe the groups are equal',

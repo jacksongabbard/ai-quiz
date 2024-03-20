@@ -1,13 +1,18 @@
+.startContainer {
+  display: flex;
+  min-height: 90vh;
+  flex-direction: column;
+}
 .start {
   align-items: center;
   display: flex;
+  flex: 1;
   flex-direction: column;
   font-size: 24px;
   line-height: 36px;
   gap: 12px;
   justify-content: center;
   margin: 0 auto;
-  min-height: 90vh;
   text-align: center;
   width: min(80vw, 300px);
 }
@@ -48,16 +53,18 @@
   }
 }
 
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 .startButton.hidden {
   pointer-events: none;
-  animation: fadeOut 1s;
+  color: #ffffff33;
+  background: #00000033;
+}
+
+.poweredBy {
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+}
+
+.logo {
+  margin-top: 12px;
 }

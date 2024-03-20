@@ -6,6 +6,7 @@ import { CordProvider } from '@cord-sdk/react';
 import Question from '@/ui/Question';
 import { Start } from '@/ui/Start';
 import type { ClientQuizQuestion } from '@/app/page';
+import { Scorecard } from '@/ui/Scorecard';
 
 export function Quiz({
   questions,
@@ -22,18 +23,29 @@ export function Quiz({
 }
 
 function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
-  const [currentQuestion, setCurrentQuestion] = useState(-1);
+  const [currentQuestion, setCurrentQuestion] = useState(questions.length - 1);
   const [answers, setAnswers] = useState<
     { humanAnswer: number; botAnswer: number }[]
   >([]);
 
   const showNextQuestion = useCallback(() => {
     const nextQuestion = currentQuestion + 1;
-    void fetch('/api/begin-question', {
-      body: JSON.stringify({ threadID: questions[nextQuestion].cordThreadID }),
-      method: 'POST',
-    });
     setCurrentQuestion(nextQuestion);
+    if (nextQuestion >= questions.length) {
+      return;
+    }
+    let delay = questions[nextQuestion].question.length;
+    for (let i = 0; i < questions[nextQuestion].answers.length; i++) {
+      delay += questions[nextQuestion].answers[i].length;
+    }
+    setTimeout(() => {
+      void fetch('/api/begin-question', {
+        body: JSON.stringify({
+          threadID: questions[nextQuestion].cordThreadID,
+        }),
+        method: 'POST',
+      });
+    }, delay * 35); // same as the ticker text
   }, [questions, currentQuestion]);
 
   let content: React.ReactNode[] = [
@@ -64,7 +76,9 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
   }
 
   if (currentQuestion === questions.length) {
-    content.push(<p>All done!</p>);
+    content.push(
+      <Scorecard key="scorecard" answers={answers} questions={questions} />,
+    );
   }
 
   return <>{content}</>;

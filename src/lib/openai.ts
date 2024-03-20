@@ -139,6 +139,7 @@ export async function addBotMessageToThread(threadID: string) {
         'PUT',
         JSON.stringify({
           content: stringToMessageContent(full),
+          updatedTimestamp: null,
         }),
       ),
     ]);
