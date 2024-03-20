@@ -1,31 +1,41 @@
 import type { ClientQuizQuestion } from '@/app/page';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import classnames from 'classnames';
 import Image from 'next/image';
 
-import { BaseQuizQuestion } from '@/lib/questions';
 import styles from '@/ui/Question.module.css';
 import { TickerText } from '@/ui/TickerText';
 import { indexToLetter } from '@/util/indexToLetter';
 import { Thread } from '@cord-sdk/react';
 
 export default function Question({
+  idx,
   qq,
   humanAnswer,
   botAnswer,
   onSubmit,
+  onNext,
 }: {
+  idx: number;
   qq: ClientQuizQuestion;
   humanAnswer?: number;
   botAnswer?: number;
   onSubmit: (humanAnswer: number, botAnswer: number) => void;
+  onNext: () => void;
 }) {
   const [_humanAnswer, setHumanAnswer] = useState(humanAnswer);
   const [_botAnswer, setBotAnswer] = useState(botAnswer || 0);
 
+  const shellRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (shellRef.current) {
+      shellRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [idx]);
+
   let runningTotal = qq.question.length + 10;
   return (
-    <div className={styles.questionContainer}>
+    <div className={styles.questionContainer} ref={shellRef}>
       <div className={styles.question}>
         <div className={styles.questionText}>
           <TickerText text={qq.question} showDot={true} />
@@ -53,6 +63,34 @@ export default function Question({
               <span>
                 <TickerText text={text} delayBy={runningTotal + 3} />
               </span>
+              {idx === qq.correctAnswerIndex &&
+                (botAnswer === idx || humanAnswer === idx) && (
+                  <span className={styles.correctAnswer}>
+                    <span className={styles.inner}>
+                      <Image
+                        src={'/check.svg'}
+                        width={16}
+                        height={16}
+                        alt="Correct!"
+                        title="Correct!"
+                      />
+                    </span>
+                  </span>
+                )}
+              {idx !== qq.correctAnswerIndex &&
+                (botAnswer === idx || humanAnswer === idx) && (
+                  <span className={styles.incorrectAnswer}>
+                    <span className={styles.inner}>
+                      <Image
+                        src={'/x.svg'}
+                        width={16}
+                        height={16}
+                        alt="Incorrect!"
+                        title="Incorrect!"
+                      />
+                    </span>
+                  </span>
+                )}
               {_botAnswer === idx && (
                 <span className={styles.botAvatar}>
                   <Image
@@ -82,8 +120,8 @@ export default function Question({
           runningTotal += text.length + 3;
           return q;
         })}
-        {!humanAnswer &&
-          !botAnswer &&
+        {humanAnswer === undefined &&
+          botAnswer === undefined &&
           _humanAnswer !== undefined &&
           _botAnswer !== undefined && (
             <button
@@ -92,11 +130,25 @@ export default function Question({
                 onSubmit(_humanAnswer, _botAnswer);
               }}
             >
-              Final answer?
+              <TickerText text="Final answer?" />
             </button>
           )}
+
+        {humanAnswer !== undefined && botAnswer !== undefined && (
+          <div className={styles.outcome}>
+            {humanAnswer === qq.correctAnswerIndex ||
+            botAnswer === qq.correctAnswerIndex ? (
+              <TickerText text={'Correct!'} />
+            ) : (
+              <TickerText text={'Incorrect!'} />
+            )}
+            <button onClick={onNext} className={styles.nextQuestion}>
+              <TickerText text="Next" delayBy={20} />
+            </button>
+          </div>
+        )}
       </div>
-      <Thread threadId={qq.cordThreadID} />
+      <Thread threadId={qq.cordThreadID} className={styles.cordThread} />
     </div>
   );
 }

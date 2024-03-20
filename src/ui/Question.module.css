@@ -2,7 +2,7 @@
   box-sizing: border-box;
   display: flex;
   margin: 0 auto;
-  min-height: 100vh;
+  min-height: 90vh;
   padding: 12px;
 
   flex-direction: row;
@@ -20,9 +20,13 @@
 
 .question {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 12px;
   margin: 0 auto;
+}
+.cordThread {
+  flex: 1;
 }
 
 .questionText {
@@ -34,13 +38,13 @@
   align-items: center;
   display: flex;
   background: #ffffff33;
-  border: 2px #ffffff00 solid;
+  border: 1px #ffffff00 solid;
   border-radius: 12px;
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
   justify-content: flex-start;
-  padding: 12px 36px 12px 12px;
+  padding: 14px 36px 14px 14px;
   position: relative;
   text-align: left;
 }
@@ -50,12 +54,12 @@
 }
 
 .answer:active {
-  border: 2px #ffffff88 solid;
+  border: 1px #ffffff88 solid;
   top: 1px;
 }
 
 .selectedAnswer {
-  border: 2px #fff solid;
+  border: 1px #fff solid;
 }
 
 .botAvatar,
@@ -80,7 +84,7 @@
 }
 
 .submit {
-  border: 2px #00000000 solid;
+  border: 1px #00000000 solid;
   animation: fadeLoop 1.5s infinite;
   background: #00000033;
   box-sizing: border-box;
@@ -91,7 +95,7 @@
 }
 
 .submit:hover {
-  border: 2px #ffffff solid;
+  border: 1px #ffffff solid;
 }
 
 .submit:active {
@@ -109,4 +113,55 @@
   100% {
     background: #ffffff33;
   }
+}
+
+.correctAnswer,
+.incorrectAnswer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: -10px;
+  top: 0;
+  bottom: 0;
+}
+
+.correctAnswer .inner {
+  background: #016526;
+}
+
+.incorrectAnswer .inner {
+  background: #912611;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  border: 1px #fff solid;
+}
+
+.outcome {
+  align-items: center;
+  display: flex;
+  background: #00000033;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: bold;
+  justify-content: space-between;
+  padding: 12px 12px 12px 24px;
+}
+
+.nextQuestion {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.nextQuestion:hover {
+  background: #ffffff33;
 }

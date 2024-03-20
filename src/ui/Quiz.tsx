@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { CordProvider } from '@cord-sdk/react';
 
 import Question from '@/ui/Question';
@@ -23,6 +23,14 @@ export function Quiz({
 
 function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
   const [currentQuestion, setCurrentQuestion] = useState(-1);
+  const [answers, setAnswers] = useState<
+    { humanAnswer: number; botAnswer: number }[]
+  >([]);
+
+  useEffect(() => {
+    window.location.hash = '';
+  }, []);
+
   const showNextQuestion = useCallback(() => {
     const nextQuestion = currentQuestion + 1;
     void fetch('/api/begin-question', {
@@ -37,13 +45,25 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
   }
 
   let qs: React.ReactNode[] = [];
-  for (let i = 0; i <= currentQuestion; i++) {
+  for (let i = 0; i <= Math.min(questions.length - 1, currentQuestion); i++) {
     qs.push(
       <Question
-        qq={questions[currentQuestion]}
-        onSubmit={() => console.log('Soon')}
+        idx={i}
+        key={questions[i].question}
+        qq={questions[i]}
+        {...answers[i]}
+        onSubmit={(humanAnswer: number, botAnswer: number) => {
+          const newAnswers = [...answers];
+          newAnswers[i] = { humanAnswer, botAnswer };
+          setAnswers(newAnswers);
+        }}
+        onNext={showNextQuestion}
       />,
     );
+  }
+
+  if (currentQuestion === questions.length) {
+    qs.push(<p>All done!</p>);
   }
 
   return <>{qs}</>;
