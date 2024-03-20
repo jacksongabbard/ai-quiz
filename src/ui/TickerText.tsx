@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export function TickerText({
   text,
@@ -37,9 +37,9 @@ export function TickerText({
     };
   }, [delayBy, text, setPos]);
 
-  let dot = "";
+  let dot = '';
   if (showDot && pos < text.length) {
-    dot = "●";
+    dot = '●';
   }
   return <>{text.substring(0, pos) + dot}</>;
 }

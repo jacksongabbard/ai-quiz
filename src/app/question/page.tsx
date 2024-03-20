@@ -1,6 +1,6 @@
-import { TickerText } from "@/ui/TickerText";
-import styles from "@/app/question/page.module.css";
-import { indexToLetter } from "@/util/indexToLetter";
+import { TickerText } from '@/ui/TickerText';
+import styles from '@/app/question/page.module.css';
+import { indexToLetter } from '@/util/indexToLetter';
 
 const Q = {
   question: `A hundred people are divided into two groups based on food
@@ -29,7 +29,7 @@ export default function Question() {
           <button key={idx} className={styles.answer}>
             <span>
               <TickerText
-                text={indexToLetter(idx) + ". "}
+                text={indexToLetter(idx) + '. '}
                 delayBy={Q.question.length}
               />
             </span>

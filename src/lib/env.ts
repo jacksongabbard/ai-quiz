@@ -1,10 +1,10 @@
 function env(k: string): string {
-	const v = process.env[k];
-	if (v !== undefined) {
-		return v;
-	}
+  const v = process.env[k];
+  if (v !== undefined) {
+    return v;
+  }
 
-	throw new Error('Missing key from .env: ' + k);
+  throw new Error('Missing key from .env: ' + k);
 }
 
 export const CORD_APPLICATION_ID = env('CORD_APPLICATION_ID');

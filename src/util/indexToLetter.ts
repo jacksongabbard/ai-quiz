@@ -1,22 +1,22 @@
 export const indexToLetter = (
-  idx: number
-): "A" | "B" | "C" | "D" | "E" | "F" => {
+  idx: number,
+): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' => {
   if (idx < 0 || idx > 5) {
   }
   switch (idx) {
     case 0:
-      return "A";
+      return 'A';
     case 1:
-      return "B";
+      return 'B';
     case 2:
-      return "C";
+      return 'C';
     case 3:
-      return "D";
+      return 'D';
     case 4:
-      return "E";
+      return 'E';
     case 5:
-      return "F";
+      return 'F';
     default:
-      throw new Error("Invalid answer index: " + idx);
+      throw new Error('Invalid answer index: ' + idx);
   }
 };

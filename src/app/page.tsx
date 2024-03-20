@@ -1,9 +1,9 @@
-import { QuizQuestion, questions } from "@/lib/questions";
-import styles from "./page.module.css";
-import { uuid } from "@/lib/uuid";
-import { fetchCordRESTApi } from "@/lib/fetchCordRESTApi";
-import { getClientAuthToken } from "@cord-sdk/server";
-import { CORD_API_SECRET, CORD_APPLICATION_ID } from "@/lib/env";
+import { QuizQuestion, questions } from '@/lib/questions';
+import styles from './page.module.css';
+import { uuid } from '@/lib/uuid';
+import { fetchCordRESTApi } from '@/lib/fetchCordRESTApi';
+import { getClientAuthToken } from '@cord-sdk/server';
+import { CORD_API_SECRET, CORD_APPLICATION_ID } from '@/lib/env';
 
 type QuizData = {
   cordAccessToken: string;
@@ -15,35 +15,35 @@ type QuizData = {
 async function getQuizData(): Promise<QuizData> {
   const id = uuid();
 
-  const human = "h:" + id;
-  const bot = "b:" + id;
-  const group = "g:" + id;
-  const thread = (n: number) => "t:" + id + ":" + String(n);
+  const human = 'h:' + id;
+  const bot = 'b:' + id;
+  const group = 'g:' + id;
+  const thread = (n: number) => 't:' + id + ':' + String(n);
 
   await fetchCordRESTApi(
-    "/v1/groups/" + group,
-    "PUT",
+    '/v1/groups/' + group,
+    'PUT',
     JSON.stringify({
-      name: "Quiz Group for " + id,
-    })
+      name: 'Quiz Group for ' + id,
+    }),
   );
 
   await Promise.all([
     fetchCordRESTApi(
-      "/v1/users/" + human,
-      "PUT",
+      '/v1/users/' + human,
+      'PUT',
       JSON.stringify({
-        name: "Human",
+        name: 'Human',
         addGroups: [group],
-      })
+      }),
     ),
     fetchCordRESTApi(
-      "/v1/users/" + bot,
-      "PUT",
+      '/v1/users/' + bot,
+      'PUT',
       JSON.stringify({
-        name: "AI",
+        name: 'AI',
         addGroups: [group],
-      })
+      }),
     ),
   ]);
 
