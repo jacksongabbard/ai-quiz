@@ -1,14 +1,15 @@
-import { QuizQuestion } from '@/lib/questions';
+import type { ClientQuizQuestion } from '@/app/page';
 import styles from '@/ui/Question.module.css';
 import { TickerText } from '@/ui/TickerText';
 import { indexToLetter } from '@/util/indexToLetter';
+import { Thread } from '@cord-sdk/react';
 
 export default function Question({
   qq,
   humanAnswer,
   botAnswer,
 }: {
-  qq: QuizQuestion;
+  qq: ClientQuizQuestion;
   humanAnswer?: number;
   botAnswer?: number;
 }) {
@@ -36,6 +37,7 @@ export default function Question({
         runningTotal += text.length + 3;
         return q;
       })}
+      <Thread threadId={qq.cordThreadID} />
     </div>
   );
 }

@@ -1,10 +1,10 @@
-export type QuizQuestion = {
+export type BaseQuizQuestion = {
   question: string;
   answers: string[];
   correctAnswerIndex: number;
 };
 
-export const questions: QuizQuestion[] = [
+export const questions: BaseQuizQuestion[] = [
   {
     question:
       'Which of these words, if you remove one letter, is an anagram of "China"?',

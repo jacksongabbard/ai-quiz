@@ -1,4 +1,4 @@
-import { QuizQuestion, questions } from '@/lib/questions';
+import { BaseQuizQuestion, questions } from '@/lib/questions';
 import styles from './page.module.css';
 import { uuid } from '@/lib/uuid';
 import { fetchCordRESTApi } from '@/lib/fetchCordRESTApi';
@@ -6,11 +6,11 @@ import { getClientAuthToken } from '@cord-sdk/server';
 import { CORD_API_SECRET, CORD_APPLICATION_ID } from '@/lib/env';
 import { Quiz } from '@/ui/Quiz';
 
+export type ClientQuizQuestion = BaseQuizQuestion & { cordThreadID: string };
+
 export type QuizData = {
   cordAccessToken: string;
-  questions: (QuizQuestion & {
-    cordThreadID: string;
-  })[];
+  questions: ClientQuizQuestion[];
 };
 
 async function getQuizData(): Promise<QuizData> {
@@ -51,6 +51,7 @@ async function getQuizData(): Promise<QuizData> {
   return {
     cordAccessToken: getClientAuthToken(CORD_APPLICATION_ID, CORD_API_SECRET, {
       user_id: human,
+      group_id: group,
     }),
     questions: questions.map((q, n) => ({ ...q, cordThreadID: thread(n) })),
   };

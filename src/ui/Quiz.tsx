@@ -5,13 +5,13 @@ import { CordProvider } from '@cord-sdk/react';
 
 import Question from '@/ui/Question';
 import { Start } from '@/ui/Start';
-import type { QuizData } from '@/app/page';
+import type { ClientQuizQuestion } from '@/app/page';
 
 export function Quiz({
   questions,
   accessToken,
 }: {
-  questions: QuizData['questions'];
+  questions: ClientQuizQuestion[];
   accessToken: string;
 }) {
   return (
@@ -21,7 +21,7 @@ export function Quiz({
   );
 }
 
-function QuizImpl({ questions }: { questions: QuizData['questions'] }) {
+function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
   const [currentQuestion, setCurrentQuestion] = useState(-1);
   const showNextQuestion = useCallback(() => {
     const nextQuestion = currentQuestion + 1;
