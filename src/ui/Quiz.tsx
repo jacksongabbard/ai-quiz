@@ -14,6 +14,14 @@ export function Quiz({
   questions: QuizData['questions'];
   accessToken: string;
 }) {
+  return (
+    <CordProvider clientAuthToken={accessToken}>
+      <QuizImpl questions={questions} />
+    </CordProvider>
+  );
+}
+
+function QuizImpl({ questions }: { questions: QuizData['questions'] }) {
   const [currentQuestion, setCurrentQuestion] = useState(-1);
   const showNextQuestion = useCallback(() => {
     const nextQuestion = currentQuestion + 1;
@@ -33,5 +41,5 @@ export function Quiz({
     qs.push(<Question qq={questions[currentQuestion]} />);
   }
 
-  return <CordProvider clientAuthToken={accessToken}>{qs}</CordProvider>;
+  return <>{qs}</>;
 }
