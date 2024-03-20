@@ -34,11 +34,11 @@ function questionSystemPrompt(q: BaseQuizQuestion): string {
   return prompt;
 }
 
-async function typing(threadID: string, userID: string) {
+async function typing(threadID: string, userID: string, present: boolean) {
   return await fetchCordRESTApi(
     `/v1/threads/${threadID}`,
     'PUT',
-    JSON.stringify({ typing: [userID] }),
+    JSON.stringify({ typing: present ? [userID] : [] }),
   );
 }
 
@@ -95,7 +95,7 @@ export async function addBotMessageToThread(threadID: string) {
     JSON.stringify({ id: messageID, authorID: botID, content: [] }),
   );
 
-  await typing(threadID, botID);
+  await typing(threadID, botID, true);
 
   let full = '';
   for await (let chunk of stream) {
@@ -105,7 +105,7 @@ export async function addBotMessageToThread(threadID: string) {
     }
 
     await Promise.all([
-      typing(threadID, botID),
+      typing(threadID, botID, true),
       fetchCordRESTApi(
         `/v1/threads/${threadID}/messages/${messageID}`,
         'PUT',
@@ -115,4 +115,6 @@ export async function addBotMessageToThread(threadID: string) {
       ),
     ]);
   }
+
+  await typing(threadID, botID, false);
 }
