@@ -1,50 +1,5 @@
-import { OpenAI } from 'openai';
 import { NextResponse } from 'next/server';
-import { OPENAI_API_SECRET } from '@/lib/env';
-import { BaseQuizQuestion, questions } from '@/lib/questions';
-import { fetchCordRESTApi } from '@/lib/fetchCordRESTApi';
-import { uuid } from '@/lib/uuid';
-import { MessageContent, MessageNodeType } from '@cord-sdk/types';
-
-const openai = new OpenAI({
-  apiKey: OPENAI_API_SECRET,
-});
-
-const baseSystemPrompt = `
-You are playing a quiz game with a friend. You should use your knowledge to try to answer the questions. You and your friend must agree on an answer to the question. Each question has only a single correct answer. Some of the questions involve trivia and knowledge. Others involve wordplay and riddles.
-Since you are only an LLM, you do not have full information about the world. If you are confident in your answer, you should hold your ground. If you are not, you should allow yourself to be convinced by your friend. Your friend needs to use evidence or logic in order to convince you.
-Similarly, you should also explain your reasoning. If you are confident about your answer, you should try to convince your friend.
-You should end your message with "So I think the answer is" followed by the single letter indicating your answer.
-`;
-
-function questionSystemPrompt(q: BaseQuizQuestion): string {
-  let prompt =
-    baseSystemPrompt +
-    '\nThe question is:\n' +
-    q.question +
-    '\nThe possible answers are:\n';
-
-  q.answers.forEach(
-    (a, i) => (prompt += `${String.fromCharCode(65 + i)}. ${a}\n`),
-  );
-
-  return prompt;
-}
-
-async function typing(threadID: string, userID: string) {
-  return await fetchCordRESTApi(
-    `/v1/threads/${threadID}`,
-    'PUT',
-    JSON.stringify({ typing: [userID] }),
-  );
-}
-
-function stringToMessageContent(s: string): MessageContent {
-  return s.split('\n').map((ss) => ({
-    type: MessageNodeType.PARAGRAPH,
-    children: [{ text: ss }],
-  }));
-}
+import { addBotMessageToThread } from '@/lib/openai';
 
 export async function POST(req: Request) {
   const data = await req.json();
@@ -53,56 +8,7 @@ export async function POST(req: Request) {
     throw new Error('Missing threadID');
   }
 
-  const [sigil, id, questionNumber] = threadID.split(':');
-  if (sigil !== 't' || questionNumber === undefined) {
-    throw new Error('Invalid threadID');
-  }
-
-  const question = questions[Number(questionNumber)];
-
-  const botID = 'b:' + id;
-  const messageID = uuid();
-
-  const openaiMessages: OpenAI.ChatCompletionMessageParam[] = [
-    {
-      role: 'system',
-      content: questionSystemPrompt(question),
-    },
-    { role: 'user', content: "I'm not sure, what do you think?" },
-  ];
-
-  const stream = await openai.chat.completions.create({
-    model: 'gpt-4-0613',
-    messages: openaiMessages,
-    stream: true,
-  });
-
-  await fetchCordRESTApi(
-    `/v1/threads/${threadID}/messages`,
-    'POST',
-    JSON.stringify({ id: messageID, authorID: botID, content: [] }),
-  );
-
-  await typing(threadID, botID);
-
-  let full = '';
-  for await (let chunk of stream) {
-    const content = chunk.choices[0].delta.content;
-    if (content !== undefined) {
-      full += content;
-    }
-
-    await Promise.all([
-      typing(threadID, botID),
-      fetchCordRESTApi(
-        `/v1/threads/${threadID}/messages/${messageID}`,
-        'PUT',
-        JSON.stringify({
-          content: stringToMessageContent(full),
-        }),
-      ),
-    ]);
-  }
+  void addBotMessageToThread(threadID);
 
   return NextResponse.json({});
 }
