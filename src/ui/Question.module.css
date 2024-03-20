@@ -5,6 +5,11 @@
   max-width: 500px;
 }
 
+.questionText {
+  font-weight: bold;
+  padding: 12px 0;
+}
+
 .answer {
   display: block;
   background: #ffffff33;

@@ -1,6 +1,4 @@
-import { TickerText } from '@/ui/TickerText';
-import styles from '@/app/question/page.module.css';
-import { indexToLetter } from '@/util/indexToLetter';
+import Question from '@/ui/Question';
 
 const Q = {
   question: `A hundred people are divided into two groups based on food
@@ -13,32 +11,8 @@ majority. What is likely to be true of the second group?`,
     `They have no consistent beliefs`,
   ],
   correctAnswerIndex: 2,
-  playerChoice: 2,
-  aiChoice: 1,
 };
 
-export default function Question() {
-  return (
-    <div className={styles.question}>
-      <div>Question</div>
-      <div>
-        <TickerText text={Q.question} showDot={true} />
-      </div>
-      {Q.answers.map((text, idx) => {
-        return (
-          <button key={idx} className={styles.answer}>
-            <span>
-              <TickerText
-                text={indexToLetter(idx) + '. '}
-                delayBy={Q.question.length}
-              />
-            </span>
-            <span>
-              <TickerText text={text} delayBy={Q.question.length + 3} />
-            </span>
-          </button>
-        );
-      })}
-    </div>
-  );
+export default function page() {
+  return <Question qq={Q} />;
 }

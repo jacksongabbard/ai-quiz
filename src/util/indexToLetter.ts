@@ -1,8 +1,6 @@
 export const indexToLetter = (
   idx: number,
 ): 'A' | 'B' | 'C' | 'D' | 'E' | 'F' => {
-  if (idx < 0 || idx > 5) {
-  }
   switch (idx) {
     case 0:
       return 'A';
