@@ -65,3 +65,12 @@ button {
   width: 100vw;
   pointer-events: none;
 }
+
+body [data-cord-button='add-task'],
+body [data-cord-button='add-mention'],
+body [data-cord-button='add-attachment'],
+body [data-cord-button='connect-slack'],
+.cord-mention-menu .cord-separator,
+body button[data-cord-button='thread-options'] {
+  display: none;
+}
