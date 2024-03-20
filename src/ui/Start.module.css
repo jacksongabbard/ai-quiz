@@ -1,7 +1,9 @@
 .startContainer {
+  box-sizing: border-box;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  padding: 10vh 0;
 }
 .start {
   align-items: center;

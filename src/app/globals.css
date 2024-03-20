@@ -50,10 +50,24 @@ a {
 }
 
 button {
+  display: inline-flex;
+  align-items: center;
   background: #ffffff33;
   color: #fff;
+  cursor: pointer;
+  border: none;
   border-radius: 12px;
   padding: 12px;
+}
+
+button:hover,
+button:active {
+  background: #ffffff55;
+}
+
+button:active {
+  position: relative;
+  top: 1px;
 }
 
 .gradient {

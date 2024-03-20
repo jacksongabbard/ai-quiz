@@ -12,6 +12,12 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 0,
   },
   {
+    question:
+      "You have a 100 cents in coins. The coins are separated into 10 piles.\nThe value of the piles are: 1, 1, 2, 3, 5, 8, 13, 21, 34, ____.\n\nWhat's the value of the last pile?",
+    answers: ['55', '34', '12', '1'],
+    correctAnswerIndex: 2,
+  },
+  {
     question: `A hundred people are divided into two groups based on food
     preferences. No one knows how many people are in each group. The people in
     the first group individually believe they make up a majority. On average,
@@ -46,8 +52,8 @@ wealthiest person?`,
   },
   {
     question:
-      "You have a dollar in coins. The coins are separated into 10 piles.\nThe value of the piles are: 1, 1, 2, 3, 5, 8, 13, 21, 34, ____.\n\nWhat's the value of the last pile?",
-    answers: ['55', '34', '12', '1'],
-    correctAnswerIndex: 2,
+      'Three perfectly logical people are deciding what to eat for lunch. The waiter asks the first person, "would you all like today\'s special?\nThe first person says, "Maybe."\nThe second person says, "Maybe." What does the third person say?',
+    answers: ['Yes', 'Maybe', "It's possible", 'Unlikely'],
+    correctAnswerIndex: 0,
   },
 ];

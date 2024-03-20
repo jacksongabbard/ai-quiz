@@ -20,7 +20,7 @@ Similarly, you should also explain your reasoning. If you are confident about yo
 You should end your message with "So I think the answer is" followed by the single letter indicating your answer.
 `;
 
-const answerRegex = /So,? I think the answer is ./;
+const answerRegex = /I think the answer is ./i;
 
 const asciiCapitalsOffset = 'A'.charCodeAt(0);
 

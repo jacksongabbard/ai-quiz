@@ -9,16 +9,18 @@ import { indexToLetter } from '@/util/indexToLetter';
 import { Thread, thread } from '@cord-sdk/react';
 
 const backgroundColors = [
-  '#5f3aac',
-  '#6836a2',
-  '#6c339d',
-  '#712f96',
-  '#772a90',
-  '#7b248a',
-  '#7f1e84',
-  '#821980',
-  '#83167e',
-  '#720e4d',
+  'hsl(256, 66%, 34%)',
+  'hsl(236, 66%, 34%)',
+  'hsl(216, 66%, 34%)',
+  'hsl(196, 66%, 34%)',
+  'hsl(176, 66%, 34%)',
+  'hsl(156, 66%, 34%)',
+  'hsl(146, 66%, 34%)',
+  'hsl(136, 66%, 34%)',
+  'hsl(116, 66%, 34%)',
+  'hsl(96, 66%, 34%)',
+  'hsl(76, 66%, 34%)',
+  'hsl(56, 66%, 34%)',
 ];
 
 export default function Question({
@@ -64,6 +66,7 @@ export default function Question({
       ref={shellRef}
     >
       <div className={styles.questionContainer}>
+        <div className={styles.questionNumber}>{idx + 1} / 10</div>
         <div className={styles.question}>
           <div className={styles.questionText}>
             <TickerText text={qq.question} showDot={true} />
@@ -80,6 +83,9 @@ export default function Question({
                     humanAnswer !== undefined &&
                     botAnswer !== undefined &&
                     idx === qq.correctAnswerIndex,
+                  [styles.incorrectAnswerBackground]:
+                    (humanAnswer === idx || botAnswer === idx) &&
+                    idx !== qq.correctAnswerIndex,
                 })}
                 onClick={() => {
                   setHumanAnswer(idx);
@@ -169,24 +175,48 @@ export default function Question({
                 <TickerText text="Final answer?" />
               </button>
             )}
-
           {humanAnswer !== undefined && botAnswer !== undefined && (
             <div className={styles.outcome}>
-              {humanAnswer === qq.correctAnswerIndex ||
-              botAnswer === qq.correctAnswerIndex ? (
-                <TickerText text={'Correct!'} />
-              ) : (
-                <TickerText text={'Incorrect!'} />
-              )}
+              {humanAnswer === qq.correctAnswerIndex &&
+                botAnswer === qq.correctAnswerIndex && (
+                  <TickerText text={'Correct!'} />
+                )}
+
+              {humanAnswer === qq.correctAnswerIndex &&
+                botAnswer !== qq.correctAnswerIndex && (
+                  <TickerText text={'You were right!'} />
+                )}
+
+              {humanAnswer !== qq.correctAnswerIndex &&
+                botAnswer === qq.correctAnswerIndex && (
+                  <TickerText text={'The AI was right!'} />
+                )}
+
+              {humanAnswer !== qq.correctAnswerIndex &&
+                botAnswer !== qq.correctAnswerIndex && (
+                  <TickerText text={'You were both wrong!'} />
+                )}
               {active && (
                 <button onClick={onNext} className={styles.nextQuestion}>
+                  <Image
+                    src="/right-arrow.svg"
+                    width={14}
+                    height={14}
+                    alt="Right arrow"
+                  />
+                  &nbsp;
                   <TickerText text="Next" delayBy={20} />
                 </button>
               )}
             </div>
           )}
         </div>
-        <Thread threadId={qq.cordThreadID} className={styles.cordThread} />
+        <Thread
+          showHeader={false}
+          showPlaceholder={false}
+          threadId={qq.cordThreadID}
+          className={styles.cordThread}
+        />
       </div>
     </div>
   );

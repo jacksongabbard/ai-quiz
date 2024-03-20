@@ -51,7 +51,7 @@
 .answer {
   align-items: center;
   display: flex;
-  background: #ffffff33;
+  background-color: #ffffff33;
   border: 1px #ffffff00 solid;
   border-radius: 12px;
   box-sizing: border-box;
@@ -61,10 +61,11 @@
   padding: 14px;
   position: relative;
   text-align: left;
+  transition: background-color 0.3s;
 }
 
 .answer:hover {
-  background: #ffffff55;
+  background-color: #ffffff55;
 }
 
 .answer:active {
@@ -102,6 +103,8 @@
   border-radius: 12px;
   color: #fff;
   cursor: pointer;
+  justify-content: flex-end;
+  mix-blend-mode: overlay;
 }
 
 .submit:hover {
@@ -115,18 +118,22 @@
 
 @keyframes fadeLoop {
   0% {
-    background: #ffffff33;
+    background: #00000033;
   }
   50% {
-    background: #88888855;
+    background: #00000055;
   }
   100% {
-    background: #ffffff33;
+    background: #00000033;
   }
 }
 
 .correctAnswerBackground {
-  background: #016526cc;
+  background-color: #2a7c48;
+}
+
+.incorrectAnswerBackground {
+  background-color: #7c2a2a;
 }
 
 .correctAnswer,
@@ -159,16 +166,19 @@
 .outcome {
   align-items: center;
   display: flex;
-  background: #00000033;
+  background: #00000077;
   border-radius: 12px;
   color: #fff;
   font-weight: bold;
   justify-content: space-between;
   padding: 12px 12px 12px 24px;
+  mix-blend-mode: overlay;
 }
 
 .nextQuestion {
-  background: #00000088;
+  align-items: center;
+  display: flex;
+  background: #000000aa;
   border: none;
   color: #fff;
   cursor: pointer;

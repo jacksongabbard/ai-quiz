@@ -9,13 +9,13 @@ export function Start({ onStart }: { onStart?: () => void }) {
     <div className={styles.startContainer}>
       <div className={styles.start}>
         <div>
-          <TickerText text={'10 questions'} />
+          <TickerText text={'10 evil questions'} />
         </div>
         <div>
-          <TickerText text={'1 AI teammate'} delayBy={20} />
+          <TickerText text={'1 AI "teammate"'} delayBy={30} />
         </div>
         <div>
-          <TickerText text={'How will you fare?'} delayBy={40} />
+          <TickerText text={'How will you fare?'} delayBy={60} />
         </div>
         <button
           onClick={onStart}
