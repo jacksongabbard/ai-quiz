@@ -19,7 +19,21 @@ async function getQuizData(): Promise<QuizData> {
   const human = 'h:' + id;
   const bot = 'b:' + id;
   const group = 'g:' + id;
-  const thread = (n: number) => 't:' + id + ':' + String(n);
+  const thread = (n: number) => {
+    const threadID = 't:' + id + ':' + String(n);
+    void fetchCordRESTApi(
+      '/v1/threads',
+      'POST',
+      JSON.stringify({
+        id: threadID,
+        name: 'Question ' + String(n),
+        url: 'https://www.cord.com/',
+        groupID: group,
+        location: { id, n },
+      }),
+    );
+    return threadID;
+  };
 
   await fetchCordRESTApi(
     '/v1/groups/' + group,
@@ -51,7 +65,6 @@ async function getQuizData(): Promise<QuizData> {
   return {
     cordAccessToken: getClientAuthToken(CORD_APPLICATION_ID, CORD_API_SECRET, {
       user_id: human,
-      group_id: group,
     }),
     questions: questions.map((q, n) => ({ ...q, cordThreadID: thread(n) })),
   };
