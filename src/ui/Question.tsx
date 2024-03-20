@@ -9,9 +9,16 @@ import { indexToLetter } from '@/util/indexToLetter';
 import { Thread, thread } from '@cord-sdk/react';
 
 const backgroundColors = [
-  '#912611', // red
-  '#757501', // yellow
-  '#5c3cb0', // purple
+  '#5f3aac',
+  '#6836a2',
+  '#6c339d',
+  '#712f96',
+  '#772a90',
+  '#7b248a',
+  '#7f1e84',
+  '#821980',
+  '#83167e',
+  '#720e4d',
 ];
 
 export default function Question({
