@@ -73,8 +73,11 @@ async function getQuizData(): Promise<QuizData> {
 export default async function Home() {
   const data = await getQuizData();
   return (
-    <main className={styles.main}>
-      <Quiz questions={data.questions} accessToken={data.cordAccessToken} />
-    </main>
+    <>
+      <div className="gradient"></div>
+      <main className={styles.main}>
+        <Quiz questions={data.questions} accessToken={data.cordAccessToken} />
+      </main>
+    </>
   );
 }

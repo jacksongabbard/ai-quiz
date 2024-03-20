@@ -7,3 +7,13 @@ body {
 body {
   scroll-behavior: smooth;
 }
+
+.gradient {
+  position: fixed;
+  background: radial-gradient(circle, #ffffff33 0%, #ffffff00 100%);
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  pointer-events: none;
+}

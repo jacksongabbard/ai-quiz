@@ -27,10 +27,6 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
     { humanAnswer: number; botAnswer: number }[]
   >([]);
 
-  useEffect(() => {
-    window.location.hash = '';
-  }, []);
-
   const showNextQuestion = useCallback(() => {
     const nextQuestion = currentQuestion + 1;
     void fetch('/api/begin-question', {
