@@ -1,0 +1,17 @@
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 500px;
+}
+
+.answer {
+  display: block;
+  background: #ffffff33;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  padding: 12px;
+  text-align: left;
+}
