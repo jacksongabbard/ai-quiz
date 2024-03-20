@@ -18,6 +18,10 @@
     gap: 12px;
     width: min(80vw, 500px);
   }
+  .cordThread {
+    max-height: 80vh;
+    flex-grow: 1;
+  }
 }
 
 .question {
@@ -27,6 +31,13 @@
   gap: 12px;
   margin: 0 auto;
 }
+
+@media (max-width: 1024px) {
+  .question {
+    width: 100%;
+  }
+}
+
 .cordThread {
   flex: 1;
 }
@@ -56,12 +67,12 @@
 }
 
 .answer:active {
-  border: 1px #ffffff88 solid;
+  border: 1px #ffffff77 solid;
   top: 1px;
 }
 
 .selectedAnswer {
-  border: 1px #fff solid;
+  border: 1px #ffffff88 solid;
 }
 
 .botAvatar,

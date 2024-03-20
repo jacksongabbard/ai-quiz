@@ -1,16 +1,62 @@
+@font-face {
+  font-family: 'abc_favoritbook';
+  src: url('/abcfavorit-book-webfont.woff2') format('woff2'),
+    url('/abcfavorit-book-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'FavoritMono';
+  src: url('/Favorit-MonoBeta.woff2') format('woff2'),
+    url('/Favorit-MonoBeta.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'FavoritWeb';
+  src: url('/Favorit-Regular.woff2') format('woff2'),
+    url('/Favorit-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'FavoritWeb';
+  src: url('/Favorit-Bold.woff2') format('woff2'),
+    url('/Favorit-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: block;
+}
+
 html,
 body {
   color: #fff;
   background: #5c3cb0;
 }
 
-body {
-  scroll-behavior: smooth;
+html,
+body,
+button,
+a {
+  font-family: 'FavoritWeb';
+}
+
+button {
+  background: #ffffff33;
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px;
 }
 
 .gradient {
   position: fixed;
-  background: radial-gradient(circle, #ffffff33 0%, #ffffff00 100%);
+  background: radial-gradient(circle, #ffffff44 0%, #ffffff00 100%);
   top: 0;
   left: 0;
   height: 100vh;

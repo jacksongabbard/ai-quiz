@@ -1,8 +1,9 @@
 import styles from '@/ui/Start.module.css';
 
 import { TickerText } from '@/ui/TickerText';
+import classNames from 'classnames';
 
-export function Start({ onStart }: { onStart: () => void }) {
+export function Start({ onStart }: { onStart?: () => void }) {
   return (
     <div className={styles.start}>
       <div>
@@ -14,7 +15,13 @@ export function Start({ onStart }: { onStart: () => void }) {
       <div>
         <TickerText text={'How will you fare?'} delayBy={40} />
       </div>
-      <button onClick={onStart} className={styles.startButton}>
+      <button
+        onClick={onStart}
+        className={classNames({
+          [styles.startButton]: true,
+          [styles.hidden]: !onStart,
+        })}
+      >
         Start
       </button>
     </div>

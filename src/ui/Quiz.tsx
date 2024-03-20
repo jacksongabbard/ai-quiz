@@ -36,7 +36,12 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
     setCurrentQuestion(nextQuestion);
   }, [questions, currentQuestion]);
 
-  let content: React.ReactNode[] = [<Start onStart={showNextQuestion} />];
+  let content: React.ReactNode[] = [
+    <Start
+      key="start"
+      onStart={currentQuestion === -1 ? showNextQuestion : undefined}
+    />,
+  ];
   if (currentQuestion === -1) {
     return content;
   }

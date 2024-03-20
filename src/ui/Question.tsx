@@ -35,6 +35,8 @@ export default function Question({
   }, [active]);
 
   let runningTotal = qq.question.length + 10;
+
+  console.log({ _botAnswer, _humanAnswer });
   return (
     <div className={styles.questionContainer} ref={shellRef}>
       <div className={styles.question}>
