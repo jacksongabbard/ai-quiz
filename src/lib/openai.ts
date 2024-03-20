@@ -83,6 +83,12 @@ export async function addBotMessageToThread(threadID: string) {
     ...existingMessages,
   ];
 
+  console.log(
+    'calling openai to add a message to thread',
+    threadID,
+    existingMessages.length,
+    messageID,
+  );
   const stream = await openai.chat.completions.create({
     model: 'gpt-4-0613',
     messages: openaiMessages,

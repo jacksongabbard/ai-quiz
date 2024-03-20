@@ -29,6 +29,7 @@ export async function POST(req: Request) {
   if ('type' in data && typeof data.type === 'string') {
     type = data.type;
   }
+  console.log('webhook', type);
 
   if (!type) {
     return NextResponse.json(true);
@@ -42,6 +43,11 @@ export async function POST(req: Request) {
     return NextResponse.json(true);
   }
 
+  console.log(
+    'webhook thread-message-added details',
+    data.event.message.id,
+    data.event.message.author.id,
+  );
   if (data.event.message.author.id.startsWith('h:')) {
     void addBotMessageToThread(data.event.threadID);
   }
