@@ -3,7 +3,7 @@ import { BaseQuizQuestion } from '@/lib/questions';
 import styles from '@/ui/Scorecard.module.css';
 import classNames from 'classnames';
 import Image from 'next/image';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const emojiNumbers = [
   '0️⃣1️⃣',
@@ -25,6 +25,8 @@ export function Scorecard({
   questions: BaseQuizQuestion[];
   answers: { humanAnswer: number; botAnswer: number }[];
 }) {
+  const [copied, setCopied] = useState(false);
+
   const shellRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (shellRef.current) {
@@ -64,13 +66,21 @@ export function Scorecard({
             <br />
             <button
               onClick={async () => {
+                setCopied(true);
                 try {
                   await navigator.clipboard.writeText(copyString);
                 } catch (e) {}
+                setTimeout(() => setCopied(false), 3000);
               }}
             >
-              <Image src="/copy.svg" width={18} height={18} alt="Copy" />
-              &nbsp;Copy scores
+              {!copied ? (
+                <>
+                  <Image src="/copy.svg" width={18} height={18} alt="Copy" />
+                  &nbsp;Copy scores
+                </>
+              ) : (
+                <>Copied!</>
+              )}
             </button>
           </div>
           <div className={classNames(styles.section, styles.footer)}></div>

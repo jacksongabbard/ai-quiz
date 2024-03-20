@@ -5,6 +5,7 @@
   min-height: 100vh;
   max-height: 100vh;
   padding: 12px;
+  position: relative;
 
   flex-direction: row;
   gap: 12px;
@@ -37,6 +38,12 @@
   .question {
     width: 100%;
   }
+}
+
+.questionNumber {
+  position: absolute;
+  top: calc(10vh - 32px);
+  left: 0;
 }
 
 .cordThread {
