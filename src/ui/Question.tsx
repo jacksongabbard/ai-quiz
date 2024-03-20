@@ -8,8 +8,15 @@ import { TickerText } from '@/ui/TickerText';
 import { indexToLetter } from '@/util/indexToLetter';
 import { Thread, thread } from '@cord-sdk/react';
 
+const backgroundColors = [
+  '#912611', // red
+  '#757501', // yellow
+  '#5c3cb0', // purple
+];
+
 export default function Question({
   active,
+  idx,
   qq,
   humanAnswer,
   botAnswer,
@@ -17,6 +24,7 @@ export default function Question({
   onNext,
 }: {
   active: boolean;
+  idx: number;
   qq: ClientQuizQuestion;
   humanAnswer?: number;
   botAnswer?: number;
@@ -42,122 +50,129 @@ export default function Question({
   let runningTotal = qq.question.length + 10;
 
   return (
-    <div className={styles.questionContainer} ref={shellRef}>
-      <div className={styles.question}>
-        <div className={styles.questionText}>
-          <TickerText text={qq.question} showDot={true} />
-        </div>
-        {qq.answers.map((text, idx) => {
-          const q = (
-            <button
-              key={idx}
-              className={classnames({
-                [styles.answer]: true,
-                [styles.selectedAnswer]:
-                  _humanAnswer === idx || _botAnswer === idx,
-              })}
-              onClick={() => {
-                setHumanAnswer(idx);
-              }}
-            >
-              <span>
-                <TickerText
-                  text={indexToLetter(idx) + '.'}
-                  delayBy={runningTotal}
-                />
-              </span>
-              &nbsp;
-              <span>
-                <TickerText text={text} delayBy={runningTotal + 3} />
-              </span>
-              {idx === qq.correctAnswerIndex &&
-                (botAnswer !== undefined || humanAnswer !== undefined) && (
-                  <span className={styles.correctAnswer}>
-                    <span className={styles.inner}>
-                      <Image
-                        src={'/check.svg'}
-                        width={16}
-                        height={16}
-                        alt="Correct!"
-                        title="Correct!"
-                      />
-                    </span>
-                  </span>
-                )}
-              {idx !== qq.correctAnswerIndex &&
-                (botAnswer === idx || humanAnswer === idx) && (
-                  <span className={styles.incorrectAnswer}>
-                    <span className={styles.inner}>
-                      <Image
-                        src={'/x.svg'}
-                        width={16}
-                        height={16}
-                        alt="Incorrect!"
-                        title="Incorrect!"
-                      />
-                    </span>
-                  </span>
-                )}
-              {_botAnswer === idx && (
-                <span className={styles.botAvatar}>
-                  <Image
-                    src={'/bot.svg'}
-                    width={12}
-                    height={12}
-                    alt="Bot"
-                    title="Your AI teammate"
+    <div
+      style={{
+        backgroundColor: backgroundColors[idx % backgroundColors.length],
+      }}
+      ref={shellRef}
+    >
+      <div className={styles.questionContainer}>
+        <div className={styles.question}>
+          <div className={styles.questionText}>
+            <TickerText text={qq.question} showDot={true} />
+          </div>
+          {qq.answers.map((text, idx) => {
+            const q = (
+              <button
+                key={idx}
+                className={classnames({
+                  [styles.answer]: true,
+                  [styles.selectedAnswer]:
+                    _humanAnswer === idx || _botAnswer === idx,
+                })}
+                onClick={() => {
+                  setHumanAnswer(idx);
+                }}
+              >
+                <span>
+                  <TickerText
+                    text={indexToLetter(idx) + '.'}
+                    delayBy={runningTotal}
                   />
                 </span>
-              )}
-              {_humanAnswer === idx && (
-                <span className={styles.humanAvatar}>
-                  <Image
-                    src={'/avatar.svg'}
-                    width={12}
-                    height={12}
-                    alt="You"
-                    title="You"
-                    className={styles.avatarImg}
-                  />
+                &nbsp;
+                <span>
+                  <TickerText text={text} delayBy={runningTotal + 3} />
                 </span>
-              )}
-            </button>
-          );
+                {idx === qq.correctAnswerIndex &&
+                  (botAnswer !== undefined || humanAnswer !== undefined) && (
+                    <span className={styles.correctAnswer}>
+                      <span className={styles.inner}>
+                        <Image
+                          src={'/check.svg'}
+                          width={16}
+                          height={16}
+                          alt="Correct!"
+                          title="Correct!"
+                        />
+                      </span>
+                    </span>
+                  )}
+                {idx !== qq.correctAnswerIndex &&
+                  (botAnswer === idx || humanAnswer === idx) && (
+                    <span className={styles.incorrectAnswer}>
+                      <span className={styles.inner}>
+                        <Image
+                          src={'/x.svg'}
+                          width={16}
+                          height={16}
+                          alt="Incorrect!"
+                          title="Incorrect!"
+                        />
+                      </span>
+                    </span>
+                  )}
+                {_botAnswer === idx && (
+                  <span className={styles.botAvatar}>
+                    <Image
+                      src={'/bot.svg'}
+                      width={12}
+                      height={12}
+                      alt="Bot"
+                      title="Your AI teammate"
+                    />
+                  </span>
+                )}
+                {_humanAnswer === idx && (
+                  <span className={styles.humanAvatar}>
+                    <Image
+                      src={'/avatar.svg'}
+                      width={12}
+                      height={12}
+                      alt="You"
+                      title="You"
+                      className={styles.avatarImg}
+                    />
+                  </span>
+                )}
+              </button>
+            );
 
-          runningTotal += text.length + 3;
-          return q;
-        })}
-        {humanAnswer === undefined &&
-          botAnswer === undefined &&
-          _humanAnswer !== undefined &&
-          _botAnswer !== undefined && (
-            <button
-              className={styles.submit}
-              onClick={() => {
-                onSubmit(_humanAnswer, _botAnswer);
-              }}
-            >
-              <TickerText text="Final answer?" />
-            </button>
-          )}
-
-        {humanAnswer !== undefined && botAnswer !== undefined && (
-          <div className={styles.outcome}>
-            {humanAnswer === qq.correctAnswerIndex ||
-            botAnswer === qq.correctAnswerIndex ? (
-              <TickerText text={'Correct!'} />
-            ) : (
-              <TickerText text={'Incorrect!'} />
-            )}
-            {active && (
-              <button onClick={onNext} className={styles.nextQuestion}>
-                <TickerText text="Next" delayBy={20} />
+            runningTotal += text.length + 3;
+            return q;
+          })}
+          {humanAnswer === undefined &&
+            botAnswer === undefined &&
+            _humanAnswer !== undefined &&
+            _botAnswer !== undefined && (
+              <button
+                className={styles.submit}
+                onClick={() => {
+                  onSubmit(_humanAnswer, _botAnswer);
+                }}
+              >
+                <TickerText text="Final answer?" />
               </button>
             )}
-          </div>
-        )}
+
+          {humanAnswer !== undefined && botAnswer !== undefined && (
+            <div className={styles.outcome}>
+              {humanAnswer === qq.correctAnswerIndex ||
+              botAnswer === qq.correctAnswerIndex ? (
+                <TickerText text={'Correct!'} />
+              ) : (
+                <TickerText text={'Incorrect!'} />
+              )}
+              {active && (
+                <button onClick={onNext} className={styles.nextQuestion}>
+                  <TickerText text="Next" delayBy={20} />
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+        <Thread threadId={qq.cordThreadID} className={styles.cordThread} />
       </div>
-      <Thread threadId={qq.cordThreadID} className={styles.cordThread} />
     </div>
   );
 }

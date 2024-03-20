@@ -14,13 +14,13 @@ export const questions: BaseQuizQuestion[] = [
   {
     question: `A hundred people are divided into two groups based on food
     preferences. No one knows how many people are in each group. The people in
-    the first group individually believe they make up a majority. What is likely
-    to be true of the second group?`,
+    the first group individually believe they make up a majority. On average,
+    what is likely to be true of each indvidual in the second group?`,
     answers: [
-      'They believe they are a minority',
-      'They believe the groups are equal',
-      'They believe themselves to be a majority',
-      'They have no consistent beliefs',
+      'They each believe they are in the minority',
+      'They each believe the groups are equal',
+      'They each believe they are in the majority',
+      'They each have no consistent beliefs',
     ],
     correctAnswerIndex: 2,
   },
@@ -43,5 +43,11 @@ wealthiest person?`,
       'Sally sat on the seashore slurping a slushie. In what style should she sing after she swallows her snack?',
     answers: ['Loudly', 'Softly', 'Angrily', 'Lazily'],
     correctAnswerIndex: 1,
+  },
+  {
+    question:
+      "You have a dollar in coins. The coins are separated into 10 piles.\nThe value of the piles are: 1, 1, 2, 3, 5, 8, 13, 21, 34, ____.\n\nWhat's the value of the last pile?",
+    answers: ['55', '34', '12', '1'],
+    correctAnswerIndex: 2,
   },
 ];

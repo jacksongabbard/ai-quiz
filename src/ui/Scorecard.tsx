@@ -2,6 +2,7 @@ import { BaseQuizQuestion } from '@/lib/questions';
 
 import styles from '@/ui/Scorecard.module.css';
 import classNames from 'classnames';
+import { useEffect, useRef } from 'react';
 
 const emojiNumbers = [
   '0️⃣1️⃣',
@@ -23,21 +24,31 @@ export function Scorecard({
   questions: BaseQuizQuestion[];
   answers: { humanAnswer: number; botAnswer: number }[];
 }) {
+  const shellRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (shellRef.current) {
+      shellRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
   return (
-    <div className={styles.scorecard}>
-      <div className={classNames(styles.section, styles.heading)}>
-        Scorecard
+    <div className={styles.scorecardContainer} ref={shellRef}>
+      <div className={styles.scorecard}>
+        <div className={classNames(styles.section, styles.heading)}>
+          Scorecard
+        </div>
+        {questions.map((q, idx) => {
+          return (
+            <div key={q.question} className={classNames(styles.section)}>
+              {emojiNumbers[idx]}
+              👤
+              {answers[idx]?.humanAnswer === q.correctAnswerIndex ? '✅' : '❌'}
+              🤖{answers[idx]?.botAnswer === q.correctAnswerIndex ? '✅' : '❌'}
+            </div>
+          );
+        })}
+        <div className={classNames(styles.section, styles.footer)}></div>
       </div>
-      {questions.map((q, idx) => {
-        return (
-          <div key={q.question} className={classNames(styles.section)}>
-            {emojiNumbers[idx]}
-            👤{answers[idx]?.humanAnswer === q.correctAnswerIndex ? '✅' : '❌'}
-            🤖{answers[idx]?.botAnswer === q.correctAnswerIndex ? '✅' : '❌'}
-          </div>
-        );
-      })}
-      <div className={classNames(styles.section, styles.footer)}></div>
     </div>
   );
 }

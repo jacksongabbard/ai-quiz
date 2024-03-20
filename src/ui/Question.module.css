@@ -168,12 +168,13 @@
 }
 
 .nextQuestion {
-  background: transparent;
+  background: #00000088;
   border: none;
   color: #fff;
   cursor: pointer;
   border-radius: 12px;
   padding: 12px;
+  mix-blend-mode: overlay;
 }
 
 .nextQuestion:hover {

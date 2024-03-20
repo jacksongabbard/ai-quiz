@@ -38,6 +38,8 @@ html,
 body {
   color: #fff;
   background: #5c3cb0;
+  padding: 0;
+  margin: 0;
 }
 
 html,

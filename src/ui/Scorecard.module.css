@@ -1,4 +1,9 @@
+.scorecardContainer {
+  background: #0037a0;
+}
+
 .scorecard {
+  background: #0037a0;
   box-sizing: border-box;
   display: flex;
   margin: 0 auto;
@@ -7,7 +12,7 @@
   padding: 12px;
 
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
   width: min(80vw, 1024px);
   padding: 10vh 0;
 }
@@ -20,12 +25,13 @@
 
 .section {
   background: #ffffff33;
+  font-size: 18px;
+  line-height: 27px;
   padding: 12px;
   text-align: center;
 }
 
 .heading {
-  font-size: 18px;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
 }

@@ -23,7 +23,7 @@ export function Quiz({
 }
 
 function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
-  const [currentQuestion, setCurrentQuestion] = useState(questions.length - 1);
+  const [currentQuestion, setCurrentQuestion] = useState(-1);
   const [answers, setAnswers] = useState<
     { humanAnswer: number; botAnswer: number }[]
   >([]);
@@ -62,6 +62,7 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
     content.push(
       <Question
         active={i === currentQuestion}
+        idx={i}
         key={questions[i].question}
         qq={questions[i]}
         {...answers[i]}
