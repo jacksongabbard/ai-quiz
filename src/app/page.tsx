@@ -4,6 +4,7 @@ import { uuid } from '@/lib/uuid';
 import { fetchCordRESTApi } from '@/lib/fetchCordRESTApi';
 import { getClientAuthToken } from '@cord-sdk/server';
 import { CORD_API_SECRET, CORD_APPLICATION_ID } from '@/lib/env';
+import { Quiz } from '@/ui/Quiz';
 
 type QuizData = {
   cordAccessToken: string;
@@ -59,7 +60,7 @@ export default async function Home() {
   const data = await getQuizData();
   return (
     <main className={styles.main}>
-      Quiz coming soon!<div>{JSON.stringify(data)}</div>
+      <Quiz questions={data.questions} accessToken={data.cordAccessToken} />
     </main>
   );
 }
