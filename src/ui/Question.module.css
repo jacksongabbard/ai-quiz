@@ -12,12 +12,42 @@
 }
 
 .answer {
-  display: block;
+  align-items: center;
+  display: flex;
   background: #ffffff33;
-  border: none;
+  border: 2px #ffffff00 solid;
   border-radius: 12px;
+  box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  padding: 12px;
+  justify-content: flex-start;
+  padding: 12px 36px 12px 12px;
+  position: relative;
   text-align: left;
+}
+
+.botAvatar,
+.humanAvatar {
+  align-items: center;
+  background: #ffffff33;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  height: 12px;
+  position: absolute;
+  width: 12px;
+}
+
+.botAvatar {
+  right: 12px;
+  bottom: 12px;
+}
+
+.humanAvatar {
+  right: 12px;
+  top: 12px;
+}
+
+.selectedAnswer {
+  border: 2px #fff solid;
 }

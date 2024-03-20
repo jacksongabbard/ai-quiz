@@ -38,7 +38,12 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
 
   let qs: React.ReactNode[] = [];
   for (let i = 0; i <= currentQuestion; i++) {
-    qs.push(<Question qq={questions[currentQuestion]} />);
+    qs.push(
+      <Question
+        qq={questions[currentQuestion]}
+        onSubmit={() => console.log('Soon')}
+      />,
+    );
   }
 
   return <>{qs}</>;
