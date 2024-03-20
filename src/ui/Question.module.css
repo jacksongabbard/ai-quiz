@@ -174,7 +174,7 @@
   cursor: pointer;
   border-radius: 12px;
   padding: 12px;
-  mix-blend-mode: overlay;
+  animation: fadeLoop 1.5s infinite;
 }
 
 .nextQuestion:hover {
