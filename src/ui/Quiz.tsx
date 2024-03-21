@@ -20,9 +20,8 @@ export function Quiz() {
 
     didFetch.current = true;
     (async () => {
-      const resp = await fetch('/api/init');
+      const resp = await fetch('/api/init', { method: 'POST' });
       const data = await resp.json();
-      console.log(data);
       setQuizData(data);
     })();
   });
