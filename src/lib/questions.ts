@@ -25,6 +25,11 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 2,
   },
   {
+    question: 'One of these things is not like the others. Which one is it?',
+    answers: ['l', 'I', 'l', 'l'],
+    correctAnswerIndex: 1,
+  },
+  {
     question:
       'When I was 6 years old, my sister was twice my age. I am now 30 years old. How old is my sister?',
     answers: ['6', '12', '36', '60'],
@@ -35,6 +40,11 @@ export const questions: BaseQuizQuestion[] = [
       'Sally sat on the seashore slurping a slushie. In what style should she sing after she swallows her snack?',
     answers: ['Loudly', 'Softly', 'Angrily', 'Lazily'],
     correctAnswerIndex: 1,
+  },
+  {
+    question: 'One of these things is not like the others:\n' + '1 l I',
+    answers: ['6', '12', '36', '60'],
+    correctAnswerIndex: 2,
   },
   {
     question:
