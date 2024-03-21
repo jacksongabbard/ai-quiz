@@ -1,25 +1,41 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { CordProvider } from '@cord-sdk/react';
 
 import Question from '@/ui/Question';
 import { Start } from '@/ui/Start';
 import type { ClientQuizQuestion } from '@/app/page';
 import { Scorecard } from '@/ui/Scorecard';
+import type { QuizData } from '@/app/api/init/route';
 
-export function Quiz({
-  questions,
-  accessToken,
-}: {
-  questions: ClientQuizQuestion[];
-  accessToken: string;
-}) {
-  return (
-    <CordProvider clientAuthToken={accessToken}>
-      <QuizImpl questions={questions} />
-    </CordProvider>
-  );
+export function Quiz() {
+  const [quizData, setQuizData] = useState<QuizData>();
+  const didFetch = useRef(false);
+
+  useEffect(() => {
+    if (didFetch.current) {
+      return;
+    }
+
+    didFetch.current = true;
+
+    fetch('/api/init')
+      .then((resp) => resp.json())
+      .then((data) => setQuizData(data));
+  });
+
+  const questions = quizData?.questions ?? [];
+  const maybeAccessToken = quizData?.cordAccessToken;
+  const quiz = <QuizImpl questions={questions} />;
+
+  if (maybeAccessToken) {
+    return (
+      <CordProvider clientAuthToken={maybeAccessToken}>{quiz}</CordProvider>
+    );
+  } else {
+    return quiz;
+  }
 }
 
 function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
@@ -51,7 +67,11 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
   let content: React.ReactNode[] = [
     <Start
       key="start"
-      onStart={currentQuestion === -1 ? showNextQuestion : undefined}
+      onStart={
+        currentQuestion === -1 && questions.length > 0
+          ? showNextQuestion
+          : undefined
+      }
     />,
   ];
   if (currentQuestion === -1) {
