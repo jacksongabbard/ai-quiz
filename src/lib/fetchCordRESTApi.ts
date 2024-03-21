@@ -5,11 +5,10 @@ export async function fetchCordRESTApi<T>(
   endpoint: string,
   method: 'GET' | 'PUT' | 'POST' | 'DELETE' = 'GET',
   body?: string,
+  authToken?: string,
 ): Promise<T> {
-  const serverAuthToken = getServerAuthToken(
-    CORD_APPLICATION_ID,
-    CORD_API_SECRET,
-  );
+  const serverAuthToken =
+    authToken ?? getServerAuthToken(CORD_APPLICATION_ID, CORD_API_SECRET);
   const response = await fetch(`${CORD_SERVER}${endpoint}`, {
     method,
     body,

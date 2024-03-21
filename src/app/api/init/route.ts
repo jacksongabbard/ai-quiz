@@ -33,7 +33,7 @@ async function getQuizData(): Promise<QuizData> {
           JSON.stringify({
             id: threadID,
             name: 'Question ' + String(n),
-            url: 'https://www.cord.com/',
+            url: SERVER,
             groupID: group,
             location: { id, n },
           }),

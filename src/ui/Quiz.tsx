@@ -38,11 +38,14 @@ export function Quiz() {
   }
 }
 
+export type ClientAnswers = {
+  humanAnswer: number;
+  botAnswer: number | undefined;
+}[];
+
 function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
   const [currentQuestion, setCurrentQuestion] = useState(-1);
-  const [answers, setAnswers] = useState<
-    { humanAnswer: number; botAnswer: number | undefined }[]
-  >([]);
+  const [answers, setAnswers] = useState<ClientAnswers>([]);
 
   const showNextQuestion = useCallback(() => {
     const nextQuestion = currentQuestion + 1;
@@ -58,11 +61,12 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
       void fetch('/api/begin-question', {
         body: JSON.stringify({
           threadID: questions[nextQuestion].cordThreadID,
+          answers,
         }),
         method: 'POST',
       });
     }, delay * 35); // same as the ticker text
-  }, [questions, currentQuestion]);
+  }, [answers, questions, currentQuestion]);
 
   let content: React.ReactNode[] = [
     <Start
