@@ -1,3 +1,4 @@
+import { questions } from '@/lib/questions';
 import styles from '@/ui/Start.module.css';
 
 import { TickerText } from '@/ui/TickerText';
@@ -9,7 +10,7 @@ export function Start({ onStart }: { onStart?: () => void }) {
     <div className={styles.startContainer}>
       <div className={styles.start}>
         <div>
-          <TickerText text={'10 evil questions'} />
+          <TickerText text={questions.length + ' evil questions'} />
         </div>
         <div>
           <TickerText text={'1 AI "teammate"'} delayBy={30} />

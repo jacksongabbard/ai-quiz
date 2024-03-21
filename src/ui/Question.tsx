@@ -7,6 +7,7 @@ import styles from '@/ui/Question.module.css';
 import { TickerText } from '@/ui/TickerText';
 import { indexToLetter } from '@/util/indexToLetter';
 import { Thread, thread } from '@cord-sdk/react';
+import { questions } from '@/lib/questions';
 
 const backgroundColors = [
   'hsl(256, 66%, 34%)',
@@ -66,7 +67,9 @@ export default function Question({
       ref={shellRef}
     >
       <div className={styles.questionContainer}>
-        <div className={styles.questionNumber}>{idx + 1} / 10</div>
+        <div className={styles.questionNumber}>
+          {idx + 1} / {questions.length}
+        </div>
         <div className={styles.question}>
           <div className={styles.questionText}>
             <TickerText text={qq.question} showDot={true} />
