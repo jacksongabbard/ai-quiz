@@ -84,7 +84,7 @@ async function getQuizData(): Promise<QuizData> {
   };
 }
 
-export async function POST(req: Request) {
+export async function POST(_req: Request) {
   const data = await getQuizData();
   return NextResponse.json(data);
 }

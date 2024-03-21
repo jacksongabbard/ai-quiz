@@ -9,7 +9,7 @@ import { indexToLetter } from '@/util/indexToLetter';
 import { Thread, thread } from '@cord-sdk/react';
 import { questions } from '@/lib/questions';
 
-let startingAngle = 256;
+const startingAngle = 256;
 
 export default function Question({
   active,

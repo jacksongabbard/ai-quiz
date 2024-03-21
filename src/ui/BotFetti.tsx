@@ -34,7 +34,7 @@ export function BotFetti({ score }: { score: number }) {
       fettiInner.appendChild(emoji);
     }
     let dist = 0;
-    let gravity = 0.1;
+    const gravity = 0.1;
     let velo = 0.2;
     const interval = setInterval(() => {
       velo += gravity;

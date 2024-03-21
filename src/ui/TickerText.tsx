@@ -42,7 +42,7 @@ export function TickerText({
     dot = '●';
   }
 
-  let t = text.substring(0, pos) + dot;
+  const t = text.substring(0, pos) + dot;
   if (t === '') {
     return <>&nbsp;</>;
   }

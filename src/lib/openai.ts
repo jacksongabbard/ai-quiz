@@ -127,7 +127,7 @@ export async function addBotMessageToThread(threadID: string) {
   await typing(threadID, botID, true);
 
   let full = '';
-  for await (let chunk of stream) {
+  for await (const chunk of stream) {
     const content = chunk.choices[0].delta.content;
     if (content !== undefined) {
       full += content;

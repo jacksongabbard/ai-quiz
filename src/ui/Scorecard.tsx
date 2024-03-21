@@ -100,11 +100,9 @@ export function Scorecard({
             {output}
             <br />
             <button
-              onClick={async () => {
+              onClick={() => {
                 setCopied(true);
-                try {
-                  await navigator.clipboard.writeText(copyString);
-                } catch (e) {}
+                navigator.clipboard.writeText(copyString).catch((_e) => {});
                 setTimeout(() => setCopied(false), 3000);
               }}
             >

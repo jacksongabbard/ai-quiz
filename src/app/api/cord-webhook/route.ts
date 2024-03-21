@@ -1,6 +1,5 @@
 import { createHmac } from 'crypto';
 import { CORD_API_SECRET } from '@/lib/env';
-import { validateWebhookSignature } from '@cord-sdk/server';
 import { WebhookWrapperProperties } from '@cord-sdk/types';
 import { NextResponse } from 'next/server';
 import { addBotMessageToThread } from '@/lib/openai';
@@ -9,9 +8,11 @@ import { assertGameNotLocked } from '@/lib/lock';
 
 export const maxDuration = 180;
 
-async function verifySignature(req: Request) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function verifySignature(req: Request) {
   const cordTimestamp = req.headers.get('x-cord-timestamp'); // XXX check if this is recent?
   const cordSignature = req.headers.get('x-cord-signature');
+  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
   const verifyStr = cordTimestamp + ':' + req.body;
 
   const hmac = createHmac('sha256', CORD_API_SECRET);
@@ -24,7 +25,7 @@ async function verifySignature(req: Request) {
 }
 
 export async function POST(req: Request) {
-  // await verifySignature(req); // XXX
+  // verifySignature(req); // XXX
   const data: WebhookWrapperProperties<'thread-message-added'> =
     await req.json();
 

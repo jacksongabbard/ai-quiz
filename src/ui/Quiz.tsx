@@ -25,7 +25,7 @@ export function Quiz() {
     }
 
     didFetch.current = true;
-    (async () => {
+    void (async () => {
       const resp = await fetch('/api/init', { method: 'POST' });
       const data = await resp.json();
       setQuizData(data);
@@ -69,7 +69,7 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
     }, delay * 35); // same as the ticker text
   }, [answers, questions, currentQuestion]);
 
-  let content: React.ReactNode[] = [
+  const content: React.ReactNode[] = [
     <Start
       key="start"
       onStart={
