@@ -38,7 +38,7 @@ export const questions: BaseQuizQuestion[] = [
   {
     question:
       'Sally sat on the seashore slurping a slushie. In what style should she sing after she swallows her snack?',
-    answers: ['Loudly', 'Softly', 'Angrily', 'Lazily'],
+    answers: ['Loudly', 'Harmoniously', 'Softly', 'Lazily'],
     correctAnswerIndex: 1,
   },
   {
