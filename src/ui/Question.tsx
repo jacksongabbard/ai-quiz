@@ -1,5 +1,5 @@
 import type { ClientQuizQuestion } from '@/app/page';
-import { useEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 import classnames from 'classnames';
 import Image from 'next/image';
 
@@ -44,8 +44,46 @@ export default function Question({
     }
   }, [active]);
 
-  let runningTotal = qq.question.length + 10;
+  return (
+    <QuestionImpl
+      active={active}
+      final={!!(humanAnswer || botAnswer)}
+      shellRef={shellRef}
+      idx={idx}
+      qq={qq}
+      humanAnswer={humanAnswer ?? _humanAnswer}
+      botAnswer={botAnswer ?? _botAnswer}
+      onChangeHumanAnswer={setHumanAnswer}
+      onSubmit={onSubmit}
+      onNext={onNext}
+    />
+  );
+}
 
+function QuestionImpl({
+  active,
+  final,
+  shellRef,
+  idx,
+  qq,
+  humanAnswer,
+  botAnswer,
+  onChangeHumanAnswer,
+  onSubmit,
+  onNext,
+}: {
+  active: boolean;
+  final: boolean;
+  shellRef: RefObject<HTMLDivElement>;
+  idx: number;
+  qq: ClientQuizQuestion;
+  humanAnswer: number | undefined;
+  botAnswer: number | undefined;
+  onChangeHumanAnswer: (humanAnswer: number) => void;
+  onSubmit: (humanAnswer: number, botAnswer: number | undefined) => void;
+  onNext: () => void;
+}) {
+  let runningTotal = qq.question.length + 10;
   return (
     <div
       style={{
@@ -68,17 +106,16 @@ export default function Question({
                 className={classnames({
                   [styles.answer]: true,
                   [styles.selectedAnswer]:
-                    _humanAnswer === idx || _botAnswer === idx,
+                    humanAnswer === idx || botAnswer === idx,
                   [styles.correctAnswerBackground]:
-                    humanAnswer !== undefined &&
-                    botAnswer !== undefined &&
-                    idx === qq.correctAnswerIndex,
+                    final && idx === qq.correctAnswerIndex,
                   [styles.incorrectAnswerBackground]:
+                    final &&
                     (humanAnswer === idx || botAnswer === idx) &&
                     idx !== qq.correctAnswerIndex,
                 })}
                 onClick={() => {
-                  setHumanAnswer(idx);
+                  !final && onChangeHumanAnswer(idx);
                 }}
               >
                 <span>
@@ -93,22 +130,22 @@ export default function Question({
                     <TickerText text={text} delayBy={runningTotal + 3} />
                   </span>
                 </span>
-                {idx === qq.correctAnswerIndex &&
-                  (botAnswer !== undefined || humanAnswer !== undefined) && (
-                    <span className={styles.correctAnswer}>
-                      <span className={styles.inner}>
-                        <Image
-                          src={'/check.svg'}
-                          width={16}
-                          height={16}
-                          alt="Correct!"
-                          title="Correct!"
-                        />
-                      </span>
+                {idx === qq.correctAnswerIndex && final && (
+                  <span className={styles.correctAnswer}>
+                    <span className={styles.inner}>
+                      <Image
+                        src={'/check.svg'}
+                        width={16}
+                        height={16}
+                        alt="Correct!"
+                        title="Correct!"
+                      />
                     </span>
-                  )}
+                  </span>
+                )}
                 {idx !== qq.correctAnswerIndex &&
-                  (botAnswer === idx || humanAnswer === idx) && (
+                  (botAnswer === idx || humanAnswer === idx) &&
+                  final && (
                     <span className={styles.incorrectAnswer}>
                       <span className={styles.inner}>
                         <Image
@@ -122,7 +159,7 @@ export default function Question({
                     </span>
                   )}
                 <span className={styles.avatars}>
-                  {_botAnswer === idx && (
+                  {botAnswer === idx && (
                     <span className={styles.botAvatar}>
                       <Image
                         src={'/bot.svg'}
@@ -133,7 +170,7 @@ export default function Question({
                       />
                     </span>
                   )}
-                  {_humanAnswer === idx && (
+                  {humanAnswer === idx && (
                     <span className={styles.humanAvatar}>
                       <Image
                         src={'/avatar.svg'}
@@ -152,20 +189,17 @@ export default function Question({
             runningTotal += text.length + 3;
             return q;
           })}
-          {humanAnswer === undefined &&
-            botAnswer === undefined &&
-            _humanAnswer !== undefined &&
-            _botAnswer !== undefined && (
-              <button
-                className={styles.submit}
-                onClick={() => {
-                  onSubmit(_humanAnswer, _botAnswer);
-                }}
-              >
-                <TickerText text="Final answer?" />
-              </button>
-            )}
-          {humanAnswer !== undefined && botAnswer !== undefined && (
+          {!final && humanAnswer !== undefined && botAnswer !== undefined && (
+            <button
+              className={styles.submit}
+              onClick={() => {
+                onSubmit(humanAnswer, botAnswer);
+              }}
+            >
+              <TickerText text="Final answer?" />
+            </button>
+          )}
+          {final && (
             <div className={styles.outcome}>
               {humanAnswer === qq.correctAnswerIndex &&
                 botAnswer === qq.correctAnswerIndex && (
