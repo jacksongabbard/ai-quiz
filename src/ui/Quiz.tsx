@@ -14,6 +14,12 @@ export function Quiz() {
   const didFetch = useRef(false);
 
   useEffect(() => {
+    // Force mobile phones to scroll to the top of the page
+    // so we get the full viewport
+    setTimeout(() => window.scrollTo(0, 0), 50);
+  }, []);
+
+  useEffect(() => {
     if (didFetch.current) {
       return;
     }
