@@ -18,27 +18,19 @@ async function getQuizData(): Promise<QuizData> {
   const human = 'h:' + id;
   const bot = 'b:' + id;
   const group = 'g:' + id;
-  const thread = (n: number) => {
+  const thread = async (n: number) => {
     const threadID = 't:' + id + ':' + String(n);
 
-    // Work around Cord issue with serializable txns when creating threads in
-    // quick succession by not doing them in such quick succession.  Flooey is
-    // looking into it -- when fixed, we can remove this setTimeout and just
-    // call the function directly.
-    setTimeout(
-      () =>
-        void fetchCordRESTApi(
-          '/v1/threads',
-          'POST',
-          JSON.stringify({
-            id: threadID,
-            name: 'Question ' + String(n),
-            url: SERVER,
-            groupID: group,
-            location: { id, n },
-          }),
-        ),
-      1000 * Math.random(),
+    await fetchCordRESTApi(
+      '/v1/threads',
+      'POST',
+      JSON.stringify({
+        id: threadID,
+        name: 'Question ' + String(n),
+        url: SERVER,
+        groupID: group,
+        location: { id, n },
+      }),
     );
 
     return threadID;
@@ -52,7 +44,7 @@ async function getQuizData(): Promise<QuizData> {
     }),
   );
 
-  await Promise.all([
+  const [_humans, _bots, questionsWithThreadID] = await Promise.all([
     fetchCordRESTApi(
       '/v1/users/' + human,
       'PUT',
@@ -71,13 +63,24 @@ async function getQuizData(): Promise<QuizData> {
         addGroups: [group],
       }),
     ),
+    // Work around Cord issue with serializable txns when concurrently creating
+    // threads by doing them serially. Flooey is looking into it -- when fixed,
+    // we can replace this loop with simply:
+    // Promise.all(questions.map(async (q, n) => ({ ...q, cordThreadID: await thread(n) })))
+    (async () => {
+      const result = [];
+      for (let n = 0; n < questions.length; n++) {
+        result.push({ ...questions[n], cordThreadID: await thread(n) });
+      }
+      return result;
+    })(),
   ]);
 
   return {
     cordAccessToken: getClientAuthToken(CORD_APPLICATION_ID, CORD_API_SECRET, {
       user_id: human,
     }),
-    questions: questions.map((q, n) => ({ ...q, cordThreadID: thread(n) })),
+    questions: questionsWithThreadID,
   };
 }
 
