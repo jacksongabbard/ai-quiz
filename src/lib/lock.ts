@@ -1,13 +1,14 @@
 import type { ServerUserData } from '@cord-sdk/types';
 import { fetchCordRESTApi } from './fetchCordRESTApi';
+import { ClientAnswers } from '@/ui/Quiz';
 
-export async function lockGame(id: string) {
+export async function lockGame(id: string, answers: ClientAnswers) {
   const bot = 'b:' + id;
   await fetchCordRESTApi(
     '/v1/users/' + bot,
     'PUT',
     JSON.stringify({
-      metadata: { locked: true },
+      metadata: { locked: true, answers },
     }),
   );
 }

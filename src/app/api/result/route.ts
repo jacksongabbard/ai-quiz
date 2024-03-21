@@ -38,7 +38,7 @@ export async function POST(req: Request) {
 
   const [id] = parseThreadID(threadID);
   await Promise.all([
-    lockGame(id),
+    lockGame(id, data?.answers ?? []),
     addGameCompleteToClack(
       threadID,
       data?.answers ?? [],
