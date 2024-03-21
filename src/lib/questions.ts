@@ -24,7 +24,12 @@ export const questions: BaseQuizQuestion[] = [
     answers: ['Middle left', 'Top left', 'Top right', 'Bottom middle'],
     correctAnswerIndex: 2,
   },
-
+  {
+    question:
+      'When I was 6 years old, my sister was twice my age. I am now 30 years old. How old is my sister?',
+    answers: ['6', '12', '36', '60'],
+    correctAnswerIndex: 2,
+  },
   {
     question:
       'Sally sat on the seashore slurping a slushie. In what style should she sing after she swallows her snack?',
@@ -40,6 +45,16 @@ export const questions: BaseQuizQuestion[] = [
       'Sahara Desert',
     ],
     correctAnswerIndex: 3,
+  },
+  {
+    question: 'What does "emollient" mean?',
+    answers: [
+      'A soothing skin cream',
+      'Feeilng emotionally calm and quiet',
+      'Having a rough and bumpy texture',
+      'Something that tastes like shellfish',
+    ],
+    correctAnswerIndex: 0,
   },
   {
     question:
@@ -75,7 +90,7 @@ export const questions: BaseQuizQuestion[] = [
   {
     question:
       'Three perfectly logical people are deciding what to eat for lunch.\n' +
-      'The waiter asks the first person, "Would you all like today\'s special?\n' +
+      'The waiter asks the first person, "Would you all like today\'s special?"\n' +
       'The first person says, "Maybe."\n' +
       'The second person says, "Maybe."\n' +
       'What does the third person say?',
@@ -84,7 +99,7 @@ export const questions: BaseQuizQuestion[] = [
   },
   {
     question:
-      'Consider the sequence 3, 7, 31, 127, 8191. Which of these numbers comes next?',
+      'Consider the well-known sequence 3, 7, 31, 127, 8191. Which of these numbers comes next?',
     answers: ['9001', '16383', '131071', '262104'],
     correctAnswerIndex: 2,
   },
