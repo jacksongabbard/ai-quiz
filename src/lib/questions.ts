@@ -13,7 +13,7 @@ export const questions: BaseQuizQuestion[] = [
   },
   {
     question: [
-      `You are circle. What should your next turn be?`,
+      `For the win, what should your next move be?`,
       '',
       ` x |   |   `,
       `-----------`,
@@ -38,7 +38,7 @@ export const questions: BaseQuizQuestion[] = [
   {
     question:
       'Sally sat on the seashore slurping a slushie. In what style should she sing after she swallows her snack?',
-    answers: ['Loudly', 'Harmoniously', 'Softly', 'Lazily'],
+    answers: ['Loudly', 'Harmoniously', 'Surely', 'Lazily'],
     correctAnswerIndex: 2,
   },
   {

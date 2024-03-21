@@ -110,16 +110,15 @@
 }
 
 .submit {
+  background: #ffffffaa;
   border: 1px #00000000 solid;
   animation: fadeLoop 1.5s infinite;
-  background: #00000033;
   box-sizing: border-box;
   padding: 12px;
   border-radius: 12px;
   color: #fff;
   cursor: pointer;
   justify-content: flex-end;
-  mix-blend-mode: overlay;
 }
 
 .submit:hover {
@@ -133,13 +132,13 @@
 
 @keyframes fadeLoop {
   0% {
-    background: #00000033;
+    background: #ffffff33;
   }
   50% {
-    background: #00000055;
+    background: #ffffff55;
   }
   100% {
-    background: #00000033;
+    background: #ffffff33;
   }
 }
 
@@ -187,13 +186,12 @@
   font-weight: bold;
   justify-content: space-between;
   padding: 12px 12px 12px 24px;
-  mix-blend-mode: overlay;
 }
 
 .nextQuestion {
   align-items: center;
   display: flex;
-  background: #000000aa;
+  background: #ffffffaa;
   border: none;
   color: #fff;
   cursor: pointer;

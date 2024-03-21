@@ -51,11 +51,11 @@ export function Scorecard({
   for (let i = 0; i < questions.length; i++) {
     const q = questions[i];
     if (answers[i]?.humanAnswer === q.correctAnswerIndex) {
-      points += 1;
+      points += 5;
     }
 
     if (answers[i]?.botAnswer === q.correctAnswerIndex) {
-      points += 1;
+      points += 5;
     }
 
     copyString +=
@@ -72,7 +72,7 @@ export function Scorecard({
       </div>,
     );
   }
-  copyString += Math.round((points / (questions.length * 2)) * 100) + '%\n\n';
+  copyString += Math.round((points / (questions.length * 10)) * 100) + '%\n\n';
 
   const didSendResult = useRef(false);
   useEffect(() => {
@@ -95,10 +95,13 @@ export function Scorecard({
   return (
     <div className={styles.scorecardContainer} ref={shellRef}>
       <div className={styles.scorecard}>
-        <BotFetti score={Math.round((points / (questions.length * 2)) * 100)} />
+        <BotFetti
+          score={Math.round((points / (questions.length * 10)) * 100)}
+        />
         <div className={styles.card}>
           <div className={classNames(styles.section, styles.heading)}>
-            You scored {Math.round((points / (questions.length * 2)) * 100)}%
+            You scored {points} points (
+            {Math.round((points / (questions.length * 10)) * 100)}%).
           </div>
           <div className={styles.section}>
             {output}
