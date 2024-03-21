@@ -3,6 +3,8 @@ import { addBotMessageToThread } from '@/lib/openai';
 import { MessageNodeType } from '@cord-sdk/types';
 import type { ClientAnswers } from '@/ui/Quiz';
 import { addContentToClack } from '@/lib/clack';
+import { parseThreadID } from '@/lib/threadID';
+import { assertGameNotLocked } from '@/lib/lock';
 
 export const maxDuration = 180;
 
@@ -10,10 +12,7 @@ async function addGameProgressToClack(
   threadID: string,
   answers: ClientAnswers,
 ) {
-  const [sigil, id, questionNumber] = threadID.split(':');
-  if (sigil !== 't' || questionNumber === undefined) {
-    throw new Error('Invalid threadID');
-  }
+  const [id, questionNumber] = parseThreadID(threadID);
 
   await addContentToClack(id, [
     {
@@ -48,10 +47,11 @@ export async function POST(req: Request) {
     throw new Error('Missing threadID');
   }
 
-  await Promise.all([
-    void addBotMessageToThread(threadID),
-    void addGameProgressToClack(threadID, data?.answers ?? []),
-  ]);
+  const [id] = parseThreadID(threadID);
+  await assertGameNotLocked(id);
+
+  void addBotMessageToThread(threadID);
+  void addGameProgressToClack(threadID, data?.answers ?? []);
 
   return NextResponse.json(true);
 }

@@ -4,6 +4,8 @@ import { validateWebhookSignature } from '@cord-sdk/server';
 import { WebhookWrapperProperties } from '@cord-sdk/types';
 import { NextResponse } from 'next/server';
 import { addBotMessageToThread } from '@/lib/openai';
+import { parseThreadID } from '@/lib/threadID';
+import { assertGameNotLocked } from '@/lib/lock';
 
 export const maxDuration = 180;
 
@@ -51,6 +53,8 @@ export async function POST(req: Request) {
     data.event.message.author.id,
   );
   if (data.event.message.author.id.startsWith('h:')) {
+    const [id] = parseThreadID(data.event.threadID);
+    await assertGameNotLocked(id);
     void addBotMessageToThread(data.event.threadID);
   }
 

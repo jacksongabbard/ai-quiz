@@ -1,4 +1,6 @@
 import { addContentToClack } from '@/lib/clack';
+import { lockGame } from '@/lib/lock';
+import { parseThreadID } from '@/lib/threadID';
 import type { ClientAnswers } from '@/ui/Quiz';
 import { MessageNodeType } from '@cord-sdk/types';
 import { NextResponse } from 'next/server';
@@ -8,11 +10,7 @@ async function addGameCompleteToClack(
   answers: ClientAnswers,
   copyString: string,
 ) {
-  const [sigil, id, _questionNumber] = threadID.split(':');
-  if (sigil !== 't') {
-    throw new Error('Invalid threadID');
-  }
-
+  const [id] = parseThreadID(threadID);
   await addContentToClack(id, [
     {
       type: MessageNodeType.PARAGRAPH,
@@ -37,6 +35,9 @@ export async function POST(req: Request) {
   if (threadID === undefined) {
     throw new Error('Missing threadID');
   }
+
+  const [id] = parseThreadID(threadID);
+  await lockGame(id);
 
   void addGameCompleteToClack(
     threadID,
