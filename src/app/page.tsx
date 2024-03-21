@@ -1,10 +1,13 @@
+import Head from 'next/head';
+import { getClientAuthToken } from '@cord-sdk/server';
+
 import { BaseQuizQuestion, questions } from '@/lib/questions';
-import styles from './page.module.css';
 import { uuid } from '@/lib/uuid';
 import { fetchCordRESTApi } from '@/lib/fetchCordRESTApi';
-import { getClientAuthToken } from '@cord-sdk/server';
 import { CORD_API_SECRET, CORD_APPLICATION_ID, SERVER } from '@/lib/env';
 import { Quiz } from '@/ui/Quiz';
+
+import styles from './page.module.css';
 
 export type ClientQuizQuestion = BaseQuizQuestion & { cordThreadID: string };
 
