@@ -16,6 +16,8 @@ const emojiNumbers = [
   '0️⃣8️⃣',
   '0️⃣9️⃣',
   '1️⃣0️⃣',
+  '1️⃣1️⃣',
+  '1️⃣2️⃣',
 ];
 
 export function Scorecard({
@@ -34,34 +36,46 @@ export function Scorecard({
     }
   }, []);
 
+  let points = 0;
   let copyString = '';
   const output: React.ReactNode[] = [];
   for (let i = 0; i < questions.length; i++) {
     const q = questions[i];
+    if (answers[i]?.humanAnswer === q.correctAnswerIndex) {
+      points += 1;
+    }
+
+    if (answers[i]?.botAnswer === q.correctAnswerIndex) {
+      points += 1;
+    }
 
     copyString +=
-      `${emojiNumbers[i]} ` +
+      `🧩${emojiNumbers[i]} ` +
       `👤 ${answers[i]?.humanAnswer === q.correctAnswerIndex ? '✅' : '❌'} ` +
       `🤖 ${answers[i]?.botAnswer === q.correctAnswerIndex ? '✅' : '❌'}\n\n`;
 
     output.push(
       <div key={q.question}>
-        {emojiNumbers[i]}&nbsp; 👤
+        🧩{emojiNumbers[i]}&nbsp; 👤
         {answers[i]?.humanAnswer === q.correctAnswerIndex ? '✅' : '❌'}
         &nbsp; 🤖
         {answers[i]?.botAnswer === q.correctAnswerIndex ? '✅' : '❌'}
       </div>,
     );
   }
+  copyString += Math.round(points / 20) + '%\n\n';
 
   return (
     <div className={styles.scorecardContainer} ref={shellRef}>
       <div className={styles.scorecard}>
         <div className={styles.card}>
           <div className={classNames(styles.section, styles.heading)}>
-            Scorecard
+            Final Score
           </div>
           <div className={styles.section}>
+            You scored {Math.round(points / 20)}%
+            <br />
+            <br />
             {output}
             <br />
             <button

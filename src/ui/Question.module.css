@@ -54,7 +54,6 @@
 .questionText {
   font-family: 'FavoritMono';
   white-space: pre-wrap;
-  font-weight: bold;
   padding: 12px 0;
   font-size: 16px;
   line-height: 24px;
@@ -69,6 +68,7 @@
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
+  font-size: 14px;
   line-height: 18px;
   justify-content: space-between;
   padding: 14px;
@@ -142,11 +142,11 @@
 }
 
 .correctAnswerBackground {
-  background-color: #2a7c48;
+  background-color: #369c5b;
 }
 
 .incorrectAnswerBackground {
-  background-color: #7c2a2a;
+  background-color: #a12424;
 }
 
 .correctAnswer,

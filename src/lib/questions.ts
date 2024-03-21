@@ -37,7 +37,15 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 1,
   },
   {
-    question: `You're standing at a point on the globe. You walk south 1 km. Then west 1 km. Then north 1 km. You were standing the middle of the Sahara Desert. Where are you now?`,
+    question:
+      'You flip a fair coin 100 times. Amazingly, it lands on heads each time.\n' +
+      'You decide to flip the coin one more time.\n\n' +
+      'How is the coin likely to fall?',
+    answers: ['Heads', 'Tails', 'Could be either'],
+    correctAnswerIndex: 2,
+  },
+  {
+    question: `You're standing at a point on the globe. You walk south 1 km. Then west 1 km. Then north 1 km. You feel the scorching hot sandy air on your face. Where are you now?`,
     answers: [
       'North pole',
       'Chicago',
@@ -66,15 +74,14 @@ export const questions: BaseQuizQuestion[] = [
   },
   {
     question:
-      `A hundred people are divided into two groups based on food ` +
-      `preferences. No one knows how many people are in each group. The people in ` +
-      `the first group individually believe they make up a majority. On average, ` +
+      `A hundred people are divided into two groups based on their favorite ice cream flavor. ` +
+      `No one knows how many people are in each group. The people in ` +
+      `the first group individually believe they are in the majority. On average, ` +
       `what is likely to be true of each indvidual in the second group? `,
     answers: [
-      'They each believe they are in the minority',
-      'They each believe the groups are equal',
-      'They each believe they are in the majority',
-      'They each have no consistent beliefs',
+      'They likely believe they are in the minority',
+      'They likely believe the groups are equal',
+      'They likely believe they are in the majority',
     ],
     correctAnswerIndex: 2,
   },
@@ -89,10 +96,10 @@ export const questions: BaseQuizQuestion[] = [
   },
   {
     question:
-      'Three perfectly logical people are deciding what to eat for lunch.\n' +
-      'The waiter asks the first person, "Would you all like today\'s special?"\n' +
+      'Three perfectly logical people are about to eat for lunch.\n\n' +
+      'The waiter asks the first person, "Would you all like today\'s special?\n' +
       'The first person says, "Maybe."\n' +
-      'The second person says, "Maybe."\n' +
+      'The second person says, "Maybe."\n\n' +
       'What does the third person say?',
     answers: ['Yes', 'Maybe', "It's possible", 'Unlikely'],
     correctAnswerIndex: 0,
