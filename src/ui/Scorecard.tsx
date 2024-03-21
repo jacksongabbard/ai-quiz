@@ -135,7 +135,7 @@ export function Scorecard({
               height={59}
               alt={'Cord Logo'}
               title={
-                'Cord offers the most feature rich, mature chat SDK on the internet'
+                'Cord offers the most feature-rich chat SDK on the internet'
               }
             />
           </a>
