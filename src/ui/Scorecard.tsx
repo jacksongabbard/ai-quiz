@@ -1,9 +1,9 @@
-import { BaseQuizQuestion } from '@/lib/questions';
-
 import styles from '@/ui/Scorecard.module.css';
 import classNames from 'classnames';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import type { ClientAnswers } from './Quiz';
+import type { ClientQuizQuestion } from '@/app/page';
 
 const emojiNumbers = [
   '0️⃣1️⃣',
@@ -26,8 +26,8 @@ export function Scorecard({
   questions,
   answers,
 }: {
-  questions: BaseQuizQuestion[];
-  answers: { humanAnswer: number; botAnswer: number | undefined }[];
+  questions: ClientQuizQuestion[];
+  answers: ClientAnswers;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -66,6 +66,24 @@ export function Scorecard({
     );
   }
   copyString += Math.round((points / (questions.length * 2)) * 100) + '%\n\n';
+
+  const didSendResult = useRef(false);
+  useEffect(() => {
+    if (didSendResult.current) {
+      return;
+    }
+
+    didSendResult.current = true;
+
+    void fetch('/api/result', {
+      body: JSON.stringify({
+        answers,
+        copyString,
+        threadID: questions[0].cordThreadID,
+      }),
+      method: 'POST',
+    });
+  });
 
   return (
     <div className={styles.scorecardContainer} ref={shellRef}>

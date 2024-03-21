@@ -1,10 +1,8 @@
 import { NextResponse } from 'next/server';
 import { addBotMessageToThread } from '@/lib/openai';
-import { fetchCordRESTApi } from '@/lib/fetchCordRESTApi';
-import { getServerAuthToken } from '@cord-sdk/server';
-import { CLACK_API_SECRET, CLACK_APPLICATION_ID } from '@/lib/env';
-import { MessageContent, MessageNodeType } from '@cord-sdk/types';
+import { MessageNodeType } from '@cord-sdk/types';
 import type { ClientAnswers } from '@/ui/Quiz';
+import { addContentToClack } from '@/lib/clack';
 
 async function addGameProgressToClack(
   threadID: string,
@@ -15,9 +13,7 @@ async function addGameProgressToClack(
     throw new Error('Invalid threadID');
   }
 
-  const channel = 'ai-quiz-game-events';
-  const clackThreadID = `ai-quiz-game-${id}`;
-  const content: MessageContent = [
+  await addContentToClack(id, [
     {
       type: MessageNodeType.PARAGRAPH,
       children: [
@@ -30,24 +26,7 @@ async function addGameProgressToClack(
       type: MessageNodeType.CODE,
       children: [{ text: JSON.stringify(answers, null, 2) }],
     },
-  ];
-
-  await fetchCordRESTApi(
-    `/v1/threads/${clackThreadID}/messages`,
-    'POST',
-    JSON.stringify({
-      authorID: 'eventbot',
-      skipLinkPreviews: true,
-      content,
-      createThread: {
-        name: `AI Quiz Game ${id}`,
-        url: `https://clack.cord.com/channel/${channel}/thread/${clackThreadID}`,
-        location: { channel },
-        organizationID: 'clack_all',
-      },
-    }),
-    getServerAuthToken(CLACK_APPLICATION_ID, CLACK_API_SECRET),
-  );
+  ]);
 }
 
 export async function POST(req: Request) {
@@ -61,5 +40,5 @@ export async function POST(req: Request) {
   void addBotMessageToThread(threadID);
   void addGameProgressToClack(threadID, data?.answers ?? []);
 
-  return NextResponse.json({});
+  return NextResponse.json(true);
 }
