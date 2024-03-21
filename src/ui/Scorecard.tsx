@@ -1,3 +1,5 @@
+'use client';
+
 import { BotFetti } from '@/ui/BotFetti';
 
 import styles from '@/ui/Scorecard.module.css';
@@ -28,9 +30,11 @@ const emojiNumbers = [
 export function Scorecard({
   questions,
   answers,
+  readOnly = false,
 }: {
   questions: ClientQuizQuestion[];
   answers: ClientAnswers;
+  readOnly?: boolean;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -72,7 +76,7 @@ export function Scorecard({
 
   const didSendResult = useRef(false);
   useEffect(() => {
-    if (didSendResult.current) {
+    if (readOnly || didSendResult.current) {
       return;
     }
 

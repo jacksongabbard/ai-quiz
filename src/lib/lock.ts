@@ -19,26 +19,14 @@ export async function lockGame(id: string, answers: ClientAnswers) {
 }
 
 export async function assertGameNotLocked(id: string) {
-  return await assertGameLock(id, false);
-}
-
-export async function assertGameLocked(id: string) {
-  return await assertGameLock(id, true);
-}
-
-async function assertGameLock(id: string, expectedLock: boolean) {
   const bot = 'b:' + id;
   const botData: ServerUserData = await fetchCordRESTApi(
     '/v1/users/' + bot,
     'GET',
   );
 
-  const actualLock = botData.metadata?.locked ?? false;
-  if (expectedLock === actualLock) {
-    return;
+  const locked = botData.metadata?.locked ?? false;
+  if (locked) {
+    throw new Error('Cannot keep playing locked game');
   }
-
-  throw new Error(
-    `Invalid lock state for game ${id}. Expected: ${expectedLock} but it was ${actualLock}`,
-  );
 }

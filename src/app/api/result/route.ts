@@ -1,5 +1,6 @@
 import { addContentToClack } from '@/lib/clack';
-import { lockGame } from '@/lib/lock';
+import { SERVER } from '@/lib/env';
+import { assertGameNotLocked, lockGame } from '@/lib/lock';
 import { parseThreadID } from '@/lib/threadID';
 import type { ClientAnswers } from '@/ui/Quiz';
 import { MessageNodeType } from '@cord-sdk/types';
@@ -17,7 +18,7 @@ async function addGameCompleteToClack(
       children: [
         { text: 'Game ' },
         { text: id, code: true },
-        { text: ' complete. Results:' },
+        { text: ' complete. Results: ' + SERVER + '/share/' + id },
       ],
     },
     { type: MessageNodeType.CODE, children: [{ text: copyString }] },
@@ -37,6 +38,7 @@ export async function POST(req: Request) {
   }
 
   const [id] = parseThreadID(threadID);
+  await assertGameNotLocked(id);
   await Promise.all([
     lockGame(id, data?.answers ?? []),
     addGameCompleteToClack(
