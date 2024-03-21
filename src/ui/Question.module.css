@@ -66,6 +66,7 @@
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
+  line-height: 18px;
   justify-content: space-between;
   padding: 14px;
   position: relative;
@@ -79,11 +80,11 @@
 
 .answer:active {
   border: 1px #ffffff77 solid;
-  top: 1px;
 }
 
 .selectedAnswer {
   border: 1px #ffffff88 solid;
+  top: 0;
 }
 
 .avatars {
