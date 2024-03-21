@@ -70,6 +70,15 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 0,
   },
   {
+    question: 'Which of the following is is more likely?',
+    answers: [
+      'You find a gold coin',
+      'You find a gold coin someone dropped',
+      'You find a gold coin someone dropped after robbing a bank',
+    ],
+    correctAnswerIndex: 0,
+  },
+  {
     question:
       `You have a 100 cents in coins. The coins are separated into 10 piles.\n` +
       `The value of the piles are: 1, 1, 2, 3, 5, 8, 13, 21, 34, ____.\n\n` +
