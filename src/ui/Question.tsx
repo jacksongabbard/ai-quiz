@@ -9,20 +9,7 @@ import { indexToLetter } from '@/util/indexToLetter';
 import { Thread, thread } from '@cord-sdk/react';
 import { questions } from '@/lib/questions';
 
-const backgroundColors = [
-  'hsl(256, 66%, 34%)',
-  'hsl(236, 66%, 34%)',
-  'hsl(216, 66%, 34%)',
-  'hsl(196, 66%, 34%)',
-  'hsl(176, 66%, 34%)',
-  'hsl(156, 66%, 34%)',
-  'hsl(146, 66%, 34%)',
-  'hsl(136, 66%, 34%)',
-  'hsl(116, 66%, 34%)',
-  'hsl(96, 66%, 34%)',
-  'hsl(76, 66%, 34%)',
-  'hsl(56, 66%, 34%)',
-];
+let startingAngle = 256;
 
 export default function Question({
   active,
@@ -62,7 +49,7 @@ export default function Question({
   return (
     <div
       style={{
-        backgroundColor: backgroundColors[idx % backgroundColors.length],
+        backgroundColor: `hsl(${startingAngle - idx * 15}, 66%, 34%)`,
       }}
       ref={shellRef}
     >

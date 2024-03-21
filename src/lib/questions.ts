@@ -79,7 +79,7 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 0,
   },
   {
-    question: 'A hundred years from now, it will be what century?',
+    question: 'A hundred years from next year, it will be what century?',
 
     answers: ['20th century', '21st century', '22nd century', '23rd century'],
     correctAnswerIndex: 2,
@@ -121,7 +121,7 @@ export const questions: BaseQuizQuestion[] = [
       'The first person says, "Maybe."\n' +
       'The second person says, "Maybe."\n\n' +
       'What does the third person say?',
-    answers: ['Yes', 'Maybe', "It's possible", 'Unlikely'],
+    answers: ['Yes', 'Maybe', "It's possible"],
     correctAnswerIndex: 0,
   },
   {

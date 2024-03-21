@@ -23,7 +23,8 @@
     height: 35vh;
     max-height: 35vh;
     flex-grow: 0;
-    flex-shrink: 0;
+    flex-shrink: 1;
+    overflow: auto;
   }
 }
 

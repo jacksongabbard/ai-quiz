@@ -1,3 +1,5 @@
+import { BotFetti } from '@/ui/BotFetti';
+
 import styles from '@/ui/Scorecard.module.css';
 import classNames from 'classnames';
 import Image from 'next/image';
@@ -20,6 +22,7 @@ const emojiNumbers = [
   '1️⃣2️⃣',
   '1️⃣3️⃣',
   '1️⃣4️⃣',
+  '1️⃣5️⃣',
 ];
 
 export function Scorecard({
@@ -88,6 +91,7 @@ export function Scorecard({
   return (
     <div className={styles.scorecardContainer} ref={shellRef}>
       <div className={styles.scorecard}>
+        <BotFetti score={Math.round((points / (questions.length * 2)) * 100)} />
         <div className={styles.card}>
           <div className={classNames(styles.section, styles.heading)}>
             You scored {Math.round((points / (questions.length * 2)) * 100)}%
