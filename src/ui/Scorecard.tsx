@@ -65,19 +65,16 @@ export function Scorecard({
       </div>,
     );
   }
-  copyString += Math.round((points / questions.length) * 100) + '%\n\n';
+  copyString += Math.round((points / (questions.length * 2)) * 100) + '%\n\n';
 
   return (
     <div className={styles.scorecardContainer} ref={shellRef}>
       <div className={styles.scorecard}>
         <div className={styles.card}>
           <div className={classNames(styles.section, styles.heading)}>
-            Final Score
+            You scored {Math.round((points / (questions.length * 2)) * 100)}%
           </div>
           <div className={styles.section}>
-            You scored {Math.round((points / questions.length) * 100)}%
-            <br />
-            <br />
             {output}
             <br />
             <button
