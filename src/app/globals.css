@@ -88,3 +88,11 @@ body [data-cord-button='connect-slack'],
 body button[data-cord-button='thread-options'] {
   display: none;
 }
+/*
+body .cord-composer {
+  position: fixed;
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
+}
+*/

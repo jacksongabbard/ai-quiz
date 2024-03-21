@@ -20,9 +20,9 @@
     width: min(80vw, 500px);
   }
   body .cordThread {
-    max-height: 80vh;
+    height: 35vh;
+    max-height: 35vh;
     flex-grow: 1;
-    overflow: scroll;
   }
 }
 
