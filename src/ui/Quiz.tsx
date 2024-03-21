@@ -16,7 +16,7 @@ export function Quiz() {
   useEffect(() => {
     // Force mobile phones to scroll to the top of the page
     // so we get the full viewport
-    setTimeout(() => window.scrollTo(0, 0), 50);
+    setTimeout(() => window.scrollTo(0, 1), 50);
   }, []);
 
   useEffect(() => {
