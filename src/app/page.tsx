@@ -24,17 +24,27 @@ async function getQuizData(): Promise<QuizData> {
   const group = 'g:' + id;
   const thread = (n: number) => {
     const threadID = 't:' + id + ':' + String(n);
-    void fetchCordRESTApi(
-      '/v1/threads',
-      'POST',
-      JSON.stringify({
-        id: threadID,
-        name: 'Question ' + String(n),
-        url: 'https://www.cord.com/',
-        groupID: group,
-        location: { id, n },
-      }),
+
+    // Work around Cord issue with serializable txns when creating threads in
+    // quick succession by not doing them in such quick succession.  Flooey is
+    // looking into it -- when fixed, we can remove this setTimeout and just
+    // call the function directly.
+    setTimeout(
+      () =>
+        void fetchCordRESTApi(
+          '/v1/threads',
+          'POST',
+          JSON.stringify({
+            id: threadID,
+            name: 'Question ' + String(n),
+            url: 'https://www.cord.com/',
+            groupID: group,
+            location: { id, n },
+          }),
+        ),
+      1000 * Math.random(),
     );
+
     return threadID;
   };
 
