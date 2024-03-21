@@ -3,6 +3,7 @@ import { fetchCordRESTApi } from '@/lib/fetchCordRESTApi';
 import type { BaseQuizQuestion } from '@/lib/questions';
 import type { ClientAnswers } from '@/ui/Quiz';
 import { Scorecard } from '@/ui/Scorecard';
+import StaticQuestion from '@/ui/StaticQuestion';
 import type { ServerUserData } from '@cord-sdk/types';
 
 const error = <div>Invalid game ID.</div>;
@@ -34,6 +35,22 @@ export default async function Share({ params }: { params: { id: string } }) {
 
   return (
     <div>
+      {baseQuestions.map((qq, idx) => (
+        <StaticQuestion
+          key={idx}
+          active={false}
+          final={true}
+          idx={idx}
+          qq={qq}
+          numQuestions={baseQuestions.length}
+          humanAnswer={answers[idx].humanAnswer}
+          botAnswer={answers[idx].botAnswer}
+          onChangeHumanAnswer={(_) => {}}
+          onSubmit={(_a, _b) => {}}
+          onNext={() => {}}
+          Thread={() => <div>read-only thread goes here eventually</div>}
+        />
+      ))}
       <Scorecard readOnly answers={answers} questions={clientQuestions} />
     </div>
   );

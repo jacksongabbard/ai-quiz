@@ -40,7 +40,7 @@ export function Scorecard({
 
   const shellRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (shellRef.current) {
+    if (!readOnly && shellRef.current) {
       shellRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, []);
