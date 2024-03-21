@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import Head from 'next/head';
 
 export const metadata: Metadata = {
   title: 'AI Quiz Challenge',
@@ -19,6 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <script src="/analytics.js" async={true}></script>
       <body>{children}</body>
     </html>
   );
