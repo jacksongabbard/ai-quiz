@@ -9,7 +9,11 @@ export async function lockGame(id: string, answers: ClientAnswers) {
     '/v1/users/' + bot,
     'PUT',
     JSON.stringify({
-      metadata: { locked: true, answers, questions },
+      metadata: {
+        locked: true,
+        answers: JSON.stringify(answers),
+        questions: JSON.stringify(questions),
+      },
     }),
   );
 }
