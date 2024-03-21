@@ -50,8 +50,10 @@ export async function POST(req: Request) {
   const [id] = parseThreadID(threadID);
   await assertGameNotLocked(id);
 
-  void addBotMessageToThread(threadID);
-  void addGameProgressToClack(threadID, data?.answers ?? []);
+  await Promise.all([
+    addBotMessageToThread(threadID),
+    addGameProgressToClack(threadID, data?.answers ?? []),
+  ]);
 
   return NextResponse.json(true);
 }
