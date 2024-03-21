@@ -37,13 +37,14 @@ export async function POST(req: Request) {
   }
 
   const [id] = parseThreadID(threadID);
-  await lockGame(id);
-
-  void addGameCompleteToClack(
-    threadID,
-    data?.answers ?? [],
-    data?.copyString ?? '',
-  );
+  await Promise.all([
+    lockGame(id),
+    addGameCompleteToClack(
+      threadID,
+      data?.answers ?? [],
+      data?.copyString ?? '',
+    ),
+  ]);
 
   return NextResponse.json(true);
 }

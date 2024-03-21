@@ -55,7 +55,7 @@ export async function POST(req: Request) {
   if (data.event.message.author.id.startsWith('h:')) {
     const [id] = parseThreadID(data.event.threadID);
     await assertGameNotLocked(id);
-    void addBotMessageToThread(data.event.threadID);
+    await addBotMessageToThread(data.event.threadID);
   }
 
   return NextResponse.json(true);
