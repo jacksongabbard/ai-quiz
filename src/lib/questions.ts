@@ -32,6 +32,16 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 1,
   },
   {
+    question: `You're standing at a point on the globe. You walk south 1 km. Then west 1 km. Then north 1 km. You were standing the middle of the Sahara Desert. Where are you now?`,
+    answers: [
+      'North pole',
+      'Chicago',
+      'Back where you started',
+      'Sahara Desert',
+    ],
+    correctAnswerIndex: 3,
+  },
+  {
     question:
       "You have a 100 cents in coins. The coins are separated into 10 piles.\nThe value of the piles are: 1, 1, 2, 3, 5, 8, 13, 21, 34, ____.\n\nWhat's the value of the last pile?",
     answers: ['55', '34', '12', '1'],
