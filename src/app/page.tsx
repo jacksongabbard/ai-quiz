@@ -5,11 +5,6 @@ import styles from './page.module.css';
 
 export type ClientQuizQuestion = BaseQuizQuestion & { cordThreadID: string };
 
-export type QuizData = {
-  cordAccessToken: string;
-  questions: ClientQuizQuestion[];
-};
-
 export default async function Home() {
   return (
     <>
