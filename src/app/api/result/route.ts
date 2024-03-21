@@ -16,7 +16,11 @@ async function addGameCompleteToClack(
   await addContentToClack(id, [
     {
       type: MessageNodeType.PARAGRAPH,
-      children: [{ text: `Game ${id} complete. Results:` }],
+      children: [
+        { text: 'Game ' },
+        { text: id, code: true },
+        { text: ' complete. Results:' },
+      ],
     },
     { type: MessageNodeType.CODE, children: [{ text: copyString }] },
     {

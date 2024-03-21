@@ -18,7 +18,14 @@ async function addGameProgressToClack(
       type: MessageNodeType.PARAGRAPH,
       children: [
         {
-          text: `Progressing game ${id} to question ${Number(questionNumber) + 1}. Current answer set:`,
+          text: 'Progressing game ',
+        },
+        {
+          text: id,
+          code: true,
+        },
+        {
+          text: ` to question ${Number(questionNumber) + 1}. Current answer set:`,
         },
       ],
     },
