@@ -51,6 +51,8 @@
 }
 
 .questionText {
+  font-family: 'FavoritMono';
+  white-space: pre-wrap;
   font-weight: bold;
   padding: 12px 0;
 }

@@ -12,6 +12,26 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 0,
   },
   {
+    question: [
+      `You are circle. What should your next turn be?`,
+      '',
+      `x| | `,
+      `-----`,
+      ` |o| `,
+      `-----`,
+      `o| |x`,
+    ].join('\n'),
+    answers: ['Middle left', 'Top left', 'Top right', 'Bottom middle'],
+    correctAnswerIndex: 2,
+  },
+
+  {
+    question:
+      'Sally sat on the seashore slurping a slushie. In what style should she sing after she swallows her snack?',
+    answers: ['Loudly', 'Softly', 'Angrily', 'Lazily'],
+    correctAnswerIndex: 1,
+  },
+  {
     question:
       "You have a 100 cents in coins. The coins are separated into 10 piles.\nThe value of the piles are: 1, 1, 2, 3, 5, 8, 13, 21, 34, ____.\n\nWhat's the value of the last pile?",
     answers: ['55', '34', '12', '1'],
@@ -32,28 +52,27 @@ export const questions: BaseQuizQuestion[] = [
   },
   {
     question:
-      'Consider the sequence 3, 7, 31, 127, 8191. Which of these numbers comes next?',
-    answers: ['9001', '16383', '131071', '262104'],
-    correctAnswerIndex: 2,
-  },
-  {
-    question: `Adam's net worth is $100. He gives half of that to Beth. She
-gives half of that to Charles. He adds $1 of his own and gives half of that
-to Denise. She gives all of that to Adam. Who of the following is the
-wealthiest person?`,
+      `Adam's net worth is $100. He gives half of that to Beth. She ` +
+      `gives half of that to Charles. He adds $1 of his own and gives half of that ` +
+      `to Denise. She gives all of that to Adam. Who of the following is the ` +
+      `wealthiest person?`,
     answers: ['Adam', 'Taylor Swift', 'King Charles III', 'Elon Musk'],
     correctAnswerIndex: 3,
   },
   {
     question:
-      'Sally sat on the seashore slurping a slushie. In what style should she sing after she swallows her snack?',
-    answers: ['Loudly', 'Softly', 'Angrily', 'Lazily'],
-    correctAnswerIndex: 1,
+      'Three perfectly logical people are deciding what to eat for lunch.\n' +
+      'The waiter asks the first person, "Would you all like today\'s special?\n' +
+      'The first person says, "Maybe."\n' +
+      'The second person says, "Maybe."\n' +
+      'What does the third person say?',
+    answers: ['Yes', 'Maybe', "It's possible", 'Unlikely'],
+    correctAnswerIndex: 0,
   },
   {
     question:
-      'Three perfectly logical people are deciding what to eat for lunch. The waiter asks the first person, "would you all like today\'s special?\nThe first person says, "Maybe."\nThe second person says, "Maybe." What does the third person say?',
-    answers: ['Yes', 'Maybe', "It's possible", 'Unlikely'],
-    correctAnswerIndex: 0,
+      'Consider the sequence 3, 7, 31, 127, 8191. Which of these numbers comes next?',
+    answers: ['9001', '16383', '131071', '262104'],
+    correctAnswerIndex: 2,
   },
 ];
