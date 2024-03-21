@@ -25,8 +25,8 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 2,
   },
   {
-    question: 'The two letters "ha" completes what word below:',
-    answers: ['s__dy', 'c__dy', 'e__ht', 't__q'],
+    question: 'The two letters "ig" complete what word below?',
+    answers: ['we__h', 'c__ap', '__oat', 'sha__'],
     correctAnswerIndex: 0,
   },
   {
