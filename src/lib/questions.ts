@@ -11,9 +11,10 @@ export const questions: BaseQuizQuestion[] = [
     answers: ['Chains', 'Chins', 'Panic', 'Change'],
     correctAnswerIndex: 0,
   },
+
   {
     question: [
-      `For the win, what should your next move be?`,
+      `Where should the next move be?`,
       '',
       ` x |   |   `,
       `-----------`,
@@ -25,13 +26,13 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 2,
   },
   {
-    question: 'The two letters "ig" complete what word below?',
-    answers: ['we__h', 'c__ap', '__oat', 'sha__'],
-    correctAnswerIndex: 0,
-  },
-  {
     question: 'One of these things is not like the others. Which one is it?',
     answers: ['l', 'I', 'l', 'l'],
+    correctAnswerIndex: 1,
+  },
+  {
+    question: 'The two letters "i" and "g" complete what word below?',
+    answers: ['c__ap', 'we__h', 'g__st', 'try__'],
     correctAnswerIndex: 1,
   },
   {
