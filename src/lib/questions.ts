@@ -70,7 +70,7 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 0,
   },
   {
-    question: 'Which of the following is is more likely?',
+    question: 'Which of the following is more likely?',
     answers: [
       'You find a gold coin',
       'You find a gold coin someone dropped',
