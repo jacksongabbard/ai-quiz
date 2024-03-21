@@ -25,6 +25,11 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 2,
   },
   {
+    question: 'The two letters "ha" completes what word below:',
+    answers: ['s__dy', 'c__dy', 'e__ht', 't__q'],
+    correctAnswerIndex: 0,
+  },
+  {
     question: 'One of these things is not like the others. Which one is it?',
     answers: ['l', 'I', 'l', 'l'],
     correctAnswerIndex: 1,
