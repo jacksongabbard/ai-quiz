@@ -25,7 +25,7 @@ export function Quiz({
 function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
   const [currentQuestion, setCurrentQuestion] = useState(-1);
   const [answers, setAnswers] = useState<
-    { humanAnswer: number; botAnswer: number }[]
+    { humanAnswer: number; botAnswer: number | undefined }[]
   >([]);
 
   const showNextQuestion = useCallback(() => {
@@ -66,7 +66,7 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
         key={questions[i].question}
         qq={questions[i]}
         {...answers[i]}
-        onSubmit={(humanAnswer: number, botAnswer: number) => {
+        onSubmit={(humanAnswer: number, botAnswer: number | undefined) => {
           const newAnswers = [...answers];
           newAnswers[i] = { humanAnswer, botAnswer };
           setAnswers(newAnswers);

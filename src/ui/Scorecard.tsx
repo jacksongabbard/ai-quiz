@@ -23,7 +23,7 @@ export function Scorecard({
   answers,
 }: {
   questions: BaseQuizQuestion[];
-  answers: { humanAnswer: number; botAnswer: number }[];
+  answers: { humanAnswer: number; botAnswer: number | undefined }[];
 }) {
   const [copied, setCopied] = useState(false);
 
