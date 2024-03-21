@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: 'Can you and your AI buddy succeed together?',
   icons: {
     icon: '/favicon-32x32.png',
-    shortcut: '/safari-pinned-tab.svg',
+    shortcut: '/android-chrome-512x512.svg',
     apple: '/apple-touch-icon.png',
   },
 };
