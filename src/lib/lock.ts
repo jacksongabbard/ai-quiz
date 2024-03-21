@@ -1,6 +1,7 @@
 import type { ServerUserData } from '@cord-sdk/types';
 import { fetchCordRESTApi } from './fetchCordRESTApi';
 import { ClientAnswers } from '@/ui/Quiz';
+import { questions } from './questions';
 
 export async function lockGame(id: string, answers: ClientAnswers) {
   const bot = 'b:' + id;
@@ -8,7 +9,7 @@ export async function lockGame(id: string, answers: ClientAnswers) {
     '/v1/users/' + bot,
     'PUT',
     JSON.stringify({
-      metadata: { locked: true, answers },
+      metadata: { locked: true, answers, questions },
     }),
   );
 }
