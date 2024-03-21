@@ -19,10 +19,12 @@ export function Quiz() {
     }
 
     didFetch.current = true;
-
-    fetch('/api/init')
-      .then((resp) => resp.json())
-      .then((data) => setQuizData(data));
+    (async () => {
+      const resp = await fetch('/api/init');
+      const data = await resp.json();
+      console.log(data);
+      setQuizData(data);
+    })();
   });
 
   const questions = quizData?.questions ?? [];
