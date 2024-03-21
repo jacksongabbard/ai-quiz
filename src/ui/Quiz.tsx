@@ -30,13 +30,7 @@ export function Quiz() {
   const maybeAccessToken = quizData?.cordAccessToken;
   const quiz = <QuizImpl questions={questions} />;
 
-  if (maybeAccessToken) {
-    return (
-      <CordProvider clientAuthToken={maybeAccessToken}>{quiz}</CordProvider>
-    );
-  } else {
-    return quiz;
-  }
+  return <CordProvider clientAuthToken={maybeAccessToken}>{quiz}</CordProvider>;
 }
 
 export type ClientAnswers = {
