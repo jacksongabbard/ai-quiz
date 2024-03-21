@@ -9,6 +9,7 @@ export const metadata: Metadata = {
     shortcut: '/android-chrome-512x512.svg',
     apple: '/apple-touch-icon.png',
   },
+  viewport: 'width=device-width, user-scalable=no',
 };
 
 export default function RootLayout({
