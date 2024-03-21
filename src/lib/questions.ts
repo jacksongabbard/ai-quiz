@@ -79,12 +79,6 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 0,
   },
   {
-    question: 'A hundred years from next year, it will be what century?',
-
-    answers: ['20th century', '21st century', '22nd century', '23rd century'],
-    correctAnswerIndex: 2,
-  },
-  {
     question:
       `You have a 100 cents in coins. The coins are separated into 10 piles.\n` +
       `The value of the piles are: 1, 1, 2, 3, 5, 8, 13, 21, 34, ____.\n\n` +
