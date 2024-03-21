@@ -16,13 +16,7 @@ export function Start({ onStart }: { onStart?: () => void }) {
           <TickerText text={'1 AI "teammate"'} delayBy={30} />
         </div>
         <div>
-          <TickerText
-            text={'Work together to get the highest combined score'}
-            delayBy={60}
-          />
-        </div>
-        <div>
-          <TickerText text={'How will you fare?'} delayBy={120} />
+          <TickerText text={'Can you work together?'} delayBy={60} />
         </div>
         <button
           onClick={onStart}
@@ -31,7 +25,7 @@ export function Start({ onStart }: { onStart?: () => void }) {
             [styles.hidden]: !onStart,
           })}
         >
-          Start
+          Begin!
         </button>
       </div>
       <div className={styles.poweredBy}>
