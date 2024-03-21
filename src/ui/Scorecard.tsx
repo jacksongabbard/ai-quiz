@@ -18,6 +18,8 @@ const emojiNumbers = [
   '1️⃣0️⃣',
   '1️⃣1️⃣',
   '1️⃣2️⃣',
+  '1️⃣3️⃣',
+  '1️⃣4️⃣',
 ];
 
 export function Scorecard({
@@ -63,7 +65,7 @@ export function Scorecard({
       </div>,
     );
   }
-  copyString += Math.round(points / 20) + '%\n\n';
+  copyString += Math.round(points / questions.length) + '%\n\n';
 
   return (
     <div className={styles.scorecardContainer} ref={shellRef}>
@@ -73,7 +75,7 @@ export function Scorecard({
             Final Score
           </div>
           <div className={styles.section}>
-            You scored {Math.round(points / 20)}%
+            You scored {Math.round(points / questions.length)}%
             <br />
             <br />
             {output}
