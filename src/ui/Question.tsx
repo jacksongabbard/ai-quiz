@@ -1,8 +1,8 @@
 import type { ClientQuizQuestion } from '@/app/page';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from '@/ui/Question.module.css';
-import { Thread, thread } from '@cord-sdk/react';
+import { Thread as CordThread, thread } from '@cord-sdk/react';
 import StaticQuestion from './StaticQuestion';
 import { questions } from '@/lib/questions';
 
@@ -39,6 +39,18 @@ export default function Question({
     }
   }, [active]);
 
+  const Thread = useCallback(
+    () => (
+      <CordThread
+        showHeader={false}
+        showPlaceholder={false}
+        threadId={qq.cordThreadID}
+        className={styles.cordThread}
+      />
+    ),
+    [qq.cordThreadID],
+  );
+
   return (
     <StaticQuestion
       active={active}
@@ -52,14 +64,7 @@ export default function Question({
       onChangeHumanAnswer={setHumanAnswer}
       onSubmit={onSubmit}
       onNext={onNext}
-      Thread={() => (
-        <Thread
-          showHeader={false}
-          showPlaceholder={false}
-          threadId={qq.cordThreadID}
-          className={styles.cordThread}
-        />
-      )}
+      Thread={Thread}
     />
   );
 }
