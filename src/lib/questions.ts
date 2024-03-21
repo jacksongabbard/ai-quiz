@@ -43,15 +43,18 @@ export const questions: BaseQuizQuestion[] = [
   },
   {
     question:
-      "You have a 100 cents in coins. The coins are separated into 10 piles.\nThe value of the piles are: 1, 1, 2, 3, 5, 8, 13, 21, 34, ____.\n\nWhat's the value of the last pile?",
+      `You have a 100 cents in coins. The coins are separated into 10 piles.\n` +
+      `The value of the piles are: 1, 1, 2, 3, 5, 8, 13, 21, 34, ____.\n\n` +
+      `What's the value of the last pile?`,
     answers: ['55', '34', '12', '1'],
     correctAnswerIndex: 2,
   },
   {
-    question: `A hundred people are divided into two groups based on food
-    preferences. No one knows how many people are in each group. The people in
-    the first group individually believe they make up a majority. On average,
-    what is likely to be true of each indvidual in the second group?`,
+    question:
+      `A hundred people are divided into two groups based on food ` +
+      `preferences. No one knows how many people are in each group. The people in ` +
+      `the first group individually believe they make up a majority. On average, ` +
+      `what is likely to be true of each indvidual in the second group? `,
     answers: [
       'They each believe they are in the minority',
       'They each believe the groups are equal',
