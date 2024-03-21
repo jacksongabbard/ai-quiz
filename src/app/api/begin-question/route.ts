@@ -4,6 +4,8 @@ import { MessageNodeType } from '@cord-sdk/types';
 import type { ClientAnswers } from '@/ui/Quiz';
 import { addContentToClack } from '@/lib/clack';
 
+export const maxDuration = 180;
+
 async function addGameProgressToClack(
   threadID: string,
   answers: ClientAnswers,
@@ -25,7 +27,9 @@ async function addGameProgressToClack(
           code: true,
         },
         {
-          text: ` to question ${Number(questionNumber) + 1}. Current answer set:`,
+          text: ` to question ${
+            Number(questionNumber) + 1
+          }. Current answer set:`,
         },
       ],
     },
@@ -44,8 +48,10 @@ export async function POST(req: Request) {
     throw new Error('Missing threadID');
   }
 
-  void addBotMessageToThread(threadID);
-  void addGameProgressToClack(threadID, data?.answers ?? []);
+  await Promise.all([
+    void addBotMessageToThread(threadID),
+    void addGameProgressToClack(threadID, data?.answers ?? []),
+  ]);
 
   return NextResponse.json(true);
 }

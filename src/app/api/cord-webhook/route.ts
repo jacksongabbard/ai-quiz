@@ -5,6 +5,8 @@ import { WebhookWrapperProperties } from '@cord-sdk/types';
 import { NextResponse } from 'next/server';
 import { addBotMessageToThread } from '@/lib/openai';
 
+export const maxDuration = 180;
+
 async function verifySignature(req: Request) {
   const cordTimestamp = req.headers.get('x-cord-timestamp'); // XXX check if this is recent?
   const cordSignature = req.headers.get('x-cord-signature');
