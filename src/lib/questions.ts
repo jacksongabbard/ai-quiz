@@ -42,11 +42,6 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 1,
   },
   {
-    question: 'One of these things is not like the others:\n' + '1 l I',
-    answers: ['6', '12', '36', '60'],
-    correctAnswerIndex: 2,
-  },
-  {
     question:
       'You flip a fair coin 100 times. Amazingly, it lands on heads each time.\n' +
       'You decide to flip the coin one more time.\n\n' +
