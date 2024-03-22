@@ -58,7 +58,7 @@ export default function Question({
   return (
     <StaticQuestion
       active={active}
-      final={!!(humanAnswer || botAnswer)}
+      final={humanAnswer !== undefined && botAnswer !== undefined}
       shellRef={shellRef}
       idx={idx}
       qq={qq}

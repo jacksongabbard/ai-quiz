@@ -153,7 +153,6 @@ export default function StaticQuestion({
             <button
               className={styles.submit}
               onClick={() => {
-                console.log('onSubmit');
                 onSubmit(idx, humanAnswer, botAnswer);
               }}
             >
@@ -182,13 +181,7 @@ export default function StaticQuestion({
                   <TickerText text={'You were both wrong! 0pts'} />
                 )}
               {active && (
-                <button
-                  onClick={() => {
-                    console.log('onNext');
-                    onNext();
-                  }}
-                  className={styles.nextQuestion}
-                >
+                <button onClick={onNext} className={styles.nextQuestion}>
                   <Image
                     src="/right-arrow.svg"
                     width={14}
