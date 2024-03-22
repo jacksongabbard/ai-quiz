@@ -22,8 +22,8 @@ export const questions: BaseQuizQuestion[] = [
       `-----------`,
       ` o | x | x `,
     ].join('\n'),
-    answers: ['Middle left', 'Top left', 'Top right', 'Bottom middle'],
-    correctAnswerIndex: 2,
+    answers: ['Middle left', 'Top left', 'Bottom middle', 'None of these'],
+    correctAnswerIndex: 3,
   },
   {
     question: 'One of these things is not like the others. Which one is it?',
@@ -43,12 +43,6 @@ export const questions: BaseQuizQuestion[] = [
   },
   {
     question:
-      'Sally sat on the seashore slurping a slushie. In what style should she sing after she swallows her snack?',
-    answers: ['In tune', 'Harmoniously', 'Softly', 'Lazily'],
-    correctAnswerIndex: 2,
-  },
-  {
-    question:
       'You flip a fair coin 100 times. Amazingly, it lands on heads each time.\n' +
       'You decide to flip the coin one more time.\n\n' +
       'How is the coin likely to fall?',
@@ -56,7 +50,7 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 2,
   },
   {
-    question: `You're standing at a point on the globe. You walk south 1 km. Then west 1 km. Then north 1 km. You feel the scorching hot sandy air on your face. Where are you now?`,
+    question: `You're standing at a point on the globe. You walk south 1 km. Then west 1 km. Then north 1 km. You feel hot, sandy air on your face. Where are you now?`,
     answers: [
       'North pole',
       'Chicago',
@@ -66,14 +60,14 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 3,
   },
   {
-    question: 'What does "emollient" mean?',
+    question: 'Who was born earliest?',
     answers: [
-      'A soothing skin cream',
-      'Feeilng emotionally calm and quiet',
-      'Having a rough and bumpy texture',
-      'Something that tastes like shellfish',
+      'Gaozu of Han',
+      'Marcus Aurelius',
+      'Dumuzid the Fisherman',
+      'Sundiata Keita',
     ],
-    correctAnswerIndex: 0,
+    correctAnswerIndex: 2,
   },
   {
     question: 'Which of the following is more likely?',
@@ -90,19 +84,6 @@ export const questions: BaseQuizQuestion[] = [
       `The value of the piles are: 1, 1, 2, 3, 5, 8, 13, 21, 34, ____.\n\n` +
       `What's the value of the last pile?`,
     answers: ['55', '34', '12', '1'],
-    correctAnswerIndex: 2,
-  },
-  {
-    question:
-      `A hundred people are divided into two groups based on their favorite ice cream flavor. ` +
-      `No one knows how many people are in each group. The people in ` +
-      `the first group individually believe they are in the majority. On average, ` +
-      `what is likely to be true of each indvidual in the second group? `,
-    answers: [
-      'They likely believe they are in the minority',
-      'They likely believe the groups are equal',
-      'They likely believe they are in the majority',
-    ],
     correctAnswerIndex: 2,
   },
   {
