@@ -60,13 +60,13 @@ export function Scorecard({
     }
 
     copyString +=
-      `🧩${emojiNumbers[i]} ` +
+      `🧩 ${emojiNumbers[i]} ` +
       `👤 ${answers[i]?.humanAnswer === q.correctAnswerIndex ? '✅' : '❌'} ` +
       `🤖 ${answers[i]?.botAnswer === q.correctAnswerIndex ? '✅' : '❌'}\n\n`;
 
     output.push(
       <div key={q.question}>
-        🧩{emojiNumbers[i]}&nbsp; 👤
+        🧩 {emojiNumbers[i]}&nbsp; 👤
         {answers[i]?.humanAnswer === q.correctAnswerIndex ? '✅' : '❌'}
         &nbsp; 🤖
         {answers[i]?.botAnswer === q.correctAnswerIndex ? '✅' : '❌'}
