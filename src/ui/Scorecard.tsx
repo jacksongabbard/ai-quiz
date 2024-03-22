@@ -63,7 +63,10 @@ export function Scorecard({
   firstThreadID?: string;
 }) {
   const readOnly = firstThreadID === undefined;
-  const shareURL = getShareURL(firstThreadID);
+  const [shareURL, setShareURL] = useState<string | null>(null);
+  useEffect(() => {
+    setShareURL(getShareURL(firstThreadID));
+  }, [setShareURL, firstThreadID]);
 
   const shellRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -150,13 +153,11 @@ export function Scorecard({
           </div>
           {shareURL && (
             <div className={styles.section}>
-              Link to full transcript: <a href={shareURL}>{shareURL}</a>
-              <br />
               <button onClick={copyShareURL}>
                 {!copiedShareURL ? (
                   <>
-                    <Image src="/copy.svg" width={18} height={18} alt="Copy" />
-                    &nbsp;Copy link
+                    <Image src="/share.svg" width={18} height={18} alt="Copy" />
+                    &nbsp;Copy link to this game
                   </>
                 ) : (
                   <>Copied!</>
