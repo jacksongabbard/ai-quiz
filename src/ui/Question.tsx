@@ -5,6 +5,7 @@ import styles from '@/ui/Question.module.css';
 import { Thread as CordThread, thread } from '@cord-sdk/react';
 import StaticQuestion from './StaticQuestion';
 import { questions } from '@/lib/questions';
+import { TickerText } from './TickerText';
 
 export default function Question({
   active,
@@ -68,6 +69,7 @@ export default function Question({
       onChangeHumanAnswer={setHumanAnswer}
       onSubmit={onSubmit}
       onNext={onNext}
+      Text={TickerText}
       Thread={Thread}
     />
   );

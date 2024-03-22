@@ -4,9 +4,12 @@ import type { BaseQuizQuestion } from '@/lib/questions';
 import type { ClientAnswers } from '@/ui/Quiz';
 import { Scorecard } from '@/ui/Scorecard';
 import StaticQuestion from '@/ui/StaticQuestion';
+import type { TickerText } from '@/ui/TickerText';
 import type { ServerUserData } from '@cord-sdk/types';
 
 const error = <div>Invalid game ID.</div>;
+
+const StaticText: typeof TickerText = ({ text }) => <>{text}</>;
 
 export default async function Share({ params }: { params: { id: string } }) {
   const bot = 'b:' + params.id;
@@ -48,6 +51,7 @@ export default async function Share({ params }: { params: { id: string } }) {
           onChangeHumanAnswer={(_) => {}}
           onSubmit={(_a, _b) => {}}
           onNext={() => {}}
+          Text={StaticText}
           Thread={() => <div>read-only thread goes here eventually</div>}
         />
       ))}

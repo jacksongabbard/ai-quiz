@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import Image from 'next/image';
-import { TickerText } from '@/ui/TickerText';
+import type { TickerText } from '@/ui/TickerText';
 import { indexToLetter } from '@/util/indexToLetter';
 import type { BaseQuizQuestion } from '@/lib/questions';
 import { RefObject } from 'react';
@@ -20,6 +20,7 @@ export default function StaticQuestion({
   onChangeHumanAnswer,
   onSubmit,
   onNext,
+  Text,
   Thread,
 }: {
   active: boolean;
@@ -37,6 +38,7 @@ export default function StaticQuestion({
     botAnswer: number | undefined,
   ) => void;
   onNext: () => void;
+  Text: typeof TickerText;
   Thread: () => JSX.Element;
 }) {
   let runningTotal = qq.question.length + 10;
@@ -53,7 +55,7 @@ export default function StaticQuestion({
         </div>
         <div className={styles.question}>
           <div className={styles.questionText}>
-            <TickerText text={qq.question} showDot={true} />
+            <Text text={qq.question} showDot={true} />
           </div>
           {qq.answers.map((text, idx) => {
             const q = (
@@ -80,14 +82,14 @@ export default function StaticQuestion({
               >
                 <span>
                   <span>
-                    <TickerText
+                    <Text
                       text={indexToLetter(idx) + '.'}
                       delayBy={runningTotal}
                     />
                   </span>
                   &nbsp;
                   <span>
-                    <TickerText text={text} delayBy={runningTotal + 3} />
+                    <Text text={text} delayBy={runningTotal + 3} />
                   </span>
                 </span>
                 {idx === qq.correctAnswerIndex && final && (
@@ -156,29 +158,29 @@ export default function StaticQuestion({
                 onSubmit(idx, humanAnswer, botAnswer);
               }}
             >
-              <TickerText text="Final answer?" />
+              <Text text="Final answer?" />
             </button>
           )}
           {final && (
             <div className={styles.outcome}>
               {humanAnswer === qq.correctAnswerIndex &&
                 botAnswer === qq.correctAnswerIndex && (
-                  <TickerText text={'Correct! 10pts'} />
+                  <Text text={'Correct! 10pts'} />
                 )}
 
               {humanAnswer === qq.correctAnswerIndex &&
                 botAnswer !== qq.correctAnswerIndex && (
-                  <TickerText text={'Only you were right! 5pts'} />
+                  <Text text={'Only you were right! 5pts'} />
                 )}
 
               {humanAnswer !== qq.correctAnswerIndex &&
                 botAnswer === qq.correctAnswerIndex && (
-                  <TickerText text={'Only the AI was right! 5pts'} />
+                  <Text text={'Only the AI was right! 5pts'} />
                 )}
 
               {humanAnswer !== qq.correctAnswerIndex &&
                 botAnswer !== qq.correctAnswerIndex && (
-                  <TickerText text={'You were both wrong! 0pts'} />
+                  <Text text={'You were both wrong! 0pts'} />
                 )}
               {active && (
                 <button onClick={onNext} className={styles.nextQuestion}>
@@ -189,7 +191,7 @@ export default function StaticQuestion({
                     alt="Right arrow"
                   />
                   &nbsp;
-                  <TickerText text="Next" delayBy={20} />
+                  <Text text="Next" delayBy={20} />
                 </button>
               )}
             </div>
