@@ -20,7 +20,7 @@ async function logToClack(req: Request, id: string) {
 
   const geoIPInfo: string[] = [];
   if (ip !== 'no-ip' && ip !== '::1') {
-    let geoipData = await ipToLocation(ip);
+    const geoipData = await ipToLocation(ip);
     if (geoipData !== ip && typeof geoipData === 'object') {
       geoIPInfo.push((geoipData as any).city || '');
       geoIPInfo.push((geoipData as any).region_name || '');
