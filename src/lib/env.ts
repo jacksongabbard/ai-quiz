@@ -17,3 +17,5 @@ export const CORD_SERVER = env('CORD_SERVER');
 
 export const OPENAI_API_SECRET = env('OPENAI_API_SECRET');
 export const SERVER = env('SERVER');
+
+export const IPSTACK_API_SECRET = env('IPSTACK_API_SECRET');

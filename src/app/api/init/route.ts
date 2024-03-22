@@ -6,13 +6,52 @@ import { fetchCordRESTApi } from '@/lib/fetchCordRESTApi';
 import { CORD_API_SECRET, CORD_APPLICATION_ID, SERVER } from '@/lib/env';
 import { NextResponse } from 'next/server';
 import type { ClientQuizQuestion } from '@/app/page';
+import { ipToLocation } from '@/lib/geoip';
+import { addContentToClack } from '@/lib/clack';
+import { MessageNodeType } from '@cord-sdk/types';
+
+async function logToClack(req: Request, id: string) {
+  let ip: string = 'no-ip';
+  if (req.headers.get('ip')) {
+    ip = (req.headers.get('ip') || '').toString();
+  } else if (req.headers.get('x-forwarded-for')) {
+    ip = (req.headers.get('x-forwarded-for') || '').toString();
+  }
+
+  const geoIPInfo: string[] = [];
+  if (ip !== 'no-ip' && ip !== '::1') {
+    let geoipData = await ipToLocation(ip);
+    if (geoipData !== ip && typeof geoipData === 'object') {
+      geoIPInfo.push((geoipData as any).city || '');
+      geoIPInfo.push((geoipData as any).region_name || '');
+      geoIPInfo.push((geoipData as any).country_name || '');
+    }
+  } else if (ip === '::1') {
+    geoIPInfo.push('::1');
+  }
+
+  await addContentToClack(id, [
+    {
+      type: MessageNodeType.PARAGRAPH,
+      children: [
+        {
+          text: 'Init (' + geoIPInfo.join(', ') + ') | ',
+        },
+        {
+          text: id,
+          code: true,
+        },
+      ],
+    },
+  ]);
+}
 
 export type QuizData = {
   cordAccessToken: string;
   questions: ClientQuizQuestion[];
 };
 
-async function getQuizData(): Promise<QuizData> {
+async function getQuizData(req: Request): Promise<QuizData> {
   const id = uuid();
 
   const human = 'h:' + id;
@@ -76,6 +115,8 @@ async function getQuizData(): Promise<QuizData> {
     })(),
   ]);
 
+  await logToClack(req, id);
+
   return {
     cordAccessToken: getClientAuthToken(CORD_APPLICATION_ID, CORD_API_SECRET, {
       user_id: human,
@@ -84,7 +125,7 @@ async function getQuizData(): Promise<QuizData> {
   };
 }
 
-export async function POST(_req: Request) {
-  const data = await getQuizData();
+export async function POST(req: Request) {
+  const data = await getQuizData(req);
   return NextResponse.json(data);
 }
