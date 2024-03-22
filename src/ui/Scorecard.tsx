@@ -5,9 +5,10 @@ import { BotFetti } from '@/ui/BotFetti';
 import styles from '@/ui/Scorecard.module.css';
 import classNames from 'classnames';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { ClientAnswers } from './Quiz';
 import type { BaseQuizQuestion } from '@/lib/questions';
+import { parseThreadID } from '@/lib/threadID';
 
 const emojiNumbers = [
   '0️⃣1️⃣',
@@ -27,6 +28,31 @@ const emojiNumbers = [
   '1️⃣5️⃣',
 ];
 
+function getShareURL(firstThreadID: string | undefined) {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  if (!firstThreadID) {
+    return window.location.href;
+  }
+
+  const [id] = parseThreadID(firstThreadID);
+  const url = new URL(window.location.href);
+  url.pathname = `/share/${id}`;
+  return url.toString();
+}
+
+function useCopyCallback(s: string): [boolean, () => void] {
+  const [copied, setCopied] = useState(false);
+  const callback = useCallback(() => {
+    setCopied(true);
+    navigator.clipboard.writeText(s).catch((_e) => {});
+    setTimeout(() => setCopied(false), 3000);
+  }, [s]);
+  return [copied, callback];
+}
+
 export function Scorecard({
   questions,
   answers,
@@ -37,7 +63,7 @@ export function Scorecard({
   firstThreadID?: string;
 }) {
   const readOnly = firstThreadID === undefined;
-  const [copied, setCopied] = useState(false);
+  const shareURL = getShareURL(firstThreadID);
 
   const shellRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -93,6 +119,9 @@ export function Scorecard({
     });
   });
 
+  const [copiedScores, copyScores] = useCopyCallback(copyString);
+  const [copiedShareURL, copyShareURL] = useCopyCallback(shareURL ?? '');
+
   return (
     <div className={styles.scorecardContainer} ref={shellRef}>
       <div className={styles.scorecard}>
@@ -107,14 +136,8 @@ export function Scorecard({
           <div className={styles.section}>
             {output}
             <br />
-            <button
-              onClick={() => {
-                setCopied(true);
-                navigator.clipboard.writeText(copyString).catch((_e) => {});
-                setTimeout(() => setCopied(false), 3000);
-              }}
-            >
-              {!copied ? (
+            <button onClick={copyScores}>
+              {!copiedScores ? (
                 <>
                   <Image src="/copy.svg" width={18} height={18} alt="Copy" />
                   &nbsp;Copy scores
@@ -124,6 +147,22 @@ export function Scorecard({
               )}
             </button>
           </div>
+          {shareURL && (
+            <div className={styles.section}>
+              Link to full transcript: <a href={shareURL}>{shareURL}</a>
+              <br />
+              <button onClick={copyShareURL}>
+                {!copiedShareURL ? (
+                  <>
+                    <Image src="/copy.svg" width={18} height={18} alt="Copy" />
+                    &nbsp;Copy link
+                  </>
+                ) : (
+                  <>Copied!</>
+                )}
+              </button>
+            </div>
+          )}
           <div className={classNames(styles.section, styles.footer)}></div>
         </div>
         <div className={styles.poweredBy}>
