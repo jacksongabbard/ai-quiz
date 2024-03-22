@@ -3,8 +3,10 @@
 
 import type { CoreMessageData } from '@cord-sdk/types';
 
-import styles from '@/ui/Question.module.css';
+import questionStyles from '@/ui/Question.module.css';
+import styles from '@/ui/StaticThread.module.css';
 import { experimental } from '@cord-sdk/react';
+import classNames from 'classnames';
 
 function StaticMessage({ message }: { message: CoreMessageData }) {
   const isHuman = message.authorID.startsWith('h:');
@@ -12,6 +14,7 @@ function StaticMessage({ message }: { message: CoreMessageData }) {
     <div className="cord-message cord-no-reactions">
       <div className="cord-avatar-container cord-present">
         <img
+          className="cord-avatar-image"
           src={isHuman ? '/avatar-black.svg' : '/bot-black.svg'}
           alt="avatar"
         />
@@ -30,7 +33,7 @@ function StaticMessage({ message }: { message: CoreMessageData }) {
 
 export function StaticThread({ thread }: { thread: CoreMessageData[] }) {
   return (
-    <div className={styles.cordThread}>
+    <div className={classNames(questionStyles.cordThread, styles.staticThread)}>
       {thread.map((m) => (
         <StaticMessage key={m.id} message={m} />
       ))}{' '}
