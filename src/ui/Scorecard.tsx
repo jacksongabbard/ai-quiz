@@ -88,7 +88,7 @@ export function Scorecard({
     copyString +=
       `🧩 ${emojiNumbers[i]} ` +
       `👤 ${answers[i]?.humanAnswer === q.correctAnswerIndex ? '✅' : '❌'} ` +
-      `🤖 ${answers[i]?.botAnswer === q.correctAnswerIndex ? '✅' : '❌'}\n\n`;
+      `🤖 ${answers[i]?.botAnswer === q.correctAnswerIndex ? '✅' : '❌'}\n`;
 
     output.push(
       <div key={q.question}>
@@ -100,6 +100,7 @@ export function Scorecard({
     );
   }
   copyString += Math.round((points / (questions.length * 10)) * 100) + '%\n\n';
+  copyString += 'https://quiz.cord.com/\n';
 
   const didSendResult = useRef(false);
   useEffect(() => {
