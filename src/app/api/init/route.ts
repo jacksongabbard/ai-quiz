@@ -30,6 +30,8 @@ async function logToClack(req: Request, id: string) {
     geoIPInfo.push('::1');
   }
 
+  const ua = req.headers.get('user-agent') || 'unknown device';
+
   await addContentToClack(id, [
     {
       type: MessageNodeType.PARAGRAPH,
@@ -40,6 +42,14 @@ async function logToClack(req: Request, id: string) {
         {
           text: id,
           code: true,
+        },
+      ],
+    },
+    {
+      type: MessageNodeType.PARAGRAPH,
+      children: [
+        {
+          text: ua,
         },
       ],
     },
