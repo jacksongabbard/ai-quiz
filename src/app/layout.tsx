@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'AI Co-op Quiz',
     description: 'Can you and your AI buddy succeed together?',
     images: {
-      url: '/opengraph-image.png',
+      url: 'https://quiz.cord.com/opengraph-image.png',
     },
     url: 'https://quiz.cord.com',
   },
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: 'AI Co-op Quiz',
     description: 'Can you and your AI buddy succeed together?',
     images: {
-      url: '/opengraph-image.png',
+      url: 'https://quiz.cord.com/opengraph-image.png',
     },
   },
 };
