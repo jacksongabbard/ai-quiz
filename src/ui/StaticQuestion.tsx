@@ -5,6 +5,7 @@ import { indexToLetter } from '@/util/indexToLetter';
 import type { BaseQuizQuestion } from '@/lib/questions';
 import { RefObject } from 'react';
 import styles from '@/ui/Question.module.css';
+import { CordLogo } from '@/ui/CordLogo';
 
 const startingAngle = 256;
 
@@ -51,7 +52,10 @@ export default function StaticQuestion({
     >
       <div className={styles.questionContainer}>
         <div className={styles.questionNumber}>
-          {idx + 1} / {numQuestions}
+          <CordLogo />{' '}
+          <span>
+            {idx + 1} / {numQuestions}
+          </span>
         </div>
         <div className={styles.question}>
           <div className={styles.questionText}>
