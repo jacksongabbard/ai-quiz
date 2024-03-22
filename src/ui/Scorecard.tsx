@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import type { ClientAnswers } from './Quiz';
-import type { ClientQuizQuestion } from '@/app/page';
+import type { BaseQuizQuestion } from '@/lib/questions';
 
 const emojiNumbers = [
   '0️⃣1️⃣',
@@ -30,12 +30,13 @@ const emojiNumbers = [
 export function Scorecard({
   questions,
   answers,
-  readOnly = false,
+  firstThreadID,
 }: {
-  questions: ClientQuizQuestion[];
+  questions: BaseQuizQuestion[];
   answers: ClientAnswers;
-  readOnly?: boolean;
+  firstThreadID?: string;
 }) {
+  const readOnly = firstThreadID === undefined;
   const [copied, setCopied] = useState(false);
 
   const shellRef = useRef<HTMLDivElement>(null);
@@ -43,7 +44,7 @@ export function Scorecard({
     if (!readOnly && shellRef.current) {
       shellRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, []);
+  }, [readOnly]);
 
   let points = 0;
   let copyString = '';
@@ -86,7 +87,7 @@ export function Scorecard({
       body: JSON.stringify({
         answers,
         copyString,
-        threadID: questions[0].cordThreadID,
+        threadID: firstThreadID,
       }),
       method: 'POST',
     });

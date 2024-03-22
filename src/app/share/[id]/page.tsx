@@ -1,4 +1,3 @@
-import type { ClientQuizQuestion } from '@/app/page';
 import { fetchCordRESTApi } from '@/lib/fetchCordRESTApi';
 import type { BaseQuizQuestion } from '@/lib/questions';
 import type { ClientAnswers } from '@/ui/Quiz';
@@ -26,26 +25,22 @@ export default async function Share({ params }: { params: { id: string } }) {
     return error;
   }
 
-  const baseQuestions: BaseQuizQuestion[] = JSON.parse(
+  const questions: BaseQuizQuestion[] = JSON.parse(
     String(botData.metadata.questions),
   );
-  const clientQuestions: ClientQuizQuestion[] = baseQuestions.map((q, n) => ({
-    ...q,
-    cordThreadID: 't:' + params.id + ':' + n,
-  }));
 
   const answers: ClientAnswers = JSON.parse(String(botData.metadata.answers));
 
   return (
     <div>
-      {baseQuestions.map((qq, idx) => (
+      {questions.map((qq, idx) => (
         <StaticQuestion
           key={idx}
           active={false}
           final={true}
           idx={idx}
           qq={qq}
-          numQuestions={baseQuestions.length}
+          numQuestions={questions.length}
           humanAnswer={answers[idx].humanAnswer}
           botAnswer={answers[idx].botAnswer}
           onChangeHumanAnswer={(_) => {}}
@@ -55,7 +50,7 @@ export default async function Share({ params }: { params: { id: string } }) {
           Thread={() => <div>read-only thread goes here eventually</div>}
         />
       ))}
-      <Scorecard readOnly answers={answers} questions={clientQuestions} />
+      <Scorecard answers={answers} questions={questions} />
     </div>
   );
 }

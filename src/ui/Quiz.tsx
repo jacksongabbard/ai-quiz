@@ -107,7 +107,12 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
 
   if (currentQuestion === questions.length) {
     content.push(
-      <Scorecard key="scorecard" answers={answers} questions={questions} />,
+      <Scorecard
+        key="scorecard"
+        answers={answers}
+        questions={questions}
+        firstThreadID={questions[0].cordThreadID}
+      />,
     );
   }
 
