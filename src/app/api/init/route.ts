@@ -115,7 +115,11 @@ async function getQuizData(req: Request): Promise<QuizData> {
     })(),
   ]);
 
-  await logToClack(req, id);
+  try {
+    await logToClack(req, id);
+  } catch (e) {
+    console.log(e);
+  }
 
   return {
     cordAccessToken: getClientAuthToken(CORD_APPLICATION_ID, CORD_API_SECRET, {
