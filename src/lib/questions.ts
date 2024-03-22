@@ -56,6 +56,17 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 2,
   },
   {
+    question:
+      'Assuming the rat was healthy and died of natural causes, which of the following would smell the worst?',
+    answers: [
+      'A rat that just died',
+      'A rat that died a week ago',
+      'A rat that died 10 years ago',
+      'A rat that died 100 years ago',
+    ],
+    correctAnswerIndex: 2,
+  },
+  {
     question: `You're standing at a point on the globe. You walk south 1 km. Then west 1 km. Then north 1 km. You feel the scorching hot sandy air on your face. Where are you now?`,
     answers: [
       'North pole',
@@ -116,7 +127,7 @@ export const questions: BaseQuizQuestion[] = [
   },
   {
     question:
-      'Three perfectly logical people are about to eat for lunch.\n\n' +
+      'Three perfectly logical people are about to eat lunch.\n\n' +
       'The waiter asks the first person, "Would you all like today\'s special?\n' +
       'The first person says, "Maybe."\n' +
       'The second person says, "Maybe."\n\n' +
