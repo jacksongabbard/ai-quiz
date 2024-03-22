@@ -26,7 +26,7 @@ export function BotFetti({ score }: { score: number }) {
       } else {
         emoji.innerText = '❌';
       }
-      emoji.style.top = -Math.round(Math.random() * 500) + 'px';
+      emoji.style.top = -Math.round(Math.random() * 1000) + 'px';
       emoji.style.left = Math.random() * 100 + '%';
       emoji.style.position = 'absolute';
       emoji.style.opacity = (Math.random() * 0.5 + 0.5).toString();
@@ -40,7 +40,7 @@ export function BotFetti({ score }: { score: number }) {
       velo += gravity;
       dist += velo;
       fettiInner.style.top = dist + 'px';
-      if (dist > window.innerHeight + 1000) {
+      if (dist > window.innerHeight + 2000) {
         document.body.removeChild(fetti);
         clearInterval(interval);
       }
