@@ -3,12 +3,17 @@
 import type { CoreMessageData } from '@cord-sdk/types';
 
 import styles from '@/ui/Question.module.css';
+import { experimental } from '@cord-sdk/react';
 
 function StaticMessage({ message }: { message: CoreMessageData }) {
   return (
     <div>
       <div>{message.authorID.startsWith('h:') ? 'You' : 'AI'}</div>
-      <div>{message.plaintext}</div>
+      <experimental.MessageContent
+        content={message.content as any}
+        attachments={[]}
+        edited={false}
+      />
     </div>
   );
 }
