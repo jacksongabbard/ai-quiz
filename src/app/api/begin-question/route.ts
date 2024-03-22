@@ -1,17 +1,15 @@
 import { NextResponse } from 'next/server';
 import { addBotMessageToThread } from '@/lib/openai';
 import { MessageNodeType } from '@cord-sdk/types';
-import type { ClientAnswers } from '@/ui/Quiz';
 import { addContentToClack } from '@/lib/clack';
 import { parseThreadID } from '@/lib/threadID';
 import { assertGameNotLocked } from '@/lib/lock';
+import { saveGameProgress } from '@/lib/progress';
+import { SERVER } from '@/lib/env';
 
 export const maxDuration = 180;
 
-async function addGameProgressToClack(
-  threadID: string,
-  answers: ClientAnswers,
-) {
+async function addGameProgressToClack(threadID: string) {
   const [id, questionNumber] = parseThreadID(threadID);
 
   await addContentToClack(id, [
@@ -26,15 +24,13 @@ async function addGameProgressToClack(
           code: true,
         },
         {
-          text: ` to question ${
-            Number(questionNumber) + 1
-          }. Current answer set:`,
+          text: ` to question ${Number(questionNumber) + 1}.`,
         },
       ],
     },
     {
-      type: MessageNodeType.CODE,
-      children: [{ text: JSON.stringify(answers, null, 2) }],
+      type: MessageNodeType.PARAGRAPH,
+      children: [{ text: `${SERVER}/share/${id}` }],
     },
   ]);
 }
@@ -52,7 +48,8 @@ export async function POST(req: Request) {
 
   await Promise.all([
     addBotMessageToThread(threadID),
-    addGameProgressToClack(threadID, data?.answers ?? []),
+    saveGameProgress(id, data?.answers ?? []),
+    addGameProgressToClack(threadID),
   ]);
 
   return NextResponse.json(true);

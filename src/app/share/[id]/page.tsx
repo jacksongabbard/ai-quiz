@@ -7,8 +7,6 @@ import { StaticThread } from '@/ui/StaticThread';
 import type { TickerText } from '@/ui/TickerText';
 import type { CoreMessageData, ServerUserData } from '@cord-sdk/types';
 
-const error = <div>Invalid game ID.</div>;
-
 const StaticText: typeof TickerText = ({ text }) => <>{text}</>;
 
 export default async function Share({ params }: { params: { id: string } }) {
@@ -19,11 +17,7 @@ export default async function Share({ params }: { params: { id: string } }) {
     botData = await fetchCordRESTApi('/v1/users/' + bot, 'GET');
   } catch (e) {
     console.log(e);
-    return error;
-  }
-
-  if (botData.metadata.locked !== true) {
-    return error;
+    return <div>Invalid game ID.</div>;
   }
 
   const questions: BaseQuizQuestion[] = JSON.parse(
@@ -51,8 +45,8 @@ export default async function Share({ params }: { params: { id: string } }) {
           idx={idx}
           qq={qq}
           numQuestions={questions.length}
-          humanAnswer={answers[idx].humanAnswer}
-          botAnswer={answers[idx].botAnswer}
+          humanAnswer={answers[idx]?.humanAnswer}
+          botAnswer={answers[idx]?.botAnswer}
           onChangeHumanAnswer={(_) => {}}
           onSubmit={(_a, _b) => {}}
           onNext={() => {}}

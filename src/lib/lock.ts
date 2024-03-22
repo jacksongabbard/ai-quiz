@@ -1,21 +1,10 @@
 import type { ServerUserData } from '@cord-sdk/types';
 import { fetchCordRESTApi } from './fetchCordRESTApi';
 import { ClientAnswers } from '@/ui/Quiz';
-import { questions } from './questions';
+import { saveGameProgress } from './progress';
 
 export async function lockGame(id: string, answers: ClientAnswers) {
-  const bot = 'b:' + id;
-  await fetchCordRESTApi(
-    '/v1/users/' + bot,
-    'PUT',
-    JSON.stringify({
-      metadata: {
-        locked: true,
-        answers: JSON.stringify(answers),
-        questions: JSON.stringify(questions),
-      },
-    }),
-  );
+  await saveGameProgress(id, answers, { locked: true });
 }
 
 export async function assertGameNotLocked(id: string) {

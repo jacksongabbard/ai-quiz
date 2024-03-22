@@ -2,15 +2,10 @@ import { addContentToClack } from '@/lib/clack';
 import { SERVER } from '@/lib/env';
 import { assertGameNotLocked, lockGame } from '@/lib/lock';
 import { parseThreadID } from '@/lib/threadID';
-import type { ClientAnswers } from '@/ui/Quiz';
 import { MessageNodeType } from '@cord-sdk/types';
 import { NextResponse } from 'next/server';
 
-async function addGameCompleteToClack(
-  threadID: string,
-  answers: ClientAnswers,
-  copyString: string,
-) {
+async function addGameCompleteToClack(threadID: string, copyString: string) {
   const [id] = parseThreadID(threadID);
   await addContentToClack(id, [
     {
@@ -18,14 +13,14 @@ async function addGameCompleteToClack(
       children: [
         { text: 'Game ' },
         { text: id, code: true },
-        { text: ' complete. Results: ' + SERVER + '/share/' + id },
+        { text: ' complete.' },
       ],
     },
-    { type: MessageNodeType.CODE, children: [{ text: copyString }] },
     {
-      type: MessageNodeType.CODE,
-      children: [{ text: JSON.stringify(answers, null, 2) }],
+      type: MessageNodeType.PARAGRAPH,
+      children: [{ text: `${SERVER}/share/${id}` }],
     },
+    { type: MessageNodeType.CODE, children: [{ text: copyString }] },
   ]);
 }
 
@@ -41,11 +36,7 @@ export async function POST(req: Request) {
   await assertGameNotLocked(id);
   await Promise.all([
     lockGame(id, data?.answers ?? []),
-    addGameCompleteToClack(
-      threadID,
-      data?.answers ?? [],
-      data?.copyString ?? '',
-    ),
+    addGameCompleteToClack(threadID, data?.copyString ?? ''),
   ]);
 
   return NextResponse.json(true);
