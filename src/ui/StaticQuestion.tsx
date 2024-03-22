@@ -31,7 +31,11 @@ export default function StaticQuestion({
   humanAnswer: number | undefined;
   botAnswer: number | undefined;
   onChangeHumanAnswer: (humanAnswer: number) => void;
-  onSubmit: (humanAnswer: number, botAnswer: number | undefined) => void;
+  onSubmit: (
+    questionIndex: number,
+    humanAnswer: number,
+    botAnswer: number | undefined,
+  ) => void;
   onNext: () => void;
   Thread: () => JSX.Element;
 }) {
@@ -149,7 +153,8 @@ export default function StaticQuestion({
             <button
               className={styles.submit}
               onClick={() => {
-                onSubmit(humanAnswer, botAnswer);
+                console.log('onSubmit');
+                onSubmit(idx, humanAnswer, botAnswer);
               }}
             >
               <TickerText text="Final answer?" />
@@ -177,7 +182,13 @@ export default function StaticQuestion({
                   <TickerText text={'You were both wrong! 0pts'} />
                 )}
               {active && (
-                <button onClick={onNext} className={styles.nextQuestion}>
+                <button
+                  onClick={() => {
+                    console.log('onNext');
+                    onNext();
+                  }}
+                  className={styles.nextQuestion}
+                >
                   <Image
                     src="/right-arrow.svg"
                     width={14}

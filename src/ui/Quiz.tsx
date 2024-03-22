@@ -24,7 +24,7 @@ export function Quiz() {
       const data = await resp.json();
       setQuizData(data);
     })();
-  });
+  }, []);
 
   const questions = quizData?.questions ?? [];
   const maybeAccessToken = quizData?.cordAccessToken;
@@ -63,6 +63,19 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
     }, delay * 35); // same as the ticker text
   }, [answers, questions, currentQuestion]);
 
+  const onSubmit = useCallback(
+    (
+      questionIndex: number,
+      humanAnswer: number,
+      botAnswer: number | undefined,
+    ) => {
+      const newAnswers = [...answers];
+      newAnswers[questionIndex] = { humanAnswer, botAnswer };
+      setAnswers(newAnswers);
+    },
+    [answers, setAnswers],
+  );
+
   const content: React.ReactNode[] = [
     <Start
       key="start"
@@ -73,6 +86,7 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
       }
     />,
   ];
+
   if (currentQuestion === -1) {
     return content;
   }
@@ -85,11 +99,7 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
         key={questions[i].question}
         qq={questions[i]}
         {...answers[i]}
-        onSubmit={(humanAnswer: number, botAnswer: number | undefined) => {
-          const newAnswers = [...answers];
-          newAnswers[i] = { humanAnswer, botAnswer };
-          setAnswers(newAnswers);
-        }}
+        onSubmit={onSubmit}
         onNext={showNextQuestion}
       />,
     );

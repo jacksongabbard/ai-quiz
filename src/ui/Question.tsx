@@ -20,7 +20,11 @@ export default function Question({
   qq: ClientQuizQuestion;
   humanAnswer?: number;
   botAnswer?: number;
-  onSubmit: (humanAnswer: number, botAnswer: number | undefined) => void;
+  onSubmit: (
+    questionIndex: number,
+    humanAnswer: number,
+    botAnswer: number | undefined,
+  ) => void;
   onNext: () => void;
 }) {
   const [_humanAnswer, setHumanAnswer] = useState(humanAnswer);
