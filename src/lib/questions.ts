@@ -56,17 +56,6 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 2,
   },
   {
-    question:
-      'Assuming the rat was healthy and died of natural causes, which of the following would smell the worst?',
-    answers: [
-      'A rat that just died',
-      'A rat that died a week ago',
-      'A rat that died 10 years ago',
-      'A rat that died 100 years ago',
-    ],
-    correctAnswerIndex: 1,
-  },
-  {
     question: `You're standing at a point on the globe. You walk south 1 km. Then west 1 km. Then north 1 km. You feel the scorching hot sandy air on your face. Where are you now?`,
     answers: [
       'North pole',
