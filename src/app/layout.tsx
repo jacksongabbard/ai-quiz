@@ -18,6 +18,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          id="cord_css"
+          rel="stylesheet"
+          href="https://app.cord.com/sdk/v1/sdk.latest.css"
+        ></link>
+      </head>
       <script src="/analytics.js" async={true}></script>
       <body>{children}</body>
     </html>

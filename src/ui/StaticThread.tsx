@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import type { CoreMessageData } from '@cord-sdk/types';
@@ -6,9 +7,18 @@ import styles from '@/ui/Question.module.css';
 import { experimental } from '@cord-sdk/react';
 
 function StaticMessage({ message }: { message: CoreMessageData }) {
+  const isHuman = message.authorID.startsWith('h:');
   return (
-    <div>
-      <div>{message.authorID.startsWith('h:') ? 'You' : 'AI'}</div>
+    <div className="cord-message cord-no-reactions">
+      <div className="cord-avatar-container cord-present">
+        <img
+          src={isHuman ? '/avatar-black.svg' : '/bot-black.svg'}
+          alt="avatar"
+        />
+      </div>
+      <div className="cord-author-name cord-font-body-emphasis">
+        {isHuman ? 'You' : 'AI'}
+      </div>
       <experimental.MessageContent
         content={message.content as any}
         attachments={[]}
