@@ -13,7 +13,7 @@ export const questions: BaseQuizQuestion[] = [
       "'38, +39\n" +
       "'50, +598",
     answers: ["'54, +30", "'54, +49", "'62, +41", "'62, +89"],
-    correctAnswerIndex: 3,
+    correctAnswerIndex: 1,
   },
   {
     question:
