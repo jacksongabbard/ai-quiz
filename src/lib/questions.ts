@@ -12,7 +12,7 @@ export const questions: BaseQuizQuestion[] = [
       "'34, +39\n" +
       "'38, +39\n" +
       "'50, +598",
-    answers: ["'50, +30", "'52, +41", "'52, +89", "'54, +49"],
+    answers: ["'54, +30", "'54, +49", "'62, +41", "'62, +89"],
     correctAnswerIndex: 3,
   },
   {
