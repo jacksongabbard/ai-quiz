@@ -7,6 +7,16 @@ export type BaseQuizQuestion = {
 export const questions: BaseQuizQuestion[] = [
   {
     question:
+      'Given the following sequence, what comes next?\n' +
+      '\n' +
+      '+49 1922\n' +
+      '+27 1957\n' +
+      '+55 1963\n',
+    answers: ['+7 1991', '+7 1964', '+383 1648', '+263 2001'],
+    correctAnswerIndex: 1,
+  },
+  {
+    question:
       'Which of these words, if you remove one letter, is an anagram of "China"?',
     answers: ['Chains', 'Chins', 'Panic', 'Change'],
     correctAnswerIndex: 0,
@@ -39,14 +49,6 @@ export const questions: BaseQuizQuestion[] = [
     question:
       'When I was 6 years old, my sister was twice my age. I am now 30 years old. How old is my sister?',
     answers: ['6', '12', '36', '60'],
-    correctAnswerIndex: 2,
-  },
-  {
-    question:
-      'You flip a fair coin 100 times. Amazingly, it lands on heads each time.\n' +
-      'You decide to flip the coin one more time.\n\n' +
-      'How is the coin likely to fall?',
-    answers: ['Heads', 'Tails', 'Could be either'],
     correctAnswerIndex: 2,
   },
   {
