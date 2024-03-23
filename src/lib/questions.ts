@@ -9,11 +9,11 @@ export const questions: BaseQuizQuestion[] = [
     question:
       'Given the following sequence, what comes next?\n' +
       '\n' +
-      '1919, +93\n' +
-      '1922, +20\n' +
-      '1932, +964\n',
-    answers: ['1958, +81', '1946, +962', '1901, +56', '1949, +13'],
-    correctAnswerIndex: 1,
+      '34, +39\n' +
+      '38, +39\n' +
+      '50, +598',
+    answers: ["'50, +30", "'52, +41", "'52, +89", "'54, +49"],
+    correctAnswerIndex: 3,
   },
   {
     question:
