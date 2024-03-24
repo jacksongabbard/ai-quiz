@@ -11,9 +11,9 @@ export const questions: BaseQuizQuestion[] = [
       '\n' +
       'kötü rüzgar\n' +
       '放屁\n' +
-      'mphepo yoipa\n' +
+      'ఫౌల్ గాలి\n' +
       'afẹfẹ buburu\n',
-    answers: ['kötü rüzgar', '放屁', 'mphepo yoipa', 'afẹfẹ buburu'],
+    answers: ['kötü rüzgar', '放屁', 'ఫౌల్ గాలి', 'afẹfẹ buburu'],
     correctAnswerIndex: 1,
   },
   {
