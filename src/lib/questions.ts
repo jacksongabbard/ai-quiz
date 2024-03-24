@@ -12,8 +12,8 @@ export const questions: BaseQuizQuestion[] = [
       'kötü rüzgar\n' +
       '放屁\n' +
       'mphepo yoipa\n' +
-      'βρομερός άνεμος\n',
-    answers: ['kötü rüzgar', '放屁', 'mphepo yoipa', 'βρομερός άνεμος'],
+      'afẹfẹ buburu\n',
+    answers: ['kötü rüzgar', '放屁', 'mphepo yoipa', 'afẹfẹ buburu'],
     correctAnswerIndex: 1,
   },
   {

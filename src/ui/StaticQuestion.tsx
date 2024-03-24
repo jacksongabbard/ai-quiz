@@ -155,16 +155,27 @@ export default function StaticQuestion({
             runningTotal += text.length + 3;
             return q;
           })}
-          {!final && humanAnswer !== undefined && botAnswer !== undefined && (
-            <button
-              className={styles.submit}
-              onClick={() => {
-                onSubmit(idx, humanAnswer, botAnswer);
-              }}
-            >
-              <Text text="Final answer?" />
-            </button>
-          )}
+          {!final &&
+            humanAnswer !== undefined &&
+            botAnswer !== undefined &&
+            humanAnswer !== botAnswer && (
+              <button className={styles.submit} disabled={true}>
+                <Text text="You must agree to proceed" />
+              </button>
+            )}
+          {!final &&
+            humanAnswer !== undefined &&
+            botAnswer !== undefined &&
+            humanAnswer === botAnswer && (
+              <button
+                className={styles.submit}
+                onClick={() => {
+                  onSubmit(idx, humanAnswer, botAnswer);
+                }}
+              >
+                <Text text="Final answer?" />
+              </button>
+            )}
           {final && (
             <div className={styles.outcome}>
               {humanAnswer === qq.correctAnswerIndex &&
