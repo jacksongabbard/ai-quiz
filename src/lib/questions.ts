@@ -6,6 +6,11 @@ export type BaseQuizQuestion = {
 
 export const questions: BaseQuizQuestion[] = [
   {
+    question: 'One of these things is not like the others. Which one is it?',
+    answers: ['l', 'I', 'l', 'l'],
+    correctAnswerIndex: 1,
+  },
+  {
     question:
       'Which of these words, if you remove one letter, is an anagram of "China"?',
     answers: ['Chains', 'Chins', 'Panic', 'Change'],
@@ -24,11 +29,6 @@ export const questions: BaseQuizQuestion[] = [
     ].join('\n'),
     answers: ['Middle left', 'Top left', 'Bottom middle', 'None of these'],
     correctAnswerIndex: 3,
-  },
-  {
-    question: 'One of these things is not like the others. Which one is it?',
-    answers: ['l', 'I', 'l', 'l'],
-    correctAnswerIndex: 1,
   },
   {
     question: 'The two letters "i" and "g" complete what word below?',
