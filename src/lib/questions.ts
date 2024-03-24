@@ -7,16 +7,6 @@ export type BaseQuizQuestion = {
 export const questions: BaseQuizQuestion[] = [
   {
     question:
-      'Given the following sequence, what comes next?\n' +
-      '\n' +
-      "'34, +39\n" +
-      "'38, +39\n" +
-      "'50, +598",
-    answers: ["'54, +30", "'54, +49", "'62, +41", "'62, +89"],
-    correctAnswerIndex: 1,
-  },
-  {
-    question:
       'Which of these words, if you remove one letter, is an anagram of "China"?',
     answers: ['Chains', 'Chins', 'Panic', 'Change'],
     correctAnswerIndex: 0,
@@ -96,6 +86,16 @@ export const questions: BaseQuizQuestion[] = [
       `wealthiest person?`,
     answers: ['Adam', 'Taylor Swift', 'King Charles III', 'Elon Musk'],
     correctAnswerIndex: 3,
+  },
+  {
+    question:
+      'Given the following sequence, what comes next?\n' +
+      '\n' +
+      "'34, +39\n" +
+      "'38, +39\n" +
+      "'50, +598",
+    answers: ["'54, +30", "'54, +49", "'62, +41", "'62, +89"],
+    correctAnswerIndex: 1,
   },
   {
     question:
