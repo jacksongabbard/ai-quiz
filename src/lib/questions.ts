@@ -91,12 +91,12 @@ export const questions: BaseQuizQuestion[] = [
   },
   {
     question:
-      'Three perfectly logical people are about to eat lunch.\n\n' +
+      'Three perfectly logical people are about to eat lunch. They all know exactly what they want.\n\n' +
       'The waiter asks the first person, "Would you all like today\'s special?"\n' +
       'The first person says, "Maybe."\n' +
       'The second person says, "Maybe."\n\n' +
       'Which of the following might the third person say?',
-    answers: ['Yes', 'Maybe', "It's possible"],
+    answers: ['"Yes."', '"Maybe."', '"I\'m not sure what I want."'],
     correctAnswerIndex: 0,
   },
   {
