@@ -60,7 +60,7 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
         }),
         method: 'POST',
       });
-    }, delay * 35); // same as the ticker text
+    }, delay * 35 + 2000); // same as the ticker text, but give 2 seconds of wait time for reading
   }, [answers, questions, currentQuestion]);
 
   const onSubmit = useCallback(
