@@ -6,6 +6,17 @@ export type BaseQuizQuestion = {
 
 export const questions: BaseQuizQuestion[] = [
   {
+    question:
+      'Which of these is not like the others?\n' +
+      '\n' +
+      'kötü rüzgar\n' +
+      '放屁\n' +
+      'mphepo yoipa\n' +
+      'βρομερός άνεμος\n',
+    answers: ['kötü rüzgar', '放屁', 'mphepo yoipa', 'βρομερός άνεμος'],
+    correctAnswerIndex: 1,
+  },
+  {
     question: 'One of these things is not like the others. Which one is it?',
     answers: ['l', 'I', 'l', 'l'],
     correctAnswerIndex: 1,
@@ -16,7 +27,6 @@ export const questions: BaseQuizQuestion[] = [
     answers: ['Chains', 'Chins', 'Panic', 'Change'],
     correctAnswerIndex: 0,
   },
-
   {
     question: [
       `Where should the next move be?`,
@@ -52,16 +62,6 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 3,
   },
   {
-    question: 'Who was born earliest?',
-    answers: [
-      'Gaozu of Han',
-      'Marcus Aurelius',
-      'Dumuzid the Fisherman',
-      'Sundiata Keita',
-    ],
-    correctAnswerIndex: 2,
-  },
-  {
     question: 'Which of the following is more likely?',
     answers: [
       'You find a gold coin',
@@ -69,14 +69,6 @@ export const questions: BaseQuizQuestion[] = [
       'You find a gold coin someone dropped after robbing a bank',
     ],
     correctAnswerIndex: 0,
-  },
-  {
-    question:
-      `You have 100 cents in coins. The coins are separated into 10 piles.\n` +
-      `The value of the piles are: 1, 1, 2, 3, 5, 8, 13, 21, 34, ____.\n\n` +
-      `What's the value of the last pile?`,
-    answers: ['55', '34', '12', '1'],
-    correctAnswerIndex: 2,
   },
   {
     question:
@@ -88,14 +80,14 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 3,
   },
   {
-    question:
-      'Given the following sequence, what comes next?\n' +
-      '\n' +
-      "'34, +39\n" +
-      "'38, +39\n" +
-      "'50, +598",
-    answers: ["'42, +30", "'54, +49", "'62, +41", "'70, +89"],
-    correctAnswerIndex: 1,
+    question: 'Who was born earliest?',
+    answers: [
+      'Gaozu of Han',
+      'Marcus Aurelius',
+      'Dumuzid the Fisherman',
+      'Sundiata Keita',
+    ],
+    correctAnswerIndex: 2,
   },
   {
     question:
@@ -112,5 +104,15 @@ export const questions: BaseQuizQuestion[] = [
       'Consider the well-known sequence 3, 7, 31, 127, 8191. Which of these numbers comes next?',
     answers: ['9001', '16383', '131071', '262104'],
     correctAnswerIndex: 2,
+  },
+  {
+    question:
+      'Given the following sequence, what comes next?\n' +
+      '\n' +
+      "'34, +39\n" +
+      "'38, +39\n" +
+      "'50, +598",
+    answers: ["'42, +30", "'54, +49", "'62, +41", "'70, +89"],
+    correctAnswerIndex: 1,
   },
 ];
