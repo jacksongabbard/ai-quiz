@@ -6,6 +6,22 @@ export type BaseQuizQuestion = {
 
 export const questions: BaseQuizQuestion[] = [
   {
+    question: `In the following list, find a group of four things.
+
+    Trooper, Sahabi, Gale,
+    Beams, Narsil, Takovo,
+    Sister, Chêne chapelle, Rays, Typhoon,
+    Rays, Uncle, Bodhi`,
+
+    answers: [
+      'Trooper, Sahabi, Gale, Typhoon',
+      'Beams, Gale, Rays, Typhoon',
+      'Sister, Grandmother, Uncle, Narsil',
+      'Bodhi, Sahabi, Takovo, Chêne chapelle',
+    ],
+    correctAnswerIndex: 3,
+  },
+  {
     question: 'Which of these is not like the others?',
     answers: ['tatlı rüzgar', '放屁', 'తీపి గాలి', 'afẹfẹ didun'],
     correctAnswerIndex: 1,
@@ -83,22 +99,6 @@ export const questions: BaseQuizQuestion[] = [
       'Which of the following might the third person say?',
     answers: ['"Yes."', '"Maybe."', '"I\'m not sure what I want."'],
     correctAnswerIndex: 0,
-  },
-  {
-    question:
-      'In the following list, find a group of four things.\n' +
-      '\n' +
-      'Horns, Weather, Gale,\n' +
-      'Beams, Teeth, Telepathy,\n' +
-      'Lasers, Typhoon, Claws,\n' +
-      'Rays,  Augury, Prediction',
-    answers: [
-      'Horns, Teeth, Claws, Lasers',
-      'Weather, Gale, Typhoon, Augury',
-      'Beams, Lasers, Rays, Horns',
-      'Weather, Lasers, Claws, Telepathy',
-    ],
-    correctAnswerIndex: 3,
   },
   {
     question:
