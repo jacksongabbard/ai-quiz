@@ -8,13 +8,13 @@ export const questions: BaseQuizQuestion[] = [
   {
     question: `In the following list, find a group of four things.
 
-    Trooper, Sahabi, Gale,
+    Branch, Sahabi, Gale,
     Beams, Narsil, Takovo,
     Sister, Chêne chapelle, Rays, Typhoon,
     Rays, Uncle, Bodhi`,
 
     answers: [
-      'Trooper, Sahabi, Gale, Typhoon',
+      'Branch, Sahabi, Gale, Typhoon',
       'Beams, Gale, Rays, Typhoon',
       'Sister, Grandmother, Uncle, Narsil',
       'Bodhi, Sahabi, Takovo, Chêne chapelle',
