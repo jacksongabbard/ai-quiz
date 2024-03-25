@@ -6,22 +6,6 @@ export type BaseQuizQuestion = {
 
 export const questions: BaseQuizQuestion[] = [
   {
-    question:
-      `In the following list, find a group of four things.\n` +
-      '\n' +
-      'Branch, Primrose, Gale,\n' +
-      'Beams, Grandmother, Signal,\n' +
-      'Sister, Bunker, Rays, Typhoon,\n' +
-      'Rays, Uncle, Constitution',
-    answers: [
-      'Branch, Signal, Gale, Typhoon',
-      'Beams, Gale, Rays, Typhoon',
-      'Sister, Grandmother, Uncle, Primrose',
-      'Primrose, Signal, Bunker, Constitution',
-    ],
-    correctAnswerIndex: 3,
-  },
-  {
     question: 'Which of these is not like the others?',
     answers: ['tatlı rüzgar', '放屁', 'తీపి గాలి', 'afẹfẹ didun'],
     correctAnswerIndex: 1,
@@ -115,5 +99,21 @@ export const questions: BaseQuizQuestion[] = [
       "'50, +598",
     answers: ["'42, +30", "'54, +49", "'62, +41", "'70, +89"],
     correctAnswerIndex: 1,
+  },
+  {
+    question:
+      `In the following list, find a group of four things.\n` +
+      '\n' +
+      'Branch, White, Gale,\n' +
+      'Beams, Grandmother, Pink,\n' +
+      'Orange, Brownian, Typhoon,\n' +
+      'Rays, Uncle, Blue',
+    answers: [
+      'Branch, Grandmother, Typhoon, Uncle',
+      'Gale, Pink, Orange, Rays',
+      'White, Grandmother, Orange, Blue',
+      'White, Pink, Brownian, Blue',
+    ],
+    correctAnswerIndex: 3,
   },
 ];
