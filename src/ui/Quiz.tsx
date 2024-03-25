@@ -32,6 +32,10 @@ export function Quiz() {
       return;
     }
 
+    if (history.scrollRestoration) {
+      history.scrollRestoration = 'manual';
+    }
+
     didFetch.current = true;
     void (async () => {
       let oldToken = null;

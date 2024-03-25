@@ -6,18 +6,18 @@ export type BaseQuizQuestion = {
 
 export const questions: BaseQuizQuestion[] = [
   {
-    question: `In the following list, find a group of four things.
-
-    Branch, Sahabi, Gale,
-    Beams, Narsil, Takovo,
-    Sister, Chêne chapelle, Rays, Typhoon,
-    Rays, Uncle, Bodhi`,
-
+    question:
+      `In the following list, find a group of four things.\n` +
+      '\n' +
+      'Branch, Primrose, Gale,\n' +
+      'Beams, Grandmother, Signal,\n' +
+      'Sister, Bunker, Rays, Typhoon,\n' +
+      'Rays, Uncle, Constitution',
     answers: [
-      'Branch, Sahabi, Gale, Typhoon',
+      'Branch, Signal, Gale, Typhoon',
       'Beams, Gale, Rays, Typhoon',
-      'Sister, Grandmother, Uncle, Narsil',
-      'Bodhi, Sahabi, Takovo, Chêne chapelle',
+      'Sister, Grandmother, Uncle, Primrose',
+      'Primrose, Signal, Bunker, Constitution',
     ],
     correctAnswerIndex: 3,
   },
