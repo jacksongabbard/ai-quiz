@@ -8,7 +8,11 @@ import { Start } from '@/ui/Start';
 import { Scorecard, getShareURL } from '@/ui/Scorecard';
 import type { InitResponse, QuizData } from '@/app/api/init/route';
 
-export const TOKEN_LOCALSTORAGE = 'cordAccessToken';
+const TOKEN_LOCALSTORAGE = 'cordAccessToken';
+export function resetTokenAndRestartGame() {
+  window.localStorage.removeItem(TOKEN_LOCALSTORAGE);
+  window.location.href = '/';
+}
 
 export type ClientAnswers = {
   humanAnswer: number;
@@ -116,6 +120,7 @@ export function Quiz() {
             ? showNextQuestion
             : undefined
       }
+      onRestart={aboutToResume ? resetTokenAndRestartGame : undefined}
     />,
   ];
 

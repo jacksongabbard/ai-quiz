@@ -7,9 +7,11 @@ import Image from 'next/image';
 
 export function Start({
   onStart,
+  onRestart,
   label,
 }: {
   onStart?: () => void;
+  onRestart?: () => void;
   label: string;
 }) {
   return (
@@ -33,6 +35,11 @@ export function Start({
         >
           {label}
         </button>
+        {onRestart && (
+          <button onClick={onRestart} className={styles.startButton}>
+            Start Over
+          </button>
+        )}
       </div>
       <div className={styles.poweredBy}>
         Powered by the Cord SDK
