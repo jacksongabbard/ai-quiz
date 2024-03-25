@@ -80,30 +80,36 @@ export function Scorecard({
   const output: React.ReactNode[] = [];
   for (let i = 0; i < questions.length; i++) {
     const q = questions[i];
-    if (answers[i]?.humanAnswer === q.correctAnswerIndex) {
-      points += 5;
-    }
-
-    if (answers[i]?.botAnswer === q.correctAnswerIndex) {
-      points += 5;
+    if (
+      answers[i]?.humanAnswer === q.correctAnswerIndex &&
+      answers[i]?.botAnswer === q.correctAnswerIndex
+    ) {
+      points += 10;
     }
 
     copyString +=
       `🧩 ${emojiNumbers[i]} ` +
-      `👤 ${answers[i]?.humanAnswer === q.correctAnswerIndex ? '✅' : '❌'} ` +
-      `🤖 ${answers[i]?.botAnswer === q.correctAnswerIndex ? '✅' : '❌'}\n`;
+      `${
+        answers[i]?.humanAnswer === q.correctAnswerIndex &&
+        answers[i]?.botAnswer === q.correctAnswerIndex
+          ? '✅'
+          : '❌'
+      }\n`;
 
     output.push(
       <div key={q.question}>
-        🧩 {emojiNumbers[i]}&nbsp; 👤
-        {answers[i]?.humanAnswer === q.correctAnswerIndex ? '✅' : '❌'}
-        &nbsp; 🤖
-        {answers[i]?.botAnswer === q.correctAnswerIndex ? '✅' : '❌'}
+        🧩 {emojiNumbers[i]}&nbsp;
+        {answers[i]?.humanAnswer === q.correctAnswerIndex &&
+        answers[i]?.botAnswer === q.correctAnswerIndex
+          ? '✅'
+          : '❌'}
       </div>,
     );
   }
   copyString += Math.round((points / (questions.length * 10)) * 100) + '%\n\n';
-  copyString += 'https://quiz.cord.com/\n';
+  copyString += 'Play here! https://quiz.cord.com/\n';
+  copyString += '\n';
+  copyString += 'See this game: ' + shareURL + '\n';
 
   const didSendResult = useRef(false);
   useEffect(() => {
