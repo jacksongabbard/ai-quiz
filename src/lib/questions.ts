@@ -18,7 +18,7 @@ export const questions: BaseQuizQuestion[] = [
   },
   {
     question: 'One of these things is not like the others. Which one is it?',
-    answers: ['live', 'Iaugh', 'love'],
+    answers: ['l', 'I', 'l', 'l'],
     correctAnswerIndex: 1,
   },
   {
