@@ -62,15 +62,6 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 3,
   },
   {
-    question: 'Which of the following is more likely?',
-    answers: [
-      'You find a gold coin',
-      'You find a gold coin someone dropped',
-      'You find a gold coin someone dropped after robbing a bank',
-    ],
-    correctAnswerIndex: 0,
-  },
-  {
     question:
       `Adam's net worth is $100. He gives half of that to Beth. She ` +
       `gives half of that to Charles. He adds $1 of his own and gives half of that ` +
@@ -98,6 +89,22 @@ export const questions: BaseQuizQuestion[] = [
       'Which of the following might the third person say?',
     answers: ['"Yes."', '"Maybe."', '"I\'m not sure what I want."'],
     correctAnswerIndex: 0,
+  },
+  {
+    question:
+      'In the following list, find a group of four things.\n' +
+      '\n' +
+      'Horns, Weather, Gale,\n' +
+      'Beams, Teeth, Telepathy,\n' +
+      'Lasers, Typhoon, Claws,\n' +
+      'Rays,  Augury, Prediction',
+    answers: [
+      'Horns, Teeth, Claws, Lasers',
+      'Weather, Gale, Typhoon, Augury',
+      'Beams, Lasers, Rays, Horns',
+      'Weather, Lasers, Claws, Telepathy',
+    ],
+    correctAnswerIndex: 3,
   },
   {
     question:
