@@ -28,7 +28,7 @@ const emojiNumbers = [
   '1️⃣5️⃣',
 ];
 
-function getShareURL(firstThreadID: string | undefined) {
+export function getShareURL(firstThreadID: string | undefined) {
   if (typeof window === 'undefined') {
     return null;
   }

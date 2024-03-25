@@ -13,6 +13,7 @@
     "@cord-sdk/react": "^1.36.2-canary.4",
     "@cord-sdk/server": "^1.36.2",
     "classnames": "^2.5.1",
+    "jsonwebtoken": "^9.0.2",
     "next": "14.1.4",
     "openai": "^4.29.2",
     "patch-package": "^8.0.0",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@cord-sdk/types": "^1.36.2",
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

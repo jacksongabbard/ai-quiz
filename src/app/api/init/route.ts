@@ -1,6 +1,6 @@
 import { getClientAuthToken } from '@cord-sdk/server';
 
-import { questions } from '@/lib/questions';
+import { BaseQuizQuestion, questions } from '@/lib/questions';
 import { uuid } from '@/lib/uuid';
 import { fetchCordRESTApi } from '@/lib/fetchCordRESTApi';
 import { CORD_API_SECRET, CORD_APPLICATION_ID, SERVER } from '@/lib/env';
@@ -8,7 +8,9 @@ import { NextResponse } from 'next/server';
 import type { ClientQuizQuestion } from '@/app/page';
 import { ipToLocation } from '@/lib/geoip';
 import { addContentToClack } from '@/lib/clack';
-import { MessageNodeType } from '@cord-sdk/types';
+import { MessageNodeType, ServerUserData } from '@cord-sdk/types';
+import * as jwt from 'jsonwebtoken';
+import type { ClientAnswers } from '@/ui/Quiz';
 
 async function logToClack(req: Request, id: string) {
   let ip: string = 'no-ip';
@@ -61,7 +63,12 @@ export type QuizData = {
   questions: ClientQuizQuestion[];
 };
 
-async function getQuizData(req: Request): Promise<QuizData> {
+export type InitResponse = {
+  quizData: QuizData;
+  resume?: ClientAnswers;
+};
+
+async function createNewQuizData(req: Request): Promise<InitResponse> {
   const id = uuid();
 
   const human = 'h:' + id;
@@ -128,18 +135,80 @@ async function getQuizData(req: Request): Promise<QuizData> {
   try {
     await logToClack(req, id);
   } catch (e) {
-    console.log(e);
+    console.error('Error logging new quiz to Clack', e);
   }
 
   return {
-    cordAccessToken: getClientAuthToken(CORD_APPLICATION_ID, CORD_API_SECRET, {
-      user_id: human,
-    }),
-    questions: questionsWithThreadID,
+    quizData: {
+      cordAccessToken: getClientAuthToken(
+        CORD_APPLICATION_ID,
+        CORD_API_SECRET,
+        {
+          user_id: human,
+        },
+      ),
+      questions: questionsWithThreadID,
+    },
   };
 }
 
+async function resumeOldQuiz(req: Request): Promise<InitResponse | null> {
+  const data = await req.json();
+  const token = data?.token;
+  if (!token) {
+    return null;
+  }
+
+  try {
+    const decoded = jwt.verify(token, CORD_API_SECRET, {
+      ignoreExpiration: true,
+    });
+    const userID = (decoded as Record<string, string>).user_id;
+    const [_sigil, id] = userID.split(':');
+
+    const userData: ServerUserData = await fetchCordRESTApi(
+      '/v1/users/' + 'b:' + id,
+      'GET',
+    );
+
+    if (!userData.metadata.answers || !userData.metadata.questions) {
+      return null;
+    }
+
+    const answers: ClientAnswers = JSON.parse(
+      String(userData.metadata.answers),
+    );
+    const questions: BaseQuizQuestion[] = JSON.parse(
+      String(userData.metadata.questions),
+    );
+    if (answers && questions) {
+      return {
+        quizData: {
+          cordAccessToken: getClientAuthToken(
+            CORD_APPLICATION_ID,
+            CORD_API_SECRET,
+            { user_id: userID },
+          ),
+          questions: questions.map((q, idx) => ({
+            ...q,
+            cordThreadID: 't:' + id + ':' + idx,
+          })),
+        },
+        resume: answers,
+      };
+    }
+  } catch (e) {
+    console.error('Error resuming old quiz', e);
+  }
+
+  return null;
+}
+
 export async function POST(req: Request) {
-  const data = await getQuizData(req);
-  return NextResponse.json(data);
+  const old = await resumeOldQuiz(req);
+  if (old) {
+    return NextResponse.json(old);
+  } else {
+    return NextResponse.json(await createNewQuizData(req));
+  }
 }

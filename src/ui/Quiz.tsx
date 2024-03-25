@@ -1,16 +1,25 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { CordProvider } from '@cord-sdk/react';
 
 import Question from '@/ui/Question';
 import { Start } from '@/ui/Start';
-import type { ClientQuizQuestion } from '@/app/page';
-import { Scorecard } from '@/ui/Scorecard';
-import type { QuizData } from '@/app/api/init/route';
+import { Scorecard, getShareURL } from '@/ui/Scorecard';
+import type { InitResponse, QuizData } from '@/app/api/init/route';
+
+const TOKEN_LOCALSTORAGE = 'cordAccessToken';
+
+export type ClientAnswers = {
+  humanAnswer: number;
+  botAnswer: number | undefined;
+}[];
 
 export function Quiz() {
   const [quizData, setQuizData] = useState<QuizData>();
+  const [currentQuestion, setCurrentQuestion] = useState(-1);
+  const [answers, setAnswers] = useState<ClientAnswers>([]);
+
   const didFetch = useRef(false);
 
   useEffect(() => {
@@ -20,27 +29,41 @@ export function Quiz() {
 
     didFetch.current = true;
     void (async () => {
-      const resp = await fetch('/api/init', { method: 'POST' });
-      const data = await resp.json();
-      setQuizData(data);
+      let oldToken = null;
+      try {
+        oldToken = localStorage.getItem(TOKEN_LOCALSTORAGE);
+      } catch (_e) {}
+
+      const resp = await fetch('/api/init', {
+        body: JSON.stringify({ token: oldToken }),
+        method: 'POST',
+      });
+
+      const data: InitResponse = await resp.json();
+      setQuizData(data.quizData);
+      try {
+        localStorage.setItem(TOKEN_LOCALSTORAGE, data.quizData.cordAccessToken);
+      } catch (_e) {}
+
+      const resume = data?.resume;
+      if (resume) {
+        if (resume.length === data.quizData.questions.length) {
+          window.location.href = getShareURL(
+            data.quizData.questions[0].cordThreadID,
+          )!;
+        } else {
+          setAnswers(resume);
+          setCurrentQuestion(resume.length);
+        }
+      }
     })();
   }, []);
 
-  const questions = quizData?.questions ?? [];
+  const questions = useMemo(
+    () => quizData?.questions ?? [],
+    [quizData?.questions],
+  );
   const maybeAccessToken = quizData?.cordAccessToken;
-  const quiz = <QuizImpl questions={questions} />;
-
-  return <CordProvider clientAuthToken={maybeAccessToken}>{quiz}</CordProvider>;
-}
-
-export type ClientAnswers = {
-  humanAnswer: number;
-  botAnswer: number | undefined;
-}[];
-
-function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
-  const [currentQuestion, setCurrentQuestion] = useState(-1);
-  const [answers, setAnswers] = useState<ClientAnswers>([]);
 
   const showNextQuestion = useCallback(() => {
     const nextQuestion = currentQuestion + 1;
@@ -91,10 +114,6 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
     />,
   ];
 
-  if (currentQuestion === -1) {
-    return content;
-  }
-
   for (let i = 0; i <= Math.min(questions.length - 1, currentQuestion); i++) {
     content.push(
       <Question
@@ -120,5 +139,7 @@ function QuizImpl({ questions }: { questions: ClientQuizQuestion[] }) {
     );
   }
 
-  return <>{content}</>;
+  return (
+    <CordProvider clientAuthToken={maybeAccessToken}>{content}</CordProvider>
+  );
 }
