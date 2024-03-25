@@ -6,7 +6,7 @@ import styles from '@/ui/Scorecard.module.css';
 import classNames from 'classnames';
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { ClientAnswers } from './Quiz';
+import { TOKEN_LOCALSTORAGE, type ClientAnswers } from './Quiz';
 import type { BaseQuizQuestion } from '@/lib/questions';
 import { parseThreadID } from '@/lib/threadID';
 
@@ -129,6 +129,11 @@ export function Scorecard({
     });
   });
 
+  const playAgain = useCallback(() => {
+    window.localStorage.removeItem(TOKEN_LOCALSTORAGE);
+    window.location.href = '/';
+  }, []);
+
   const [copiedScores, copyScores] = useCopyCallback(copyString);
   const [copiedShareURL, copyShareURL] = useCopyCallback(shareURL ?? '');
 
@@ -171,6 +176,9 @@ export function Scorecard({
               </button>
             </div>
           )}
+          <div className={styles.section}>
+            <button onClick={playAgain}>Play Again</button>
+          </div>
           <div className={classNames(styles.section, styles.footer)}></div>
         </div>
         <div className={styles.poweredBy}>

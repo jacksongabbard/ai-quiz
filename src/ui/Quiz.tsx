@@ -8,7 +8,7 @@ import { Start } from '@/ui/Start';
 import { Scorecard, getShareURL } from '@/ui/Scorecard';
 import type { InitResponse, QuizData } from '@/app/api/init/route';
 
-const TOKEN_LOCALSTORAGE = 'cordAccessToken';
+export const TOKEN_LOCALSTORAGE = 'cordAccessToken';
 
 export type ClientAnswers = {
   humanAnswer: number;
