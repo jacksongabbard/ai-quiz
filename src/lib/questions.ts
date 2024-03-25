@@ -92,6 +92,22 @@ export const questions: BaseQuizQuestion[] = [
   },
   {
     question:
+      `In the following list, find a group of four things.\n` +
+      '\n' +
+      'Racket, Fuji, Gale,\n' +
+      'Signal, Grandmother, Envy,\n' +
+      'Orange, Ambrosia, Typhoon,\n' +
+      'Digital, Uncle, Opal',
+    answers: [
+      'Racket, Grandmother, Typhoon, Uncle',
+      'Gale, Signal, Orange, Digital',
+      'Fuji, Grandmother, Orange, Digital',
+      'Fuji, Envy, Ambrosia, Opal',
+    ],
+    correctAnswerIndex: 3,
+  },
+  {
+    question:
       'Given the following sequence, what comes next?\n' +
       '\n' +
       "'34, +39\n" +
@@ -99,21 +115,5 @@ export const questions: BaseQuizQuestion[] = [
       "'50, +598",
     answers: ["'42, +30", "'54, +49", "'62, +41", "'70, +89"],
     correctAnswerIndex: 1,
-  },
-  {
-    question:
-      `In the following list, find a group of four things.\n` +
-      '\n' +
-      'Branch, White, Gale,\n' +
-      'Beams, Grandmother, Pink,\n' +
-      'Orange, Brownian, Typhoon,\n' +
-      'Rays, Uncle, Blue',
-    answers: [
-      'Branch, Grandmother, Typhoon, Uncle',
-      'Gale, Pink, Orange, Rays',
-      'White, Grandmother, Orange, Blue',
-      'White, Pink, Brownian, Blue',
-    ],
-    correctAnswerIndex: 3,
   },
 ];
