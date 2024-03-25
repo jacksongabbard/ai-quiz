@@ -6,14 +6,8 @@ export type BaseQuizQuestion = {
 
 export const questions: BaseQuizQuestion[] = [
   {
-    question:
-      'Which of these is not like the others?\n' +
-      '\n' +
-      'kötü rüzgar\n' +
-      '放屁\n' +
-      'ఫౌల్ గాలి\n' +
-      'afẹfẹ buburu\n',
-    answers: ['kötü rüzgar', '放屁', 'ఫౌల్ గాలి', 'afẹfẹ buburu'],
+    question: 'Which of these is not like the others?',
+    answers: ['tatlı rüzgar', '放屁', 'తీపి గాలి', 'afẹfẹ didun'],
     correctAnswerIndex: 1,
   },
   {
