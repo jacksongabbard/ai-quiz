@@ -19,6 +19,7 @@ export function Quiz() {
   const [quizData, setQuizData] = useState<QuizData>();
   const [currentQuestion, setCurrentQuestion] = useState(-1);
   const [answers, setAnswers] = useState<ClientAnswers>([]);
+  const [aboutToResume, setAboutToResume] = useState(false);
 
   const didFetch = useRef(false);
 
@@ -54,6 +55,7 @@ export function Quiz() {
         } else {
           setAnswers(resume);
           setCurrentQuestion(resume.length);
+          setAboutToResume(true);
         }
       }
     })();
@@ -106,10 +108,13 @@ export function Quiz() {
   const content: React.ReactNode[] = [
     <Start
       key="start"
+      label={aboutToResume ? 'Resume Game' : 'Begin!'}
       onStart={
-        currentQuestion === -1 && questions.length > 0
-          ? showNextQuestion
-          : undefined
+        aboutToResume
+          ? () => setAboutToResume(false)
+          : currentQuestion === -1 && questions.length > 0
+            ? showNextQuestion
+            : undefined
       }
     />,
   ];
@@ -117,7 +122,7 @@ export function Quiz() {
   for (let i = 0; i <= Math.min(questions.length - 1, currentQuestion); i++) {
     content.push(
       <Question
-        active={i === currentQuestion}
+        active={i === currentQuestion && !aboutToResume}
         idx={i}
         key={questions[i].question}
         qq={questions[i]}

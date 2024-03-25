@@ -5,7 +5,13 @@ import { TickerText } from '@/ui/TickerText';
 import classNames from 'classnames';
 import Image from 'next/image';
 
-export function Start({ onStart }: { onStart?: () => void }) {
+export function Start({
+  onStart,
+  label,
+}: {
+  onStart?: () => void;
+  label: string;
+}) {
   return (
     <div className={styles.startContainer}>
       <div className={styles.start}>
@@ -25,7 +31,7 @@ export function Start({ onStart }: { onStart?: () => void }) {
             [styles.hidden]: !onStart,
           })}
         >
-          Begin!
+          {label}
         </button>
       </div>
       <div className={styles.poweredBy}>
