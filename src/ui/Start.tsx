@@ -23,7 +23,7 @@ export function Start({
         <div>
           <TickerText text={'1 AI "teammate"'} delayBy={30} />
         </div>
-        <div>
+        <div className={styles.lastItem}>
           <TickerText text={'Can you work together?'} delayBy={60} />
         </div>
         <button
