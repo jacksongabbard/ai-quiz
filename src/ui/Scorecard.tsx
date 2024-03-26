@@ -107,12 +107,13 @@ export function Scorecard({
     );
   }
   copyString +=
+    'You got ' +
     points +
     ' out of ' +
     questions.length +
-    '(' +
+    ' (' +
     Math.round((points / questions.length) * 100) +
-    '%)\n\n';
+    '%).\n\n';
   copyString += 'Play here! https://quiz.cord.com/\n';
   copyString += '\n';
   copyString += 'See this game: ' + shareURL + '\n';
