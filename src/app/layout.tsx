@@ -2,7 +2,10 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { questions } from '@/lib/questions';
 
-const description = 'Can you and an LLM work together to win?';
+const description =
+  'Can you and an LLM work together to win? ' +
+  'You and your GPT-4-powered teammate are pitted against 7 nasty questions. ' +
+  'Will the LLM help or hinder you?';
 export const metadata: Metadata = {
   title: `${questions.length} Tricky CoLLMaborative Quiz Questions`,
   description,
