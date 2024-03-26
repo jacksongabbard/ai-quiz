@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'AI Co-op Quiz',
+  title: '13 Tricky CoLLMaborative Quiz Questions',
   description: 'Can you and your AI buddy succeed together?',
   icons: {
     icon: '/favicon-32x32.png',
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   openGraph: {
-    title: 'AI Co-op Quiz',
+    title: '13 Tricky CoLLMaborative Quiz Questions',
     description: 'Can you and your AI buddy succeed together?',
     images: {
       url: 'https://quiz.cord.com/opengraph-image.png',
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     url: 'https://quiz.cord.com',
   },
   twitter: {
-    title: 'AI Co-op Quiz',
+    title: '13 Tricky CoLLMaborative Quiz Questions',
     description: 'Can you and your AI buddy succeed together?',
     images: {
       url: 'https://quiz.cord.com/opengraph-image.png',
