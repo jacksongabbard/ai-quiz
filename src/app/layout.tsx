@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { questions } from '@/lib/questions';
 
+const description = 'Can you and an LLM work together to win?';
 export const metadata: Metadata = {
   title: `${questions.length} Tricky CoLLMaborative Quiz Questions`,
-  description: 'Can you and your AI buddy succeed together?',
+  description,
   icons: {
     icon: '/favicon-32x32.png',
     shortcut: '/android-chrome-512x512.svg',
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     title: `${questions.length} Tricky CoLLMaborative Quiz Questions`,
-    description: 'Can you and your AI buddy succeed together?',
+    description,
     images: {
       url: 'https://quiz.cord.com/opengraph-image.png',
     },
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: `${questions.length} Tricky CoLLMaborative Quiz Questions`,
-    description: 'Can you and your AI buddy succeed together?',
+    description,
     images: {
       url: 'https://quiz.cord.com/opengraph-image.png',
     },
