@@ -43,7 +43,7 @@ export const questions: BaseQuizQuestion[] = [
     answers: [
       'Gaozu of Han',
       'Marcus Aurelius',
-      'Dumuzid the Fisherman',
+      'Pharoah Tutankhamun',
       'Sundiata Keita',
     ],
     correctAnswerIndex: 2,
