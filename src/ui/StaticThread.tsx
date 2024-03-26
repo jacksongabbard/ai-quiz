@@ -20,7 +20,7 @@ function StaticMessage({ message }: { message: CoreMessageData }) {
         />
       </div>
       <div className="cord-author-name cord-font-body-emphasis">
-        {isHuman ? 'You' : 'Geppetto'}
+        {isHuman ? 'You' : 'Geppetto (GPT 4)'}
       </div>
       <experimental.MessageContent
         content={message.content as any}
