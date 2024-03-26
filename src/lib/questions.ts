@@ -22,38 +22,12 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 0,
   },
   {
-    question: [
-      `Where should the next move be?`,
-      '',
-      ` x |   |   `,
-      `-----------`,
-      `   | o |   `,
-      `-----------`,
-      ` o | x | x `,
-    ].join('\n'),
-    answers: ['Middle left', 'Top left', 'Bottom middle', 'None of these'],
-    correctAnswerIndex: 3,
-  },
-  {
-    question: 'The two letters "i" and "g" complete what word below?',
-    answers: ['c__ap', 'we__h', 'g__st', 'try__'],
-    correctAnswerIndex: 1,
-  },
-  {
     question:
-      'When I was 6 years old, my sister was twice my age. I am now 30 years old. How old is my sister?',
-    answers: ['6', '12', '36', '60'],
+      `You have a 100 cents in coins. The coins are separated into 10 piles.\n` +
+      `The value of the piles are: 1, 1, 2, 3, 5, 8, 13, 21, 34, ____.\n\n` +
+      `What's the value of the last pile?`,
+    answers: ['55', '34', '12', '1'],
     correctAnswerIndex: 2,
-  },
-  {
-    question: `You're standing at a point on the globe. You walk south 1 km. Then west 1 km. Then north 1 km. You feel hot, sandy air on your face. Where are you now?`,
-    answers: [
-      'North pole',
-      'Chicago',
-      'Back where you started',
-      'Sahara Desert',
-    ],
-    correctAnswerIndex: 3,
   },
   {
     question:
@@ -76,23 +50,7 @@ export const questions: BaseQuizQuestion[] = [
   },
   {
     question:
-      'Three perfectly logical people are about to eat lunch. They all know exactly what they want.\n\n' +
-      'The waiter asks the first person, "Would you all like today\'s special?"\n' +
-      'The first person says, "Maybe."\n' +
-      'The second person says, "Maybe."\n\n' +
-      'Which of the following might the third person say?',
-    answers: ['"Yes."', '"Maybe."', '"I\'m not sure what I want."'],
-    correctAnswerIndex: 0,
-  },
-  {
-    question:
-      'Consider the well-known sequence 3, 7, 31, 127, 8191. Which of these numbers comes next?',
-    answers: ['9001', '16383', '131071', '262104'],
-    correctAnswerIndex: 2,
-  },
-  {
-    question:
-      `In the following list, find a group of four things.\n` +
+      `In the following list, find a group of four related things.\n` +
       '\n' +
       'Racket, Fuji, Gale,\n' +
       'Signal, Grandmother, Envy,\n' +
@@ -105,15 +63,5 @@ export const questions: BaseQuizQuestion[] = [
       'Fuji, Envy, Ambrosia, Opal',
     ],
     correctAnswerIndex: 3,
-  },
-  {
-    question:
-      'Given the following sequence, what comes next?\n' +
-      '\n' +
-      "'34, +39\n" +
-      "'38, +39\n" +
-      "'50, +598",
-    answers: ["'42, +30", "'54, +49", "'62, +41", "'70, +89"],
-    correctAnswerIndex: 1,
   },
 ];

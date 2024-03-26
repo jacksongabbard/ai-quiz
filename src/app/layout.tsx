@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { questions } from '@/lib/questions';
 
 export const metadata: Metadata = {
-  title: '13 Tricky CoLLMaborative Quiz Questions',
+  title: `${questions.length} Tricky CoLLMaborative Quiz Questions`,
   description: 'Can you and your AI buddy succeed together?',
   icons: {
     icon: '/favicon-32x32.png',
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    title: '13 Tricky CoLLMaborative Quiz Questions',
+    title: `${questions.length} Tricky CoLLMaborative Quiz Questions`,
     description: 'Can you and your AI buddy succeed together?',
     images: {
       url: 'https://quiz.cord.com/opengraph-image.png',
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     url: 'https://quiz.cord.com',
   },
   twitter: {
-    title: '13 Tricky CoLLMaborative Quiz Questions',
+    title: `${questions.length} Tricky CoLLMaborative Quiz Questions`,
     description: 'Can you and your AI buddy succeed together?',
     images: {
       url: 'https://quiz.cord.com/opengraph-image.png',
