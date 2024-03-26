@@ -21,7 +21,7 @@ export function Start({
           <TickerText text={questions.length + ' evil questions'} />
         </div>
         <div>
-          <TickerText text={'1 AI "teammate"'} delayBy={30} />
+          <TickerText text={'1 AI teammate'} delayBy={30} />
         </div>
         <div className={styles.lastItem}>
           <TickerText text={'Can you work together?'} delayBy={60} />
