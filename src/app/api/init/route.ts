@@ -114,7 +114,7 @@ async function createNewQuizData(req: Request): Promise<InitResponse> {
       '/v1/users/' + bot,
       'PUT',
       JSON.stringify({
-        name: 'AI',
+        name: 'Geppetto',
         profilePictureURL: SERVER + '/bot-black.svg',
         addGroups: [group],
       }),
