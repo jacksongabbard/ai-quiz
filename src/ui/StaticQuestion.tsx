@@ -9,21 +9,7 @@ import { CordLogo } from '@/ui/CordLogo';
 
 const startingAngle = 256;
 
-export default function StaticQuestion({
-  active,
-  final,
-  shellRef,
-  idx,
-  qq,
-  numQuestions,
-  humanAnswer,
-  botAnswer,
-  onChangeHumanAnswer,
-  onSubmit,
-  onNext,
-  Text,
-  Thread,
-}: {
+type Props = {
   active: boolean;
   final: boolean;
   shellRef?: RefObject<HTMLDivElement>;
@@ -41,7 +27,75 @@ export default function StaticQuestion({
   onNext: () => void;
   Text: typeof TickerText;
   Thread: () => JSX.Element;
-}) {
+};
+
+function SubmitButton({
+  final,
+  idx,
+  humanAnswer,
+  botAnswer,
+  onSubmit,
+  Text,
+}: Pick<
+  Props,
+  'final' | 'idx' | 'humanAnswer' | 'botAnswer' | 'onSubmit' | 'Text'
+>) {
+  if (final) {
+    return null;
+  }
+
+  if (humanAnswer === undefined && botAnswer === undefined) {
+    return null;
+  }
+
+  if (humanAnswer === undefined || botAnswer === undefined) {
+    return (
+      <button className={styles.submit} disabled>
+        <Text
+          text={
+            (humanAnswer === undefined ? 'You' : 'The AI') +
+            ' must pick an answer to proceed'
+          }
+        />
+      </button>
+    );
+  }
+
+  if (humanAnswer !== botAnswer) {
+    return (
+      <button className={styles.submit} disabled={true}>
+        <Text text="You must agree to proceed" />
+      </button>
+    );
+  }
+
+  return (
+    <button
+      className={styles.submit}
+      onClick={() => {
+        onSubmit(idx, humanAnswer, botAnswer);
+      }}
+    >
+      <Text text="Final answer?" />
+    </button>
+  );
+}
+
+export default function StaticQuestion({
+  active,
+  final,
+  shellRef,
+  idx,
+  qq,
+  numQuestions,
+  humanAnswer,
+  botAnswer,
+  onChangeHumanAnswer,
+  onSubmit,
+  onNext,
+  Text,
+  Thread,
+}: Props) {
   let runningTotal = qq.question.length + 10;
   return (
     <div
@@ -155,27 +209,14 @@ export default function StaticQuestion({
             runningTotal += text.length + 3;
             return q;
           })}
-          {!final &&
-            humanAnswer !== undefined &&
-            botAnswer !== undefined &&
-            humanAnswer !== botAnswer && (
-              <button className={styles.submit} disabled={true}>
-                <Text text="You must agree to proceed" />
-              </button>
-            )}
-          {!final &&
-            humanAnswer !== undefined &&
-            botAnswer !== undefined &&
-            humanAnswer === botAnswer && (
-              <button
-                className={styles.submit}
-                onClick={() => {
-                  onSubmit(idx, humanAnswer, botAnswer);
-                }}
-              >
-                <Text text="Final answer?" />
-              </button>
-            )}
+          <SubmitButton
+            final={final}
+            idx={idx}
+            humanAnswer={humanAnswer}
+            botAnswer={botAnswer}
+            onSubmit={onSubmit}
+            Text={Text}
+          />
           {final && (
             <div className={styles.outcome}>
               {humanAnswer === qq.correctAnswerIndex &&
