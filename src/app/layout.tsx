@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   openGraph: {
+    type: 'website',
     title: '13 Tricky CoLLMaborative Quiz Questions',
     description: 'Can you and your AI buddy succeed together?',
     images: {
