@@ -76,7 +76,7 @@ export function Scorecard({
   }, [readOnly]);
 
   let points = 0;
-  let copyString = '';
+  let copyString = `${questions.length} Tricky CoLLMaborative Quiz Questions\n`;
   const output: React.ReactNode[] = [];
   for (let i = 0; i < questions.length; i++) {
     const q = questions[i];
