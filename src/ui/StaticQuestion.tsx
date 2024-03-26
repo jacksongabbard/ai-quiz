@@ -221,22 +221,22 @@ export default function StaticQuestion({
             <div className={styles.outcome}>
               {humanAnswer === qq.correctAnswerIndex &&
                 botAnswer === qq.correctAnswerIndex && (
-                  <Text text={'Correct! 10pts'} />
+                  <Text text={'Correct!'} />
                 )}
 
               {humanAnswer === qq.correctAnswerIndex &&
                 botAnswer !== qq.correctAnswerIndex && (
-                  <Text text={'Only you were right! 5pts'} />
+                  <Text text={'Only you were right!'} />
                 )}
 
               {humanAnswer !== qq.correctAnswerIndex &&
                 botAnswer === qq.correctAnswerIndex && (
-                  <Text text={'Only the AI was right! 5pts'} />
+                  <Text text={'Only Geppettoo was right!'} />
                 )}
 
               {humanAnswer !== qq.correctAnswerIndex &&
                 botAnswer !== qq.correctAnswerIndex && (
-                  <Text text={'You were both wrong! 0pts'} />
+                  <Text text={'Incorrect!'} />
                 )}
               {active && (
                 <button onClick={onNext} className={styles.nextQuestion}>
