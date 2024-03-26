@@ -144,7 +144,7 @@ export function Scorecard({
         <BotFetti score={Math.round((points / questions.length) * 100)} />
         <div className={styles.card}>
           <div className={classNames(styles.section, styles.heading)}>
-            {points} out of {questions.length} (
+            You got {points} out of {questions.length} (
             {Math.round((points / questions.length) * 100)}%).
           </div>
           <div className={styles.section}>
