@@ -114,7 +114,7 @@ async function createNewQuizData(req: Request): Promise<InitResponse> {
       '/v1/users/' + bot,
       'PUT',
       JSON.stringify({
-        name: 'Geppetto (GPT 4)',
+        name: 'Geppetto (GPT-4)',
         profilePictureURL: SERVER + '/bot-black.svg',
         addGroups: [group],
       }),
