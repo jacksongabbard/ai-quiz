@@ -106,7 +106,13 @@ export function Scorecard({
       </div>,
     );
   }
-  copyString += Math.round((points / questions.length) * 100) + '%\n\n';
+  copyString +=
+    points +
+    ' out of ' +
+    questions.length +
+    '(' +
+    Math.round((points / questions.length) * 100) +
+    '%)\n\n';
   copyString += 'Play here! https://quiz.cord.com/\n';
   copyString += '\n';
   copyString += 'See this game: ' + shareURL + '\n';
@@ -138,7 +144,7 @@ export function Scorecard({
         <BotFetti score={Math.round((points / questions.length) * 100)} />
         <div className={styles.card}>
           <div className={classNames(styles.section, styles.heading)}>
-            {points} out of ${questions.length} (
+            {points} out of {questions.length} (
             {Math.round((points / questions.length) * 100)}%).
           </div>
           <div className={styles.section}>
