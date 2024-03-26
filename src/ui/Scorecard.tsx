@@ -163,7 +163,7 @@ export function Scorecard({
                 {!copiedShareURL ? (
                   <>
                     <Image src="/share.svg" width={18} height={18} alt="Copy" />
-                    &nbsp;Copy link to this game
+                    &nbsp;Copy link to these results
                   </>
                 ) : (
                   <>Copied!</>
