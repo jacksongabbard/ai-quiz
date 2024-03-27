@@ -20,8 +20,8 @@ export const questions: BaseQuizQuestion[] = [
   },
   {
     question:
-      'Which of these words, if you remove one letter, is an anagram of "China"?',
-    answers: ['Chains', 'Antic', 'Panic', 'Manic'],
+      'If you take the first, second, and last letter from each of the following, for which do those three letters spell a new word?',
+    answers: ['SLIMY', 'PLANTS', 'TRAIN', 'CRYING'],
     correctAnswerIndex: 0,
   },
   {
