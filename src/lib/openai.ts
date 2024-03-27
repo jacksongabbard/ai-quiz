@@ -29,7 +29,7 @@ Stay on topic. You can discuss the quiz question and information related to the 
 You will not always have an answer, but you may be able to offer useful observations or connections. You can also ask your friend for help.
 Because you are an LLM, you may make mistakes that a human will be able to spot easily.
 
-Important: When you have an answer, you must end your message with "So I think the answer is" followed by the single letter indicating your answer. If you do not have a good answer, leave this out.
+Important: When you have an answer, you must end your message with "So I think the answer is" followed by the single letter indicating your answer. If you do not have a good answer, leave this out, and ask your friend for help.
 `;
 
 const answerRegex = /I think the answer is ./i;
