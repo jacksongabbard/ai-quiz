@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import Image from 'next/image';
-import type { TickerText } from '@/ui/TickerText';
+import { TickerText } from '@/ui/TickerText';
 import { indexToLetter } from '@/util/indexToLetter';
 import type { BaseQuizQuestion } from '@/lib/questions';
 import { RefObject } from 'react';
@@ -188,7 +188,9 @@ export default function StaticQuestion({
                   </button>
                 )}
               </div>
-              <div className={styles.explanation}>{qq.explanation}</div>
+              <div className={styles.explanation}>
+                <Text text={qq.explanation} />
+              </div>
             </>
           )}
         </div>

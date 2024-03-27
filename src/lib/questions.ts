@@ -23,7 +23,7 @@ export const questions: BaseQuizQuestion[] = [
     answers: ['l', 'I', 'l', 'l'],
     correctAnswerIndex: 1,
     explanation:
-      "An LLM isn't going to be tricked by the visual similarity of these characters. LLMs work on the concept of tokens, which are basically numbers that represent characters of text. To a human eye, there is no differenc, but the LLM sees 326, 358, 326, and 326. Clear as day.",
+      "An LLM isn't going to be tricked by the visual similarity of these characters. LLMs work on the concept of 'tokens', which are basically numbers that represent characters of text. A human eye sees no difference, but an LLM sees 326, 358, 326, and 326. Clear as day.",
   },
   {
     question: 'Who is the current monarch of the United Kingdom?',
@@ -40,7 +40,7 @@ export const questions: BaseQuizQuestion[] = [
     answers: ['SLIMY', 'PLANTS', 'TRAIN', 'CRYING'],
     correctAnswerIndex: 0,
     explanation: [
-      'LLMs don\'t really see words like we do. They break things down into "tokens", which (oversimplifying) are a couple of characters long.',
+      "LLMs don't really see words like we do. They break text down into tokens, which (oversimplifying) are a couple of characters long.",
       "That means that they can have a hard time manipulating things which don't cleanly line up at token boundaries, such as slicing apart words.",
       "If the problem is one that has come up a lot in training data, the LLM can typically pattern match against that well enough (they don't have a lot of difficulty reading backwards, for example).",
       'But for something even slightly novel, they are pretty lost.',
@@ -80,8 +80,8 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 3,
     explanation: [
       "Even though it's trivial for humans, LLMs have no ability to do any sort of spatial reasoning.",
-      'They are restricted both by their nature as text completion engines, as well as by their tokenizatino preventing them from seeing the board the way a human does.',
-      'This, combined with the "best" move being "none of the above" -- so that it doesn\'t appear in the answers to match against, gives the LLM no hope.',
+      'They are restricted both by their nature as text completion engines and by their tokenization. Both prevent them from "seeing" the board the way a human does.',
+      'This, combined with the "best" move being "none of the above" -- so that it doesn\'t appear in the answers to match against -- gives the LLM no hope.',
     ].join(' '),
   },
 ];
