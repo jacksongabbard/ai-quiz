@@ -23,7 +23,7 @@ export const questions: BaseQuizQuestion[] = [
     answers: ['l', 'I', 'l', 'l'],
     correctAnswerIndex: 1,
     explanation:
-      "An LLM isn't going to be tricked by the visual similarity of items. It has an easy time seeing the difference between the digital data!",
+      "An LLM isn't going to be tricked by the visual similarity of these characters. LLMs work on the concept of tokens, which are basically numbers that represent characters of text. To a human eye, there is no differenc, but the LLM sees 326, 358, 326, and 326. Clear as day.",
   },
   {
     question: 'Who is the current monarch of the United Kingdom?',
