@@ -40,7 +40,7 @@ export const questions: BaseQuizQuestion[] = [
     answers: ['SLIMY', 'PLANTS', 'TRAIN', 'CRYING'],
     correctAnswerIndex: 0,
     explanation: [
-      'LLMs don\'t really see words like we do. The break things down into "tokens", which (oversimplifying) are a couple of characters long.',
+      'LLMs don\'t really see words like we do. They break things down into "tokens", which (oversimplifying) are a couple of characters long.',
       "That means that they can have a hard time manipulating things which don't cleanly line up at token boundaries, such as slicing apart words.",
       "If the problem is one that has come up a lot in training data, the LLM can typically pattern match against that well enough (they don't have a lot of difficulty reading backwards, for example).",
       'But for something even slightly novel, they are pretty lost.',
@@ -63,7 +63,7 @@ export const questions: BaseQuizQuestion[] = [
     explanation: [
       "An LLM can only pattern match against what it's seen before. It has no ability to reason or think latteraly.",
       "In this case, it's seen a lot of problems having to do with the initial letters in the first row, and so tends to pattern match against that.",
-      "However, in case you didn't notice, if you explicitly tell it to read top-to-bottom, it will typically solve the problem -- it's seen problems of that kind before, it just can't figure out this is one of them.",
+      "However, in case you didn't notice, if you explicitly tell it to read top-to-bottom, it will typically solve the problem -- it's seen problems of that kind before, it just can't figure out this is one of them (most of the time).",
     ].join(' '),
   },
   {
@@ -79,7 +79,7 @@ export const questions: BaseQuizQuestion[] = [
     answers: ['Middle left', 'Top left', 'Bottom middle', 'None of these'],
     correctAnswerIndex: 3,
     explanation: [
-      "Even though it's trivial for humans, LLMs have no ability to any sort of spatial reasoning.",
+      "Even though it's trivial for humans, LLMs have no ability to do any sort of spatial reasoning.",
       'They are restricted both by their nature as text completion engines, as well as by their tokenizatino preventing them from seeing the board the way a human does.',
       'This, combined with the "best" move being "none of the above" -- so that it doesn\'t appear in the answers to match against, gives the LLM no hope.',
     ].join(' '),
