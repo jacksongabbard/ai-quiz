@@ -166,27 +166,30 @@ export default function StaticQuestion({
             Text={Text}
           />
           {final && (
-            <div className={styles.outcome}>
-              <Text
-                text={
-                  botAnswer === qq.correctAnswerIndex
-                    ? 'Correct!'
-                    : 'Incorrect!'
-                }
-              />
-              {active && (
-                <button onClick={onNext} className={styles.nextQuestion}>
-                  <Image
-                    src="/right-arrow.svg"
-                    width={14}
-                    height={14}
-                    alt="Right arrow"
-                  />
-                  &nbsp;
-                  <Text text="Next" delayBy={20} />
-                </button>
-              )}
-            </div>
+            <>
+              <div className={styles.outcome}>
+                <Text
+                  text={
+                    botAnswer === qq.correctAnswerIndex
+                      ? 'Correct!'
+                      : 'Incorrect!'
+                  }
+                />
+                {active && (
+                  <button onClick={onNext} className={styles.nextQuestion}>
+                    <Image
+                      src="/right-arrow.svg"
+                      width={14}
+                      height={14}
+                      alt="Right arrow"
+                    />
+                    &nbsp;
+                    <Text text="Next" delayBy={20} />
+                  </button>
+                )}
+              </div>
+              <div className={styles.explanation}>{qq.explanation}</div>
+            </>
           )}
         </div>
         <Thread />
