@@ -60,7 +60,7 @@ button {
   padding: 12px;
 }
 
-button:hover,
+button:enabled:hover,
 button:active {
   background: #ffffff55;
 }
@@ -68,6 +68,10 @@ button:active {
 button:active {
   position: relative;
   top: 1px;
+}
+
+button:disabled {
+  cursor: default;
 }
 
 .gradient {

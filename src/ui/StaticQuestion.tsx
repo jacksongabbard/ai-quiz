@@ -34,23 +34,23 @@ function SubmitButton({
     return null;
   }
 
-  if (botAnswer === undefined) {
-    return (
-      <button className={styles.submit} onClick={() => onSubmit(idx, -1)}>
+  return (
+    <div className={styles.submitWrap}>
+      <button
+        disabled={botAnswer !== undefined}
+        className={styles.submit}
+        onClick={() => onSubmit(idx, -1)}
+      >
         <Text text="Skip question" />
       </button>
-    );
-  }
-
-  return (
-    <button
-      className={styles.submit}
-      onClick={() => {
-        onSubmit(idx, botAnswer);
-      }}
-    >
-      <Text text="Final answer?" />
-    </button>
+      <button
+        disabled={botAnswer === undefined}
+        className={styles.submit}
+        onClick={() => onSubmit(idx, botAnswer)}
+      >
+        <Text text="Final answer?" />
+      </button>
+    </div>
   );
 }
 
@@ -88,7 +88,7 @@ export default function StaticQuestion({
           </div>
           {qq.answers.map((text, idx) => {
             const q = (
-              <button
+              <div
                 key={idx}
                 className={classnames({
                   [styles.answer]: true,
@@ -152,7 +152,7 @@ export default function StaticQuestion({
                     </span>
                   )}
                 </span>
-              </button>
+              </div>
             );
 
             runningTotal += text.length + 3;

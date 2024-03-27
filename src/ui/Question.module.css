@@ -73,18 +73,12 @@
   border-radius: 12px;
   box-sizing: border-box;
   color: #fff;
-  cursor: pointer;
   font-size: 14px;
   line-height: 18px;
   justify-content: space-between;
   padding: 14px;
   position: relative;
   text-align: left;
-  transition: background-color 0.3s;
-}
-
-.answer:hover {
-  background-color: #ffffff55;
 }
 
 .answer:active {
@@ -113,20 +107,31 @@
   width: 18px;
 }
 
+.submitWrap {
+  display: flex;
+  gap: 12px;
+}
+
 .submit {
-  background: #ffffffaa;
   border: 1px #00000000 solid;
-  animation: fadeLoop 1.5s infinite;
   box-sizing: border-box;
   padding: 12px;
   border-radius: 12px;
   color: #fff;
   cursor: pointer;
+  flex-grow: 1;
+}
+
+.submit:last-child {
   justify-content: flex-end;
 }
 
-.submit:hover {
+.submit:enabled:hover {
   border: 1px #ffffff solid;
+}
+
+.submit:disabled {
+  background: #ffffff11;
 }
 
 .submit:active {
