@@ -18,13 +18,13 @@ export function Start({
     <div className={styles.startContainer}>
       <div className={styles.start}>
         <div>
-          <TickerText text={questions.length + ' staging questions'} />
+          <TickerText text={questions.length + ' "tricky" questions'} />
         </div>
         <div>
-          <TickerText text={'1 AI teammate'} delayBy={30} />
+          <TickerText text={'1 "advanced" AI'} delayBy={30} />
         </div>
         <div className={styles.lastItem}>
-          <TickerText text={'Can you work together?'} delayBy={60} />
+          <TickerText text={'Can you help it pass the test?'} delayBy={60} />
         </div>
         <button
           onClick={onStart}
