@@ -19,6 +19,11 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 1,
   },
   {
+    question: 'Who is the current monarch of the United Kingdom?',
+    answers: ['King George VI', 'Queen Elizabeth II', 'King Charles III'],
+    correctAnswerIndex: 2,
+  },
+  {
     question:
       'If you take the first, second, and last letter from each of the following, for which do those three letters spell a new word?',
     answers: ['SLIMY', 'PLANTS', 'TRAIN', 'CRYING'],
