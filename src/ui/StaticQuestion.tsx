@@ -16,14 +16,8 @@ type Props = {
   idx: number;
   qq: BaseQuizQuestion;
   numQuestions: number;
-  humanAnswer: number | undefined;
   botAnswer: number | undefined;
-  onChangeHumanAnswer: (humanAnswer: number) => void;
-  onSubmit: (
-    questionIndex: number,
-    humanAnswer: number,
-    botAnswer: number | undefined,
-  ) => void;
+  onSubmit: (questionIndex: number, botAnswer: number | undefined) => void;
   onNext: () => void;
   Text: typeof TickerText;
   Thread: () => JSX.Element;
@@ -32,39 +26,18 @@ type Props = {
 function SubmitButton({
   final,
   idx,
-  humanAnswer,
   botAnswer,
   onSubmit,
   Text,
-}: Pick<
-  Props,
-  'final' | 'idx' | 'humanAnswer' | 'botAnswer' | 'onSubmit' | 'Text'
->) {
+}: Pick<Props, 'final' | 'idx' | 'botAnswer' | 'onSubmit' | 'Text'>) {
   if (final) {
     return null;
   }
 
-  if (humanAnswer === undefined && botAnswer === undefined) {
-    return null;
-  }
-
-  if (humanAnswer === undefined || botAnswer === undefined) {
+  if (botAnswer === undefined) {
     return (
-      <button className={styles.submit} disabled>
-        <Text
-          text={
-            (humanAnswer === undefined ? 'You' : 'The AI') +
-            ' must pick an answer to proceed'
-          }
-        />
-      </button>
-    );
-  }
-
-  if (humanAnswer !== botAnswer) {
-    return (
-      <button className={styles.submit} disabled={true}>
-        <Text text="You must agree to proceed" />
+      <button className={styles.submit} onClick={() => onSubmit(idx, -1)}>
+        <Text text="Skip question" />
       </button>
     );
   }
@@ -73,7 +46,7 @@ function SubmitButton({
     <button
       className={styles.submit}
       onClick={() => {
-        onSubmit(idx, humanAnswer, botAnswer);
+        onSubmit(idx, botAnswer);
       }}
     >
       <Text text="Final answer?" />
@@ -88,9 +61,7 @@ export default function StaticQuestion({
   idx,
   qq,
   numQuestions,
-  humanAnswer,
   botAnswer,
-  onChangeHumanAnswer,
   onSubmit,
   onNext,
   Text,
@@ -121,22 +92,12 @@ export default function StaticQuestion({
                 key={idx}
                 className={classnames({
                   [styles.answer]: true,
-                  [styles.selectedAnswer]:
-                    humanAnswer === idx || botAnswer === idx,
+                  [styles.selectedAnswer]: botAnswer === idx,
                   [styles.correctAnswerBackground]:
                     final && idx === qq.correctAnswerIndex,
                   [styles.incorrectAnswerBackground]:
-                    final &&
-                    (humanAnswer === idx || botAnswer === idx) &&
-                    idx !== qq.correctAnswerIndex,
+                    final && botAnswer === idx && idx !== qq.correctAnswerIndex,
                 })}
-                onClick={
-                  final
-                    ? undefined
-                    : () => {
-                        onChangeHumanAnswer(idx);
-                      }
-                }
               >
                 <span>
                   <span>
@@ -164,7 +125,7 @@ export default function StaticQuestion({
                   </span>
                 )}
                 {idx !== qq.correctAnswerIndex &&
-                  (botAnswer === idx || humanAnswer === idx) &&
+                  botAnswer === idx &&
                   final && (
                     <span className={styles.incorrectAnswer}>
                       <span className={styles.inner}>
@@ -190,18 +151,6 @@ export default function StaticQuestion({
                       />
                     </span>
                   )}
-                  {humanAnswer === idx && (
-                    <span className={styles.humanAvatar}>
-                      <Image
-                        src={'/avatar.svg'}
-                        width={16}
-                        height={16}
-                        alt="You"
-                        title="You"
-                        className={styles.avatarImg}
-                      />
-                    </span>
-                  )}
                 </span>
               </button>
             );
@@ -212,32 +161,19 @@ export default function StaticQuestion({
           <SubmitButton
             final={final}
             idx={idx}
-            humanAnswer={humanAnswer}
             botAnswer={botAnswer}
             onSubmit={onSubmit}
             Text={Text}
           />
           {final && (
             <div className={styles.outcome}>
-              {humanAnswer === qq.correctAnswerIndex &&
-                botAnswer === qq.correctAnswerIndex && (
-                  <Text text={'Correct!'} />
-                )}
-
-              {humanAnswer === qq.correctAnswerIndex &&
-                botAnswer !== qq.correctAnswerIndex && (
-                  <Text text={'Only you were right!'} />
-                )}
-
-              {humanAnswer !== qq.correctAnswerIndex &&
-                botAnswer === qq.correctAnswerIndex && (
-                  <Text text={'Only Geppettoo was right!'} />
-                )}
-
-              {humanAnswer !== qq.correctAnswerIndex &&
-                botAnswer !== qq.correctAnswerIndex && (
-                  <Text text={'Incorrect!'} />
-                )}
+              <Text
+                text={
+                  botAnswer === qq.correctAnswerIndex
+                    ? 'Correct!'
+                    : 'Incorrect!'
+                }
+              />
               {active && (
                 <button onClick={onNext} className={styles.nextQuestion}>
                   <Image

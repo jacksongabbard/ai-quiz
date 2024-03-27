@@ -45,9 +45,7 @@ export default async function Share({ params }: { params: { id: string } }) {
           idx={idx}
           qq={qq}
           numQuestions={questions.length}
-          humanAnswer={answers[idx]?.humanAnswer}
           botAnswer={answers[idx]?.botAnswer}
-          onChangeHumanAnswer={(_) => {}}
           onSubmit={(_a, _b) => {}}
           onNext={() => {}}
           Text={StaticText}

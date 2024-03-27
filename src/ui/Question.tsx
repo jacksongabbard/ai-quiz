@@ -1,5 +1,5 @@
 import type { ClientQuizQuestion } from '@/app/page';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import styles from '@/ui/Question.module.css';
 import { Thread as CordThread, thread } from '@cord-sdk/react';
@@ -11,7 +11,6 @@ export default function Question({
   active,
   idx,
   qq,
-  humanAnswer,
   botAnswer,
   onSubmit,
   onNext,
@@ -19,16 +18,10 @@ export default function Question({
   active: boolean;
   idx: number;
   qq: ClientQuizQuestion;
-  humanAnswer?: number;
   botAnswer?: number;
-  onSubmit: (
-    questionIndex: number,
-    humanAnswer: number,
-    botAnswer: number | undefined,
-  ) => void;
+  onSubmit: (questionIndex: number, botAnswer: number | undefined) => void;
   onNext: () => void;
 }) {
-  const [_humanAnswer, setHumanAnswer] = useState(humanAnswer);
   const threadData = thread.useThread(qq.cordThreadID);
   let _botAnswer: number | undefined = Number(
     threadData.thread?.metadata?.botAnswer,
@@ -59,14 +52,12 @@ export default function Question({
   return (
     <StaticQuestion
       active={active}
-      final={humanAnswer !== undefined && botAnswer !== undefined}
+      final={botAnswer !== undefined}
       shellRef={shellRef}
       idx={idx}
       qq={qq}
       numQuestions={questions.length}
-      humanAnswer={humanAnswer ?? _humanAnswer}
       botAnswer={botAnswer ?? _botAnswer}
-      onChangeHumanAnswer={setHumanAnswer}
       onSubmit={onSubmit}
       onNext={onNext}
       Text={TickerText}

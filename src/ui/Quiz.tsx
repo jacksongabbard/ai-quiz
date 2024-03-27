@@ -15,7 +15,6 @@ export function resetTokenAndRestartGame() {
 }
 
 export type ClientAnswers = {
-  humanAnswer: number;
   botAnswer: number | undefined;
 }[];
 
@@ -101,13 +100,9 @@ export function Quiz() {
   }, [answers, questions, currentQuestion]);
 
   const onSubmit = useCallback(
-    (
-      questionIndex: number,
-      humanAnswer: number,
-      botAnswer: number | undefined,
-    ) => {
+    (questionIndex: number, botAnswer: number | undefined) => {
       const newAnswers = [...answers];
-      newAnswers[questionIndex] = { humanAnswer, botAnswer };
+      newAnswers[questionIndex] = { botAnswer };
       setAnswers(newAnswers);
     },
     [answers, setAnswers],

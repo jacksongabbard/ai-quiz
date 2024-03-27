@@ -80,29 +80,18 @@ export function Scorecard({
   const output: React.ReactNode[] = [];
   for (let i = 0; i < questions.length; i++) {
     const q = questions[i];
-    if (
-      answers[i]?.humanAnswer === q.correctAnswerIndex &&
-      answers[i]?.botAnswer === q.correctAnswerIndex
-    ) {
+    if (answers[i]?.botAnswer === q.correctAnswerIndex) {
       points += 1;
     }
 
     copyString +=
       `🧩 ${emojiNumbers[i]} ` +
-      `${
-        answers[i]?.humanAnswer === q.correctAnswerIndex &&
-        answers[i]?.botAnswer === q.correctAnswerIndex
-          ? '✅'
-          : '❌'
-      }\n`;
+      `${answers[i]?.botAnswer === q.correctAnswerIndex ? '✅' : '❌'}\n`;
 
     output.push(
       <div key={q.question}>
         🧩 {emojiNumbers[i]}&nbsp;
-        {answers[i]?.humanAnswer === q.correctAnswerIndex &&
-        answers[i]?.botAnswer === q.correctAnswerIndex
-          ? '✅'
-          : '❌'}
+        {answers[i]?.botAnswer === q.correctAnswerIndex ? '✅' : '❌'}
       </div>,
     );
   }
