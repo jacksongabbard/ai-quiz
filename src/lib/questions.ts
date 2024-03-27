@@ -25,9 +25,9 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 0,
   },
   {
-    question: 'What is 69784 * 5687?',
-    answers: ['396000008', '396861608', '397000008'],
-    correctAnswerIndex: 1,
+    question: 'What is 23 * 24 * 102 * 407 + 1?',
+    answers: ['22915726', '22915727', '22915728', '22915729'],
+    correctAnswerIndex: 3,
   },
   {
     question: ['W I O P T', 'H S N L W', 'A   E U O', 'T     S'].join('\n'),
