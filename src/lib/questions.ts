@@ -21,7 +21,7 @@ export const questions: BaseQuizQuestion[] = [
   {
     question:
       'Which of these words, if you remove one letter, is an anagram of "China"?',
-    answers: ['Chains', 'Chins', 'Panic', 'Change'],
+    answers: ['Chains', 'Antic', 'Panic', 'Manic'],
     correctAnswerIndex: 0,
   },
   {
