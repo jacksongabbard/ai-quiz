@@ -24,7 +24,9 @@ export function Start({
           <TickerText text={'1 "advanced" AI'} delayBy={30} />
         </div>
         <div className={styles.lastItem}>
-          <TickerText text={'Can you help it pass the test?'} delayBy={60} />
+          <TickerText text={'Can you help it'} delayBy={60} />
+          <br />
+          <TickerText text={'pass the test?'} delayBy={75} />
         </div>
         <button
           onClick={onStart}
