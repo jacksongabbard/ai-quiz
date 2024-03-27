@@ -18,7 +18,7 @@ export function Start({
     <div className={styles.startContainer}>
       <div className={styles.start}>
         <div>
-          <TickerText text={questions.length + ' evil questions'} />
+          <TickerText text={questions.length + ' staging questions'} />
         </div>
         <div>
           <TickerText text={'1 AI teammate'} delayBy={30} />
