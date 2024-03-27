@@ -1,13 +1,17 @@
 import { OpenAI } from 'openai';
 import { OPENAI_API_SECRET } from '@/lib/env';
-import { BaseQuizQuestion, questions } from '@/lib/questions';
+import {
+  BaseQuizQuestion,
+  questions as productionQuestions,
+} from '@/lib/questions';
 import { fetchCordRESTApi } from '@/lib/fetchCordRESTApi';
 import { uuid } from '@/lib/uuid';
-import {
+import type {
   CoreMessageData,
   MessageContent,
-  MessageNodeType,
+  ServerUserData,
 } from '@cord-sdk/types';
+import { MessageNodeType } from '@cord-sdk/types';
 
 const openai = new OpenAI({
   apiKey: OPENAI_API_SECRET,
@@ -62,6 +66,26 @@ function stringToMessageContent(s: string): MessageContent {
   }));
 }
 
+async function getSavedQuestion(
+  id: string,
+  questionNumber: number,
+): Promise<BaseQuizQuestion> {
+  const userData = await fetchCordRESTApi<ServerUserData>(
+    '/v1/users/' + 'b:' + id,
+    'GET',
+  );
+
+  try {
+    const questions = JSON.parse(String(userData.metadata.questions));
+    const question = questions[questionNumber];
+    if (question) {
+      return question;
+    }
+  } catch (_e) {}
+
+  return productionQuestions[questionNumber];
+}
+
 async function getMessagesInThread(
   threadID: string,
 ): Promise<OpenAI.ChatCompletionMessageParam[]> {
@@ -98,8 +122,10 @@ export async function addBotMessageToThread(threadID: string) {
     throw new Error('Invalid threadID');
   }
 
-  const question = questions[Number(questionNumber)];
-  const existingMessages = await getMessagesInThread(threadID);
+  const [question, existingMessages] = await Promise.all([
+    getSavedQuestion(id, Number(questionNumber)),
+    getMessagesInThread(threadID),
+  ]);
 
   const botID = 'b:' + id;
   const messageID = uuid();
