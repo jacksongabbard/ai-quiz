@@ -47,6 +47,13 @@ export const questions: BaseQuizQuestion[] = [
     ].join('\n'),
   },
   {
+    question: 'Which of these is not like the others?',
+    answers: ['tatlı rüzgar', '放屁', 'తీపి గాలి', 'afẹfẹ didun'],
+    correctAnswerIndex: 1,
+    explanation:
+      '"Normal" language questions play directly to the strengths of an LLM, and so it gets it exactly right every single time!',
+  },
+  {
     question: 'What is 23 * 24 * 102 * 407 + 1?',
     answers: ['22915726', '22915727', '22915728', '22915729'],
     correctAnswerIndex: 3,
