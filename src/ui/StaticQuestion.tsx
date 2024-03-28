@@ -78,7 +78,7 @@ export default function StaticQuestion({
   return (
     <div
       style={{
-        backgroundColor: `hsl(${startingAngle - idx * 15}, 66%, 34%)`,
+        backgroundColor: `hsl(${startingAngle - idx * 10}, 66%, 34%)`,
       }}
       ref={shellRef}
     >

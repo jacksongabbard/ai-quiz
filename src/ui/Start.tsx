@@ -15,7 +15,12 @@ export function Start({
   label: string;
 }) {
   return (
-    <div className={styles.startContainer}>
+    <div
+      className={styles.startContainer}
+      style={{
+        backgroundColor: `hsl(${256 - 10}, 66%, 34%)`,
+      }}
+    >
       <div className={styles.start}>
         <div>
           <TickerText text={questions.length + ' "tricky" questions'} />

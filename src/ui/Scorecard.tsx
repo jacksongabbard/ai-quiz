@@ -130,7 +130,12 @@ export function Scorecard({
   const [copiedShareURL, copyShareURL] = useCopyCallback(shareURL ?? '');
 
   return (
-    <div className={styles.scorecardContainer} ref={shellRef}>
+    <div
+      ref={shellRef}
+      style={{
+        backgroundColor: `hsl(${256 - questions.length * 10}, 66%, 34%)`,
+      }}
+    >
       <div className={styles.scorecard}>
         <BotFetti score={Math.round((points / questions.length) * 100)} />
         <div className={styles.card}>
