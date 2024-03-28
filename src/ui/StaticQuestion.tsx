@@ -51,7 +51,7 @@ function SubmitButton({
       >
         <Text
           text={
-            botAnswer && botAnswer !== qq.correctAnswerIndex
+            botAnswer !== undefined && botAnswer !== qq.correctAnswerIndex
               ? 'Incorrect -- submit anyway?'
               : 'Submit answer'
           }
@@ -196,9 +196,7 @@ export default function StaticQuestion({
                   </button>
                 )}
               </div>
-              <div className={styles.explanation}>
-                <Text text={qq.explanation} />
-              </div>
+              <div className={styles.explanation}>{qq.explanation}</div>
             </>
           )}
         </div>
