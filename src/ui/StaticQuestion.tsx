@@ -17,7 +17,7 @@ type Props = {
   qq: BaseQuizQuestion;
   numQuestions: number;
   botAnswer: number | undefined;
-  onSubmit: (questionIndex: number, botAnswer: number | undefined) => void;
+  onSubmit: (questionIndex: number, botAnswer: number) => void;
   onNext: () => void;
   Text: typeof TickerText;
   Thread: () => JSX.Element;
@@ -38,16 +38,15 @@ function SubmitButton({
   return (
     <div className={styles.submitWrap}>
       <button
-        disabled={botAnswer !== undefined}
         className={styles.submit}
-        onClick={() => onSubmit(idx, -1)}
+        onClick={() => onSubmit(idx, botAnswer === undefined ? -1 : botAnswer)}
       >
         <Text text="Skip question" />
       </button>
       <button
         disabled={botAnswer === undefined}
         className={styles.submit}
-        onClick={() => onSubmit(idx, botAnswer)}
+        onClick={() => onSubmit(idx, botAnswer!)}
       >
         <Text
           text={

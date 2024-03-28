@@ -19,7 +19,7 @@ export default function Question({
   idx: number;
   qq: ClientQuizQuestion;
   botAnswer?: number;
-  onSubmit: (questionIndex: number, botAnswer: number | undefined) => void;
+  onSubmit: (questionIndex: number, botAnswer: number) => void;
   onNext: () => void;
 }) {
   const threadData = thread.useThread(qq.cordThreadID);

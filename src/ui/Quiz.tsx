@@ -100,7 +100,7 @@ export function Quiz() {
   }, [answers, questions, currentQuestion]);
 
   const onSubmit = useCallback(
-    (questionIndex: number, botAnswer: number | undefined) => {
+    (questionIndex: number, botAnswer: number) => {
       const newAnswers = [...answers];
       newAnswers[questionIndex] = { botAnswer };
       setAnswers(newAnswers);
