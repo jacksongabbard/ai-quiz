@@ -41,8 +41,8 @@ export const questions: BaseQuizQuestion[] = [
     correctAnswerIndex: 0,
     explanation: [
       "LLMs don't really see words like we do. They break text down into tokens. Tokens can be individual characters, portions of words, and sometimes entire words.",
-      "That means that they can have a hard time manipulating things which don't cleanly line up at token boundaries, such as slicing apart words.",
-      "If the problem is one that has come up a lot in training data, the LLM can typically pattern match against that well enough (they don't have a lot of difficulty reading backwards, for example).",
+      "That means that LLMs can have a hard time manipulating things which don't cleanly line up at token boundaries, such as slicing apart words.",
+      "If the problem is one that has come up a lot in training data, the LLM can typically pattern match against that well enough (they don't have trouble reading backwards, for example).",
       'But for something even slightly novel, they are pretty lost.',
     ].join('\n'),
   },
