@@ -8,7 +8,7 @@ export type BaseQuizQuestion = {
 export const questions: BaseQuizQuestion[] = [
   {
     question:
-      `Lionardo Fibonacci has exactly 100 coins. His coins are separated into 10 piles.\n\n` +
+      `Leonardo Fibonacci has exactly 100 coins. His coins are separated into 10 piles.\n\n` +
       `The number of coins in the first 9 piles are as follows:\n1, 1, 2, 3, 5, 8, 13, 21, 34.\n\n` +
       `How many coins are in the last pile?`,
     answers: ['55', '34', '12', '1'],
