@@ -101,6 +101,10 @@ body .cord-composer {
 }
 */
 
+body .cord-inline-thread {
+  justify-content: flex-end;
+}
+
 @media (max-width: 1024px) {
   body .cord-editor {
     font-size: 16px;
