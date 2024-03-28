@@ -34,10 +34,6 @@
   font-display: block;
 }
 
-html {
-  scroll-snap-type: y mandatory;
-}
-
 html,
 body {
   color: #fff;

@@ -4,7 +4,6 @@
   min-height: 100vh;
   flex-direction: column;
   padding: 10vh 0;
-  scroll-snap-align: start;
 }
 .start {
   align-items: center;
