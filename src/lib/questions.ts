@@ -54,13 +54,13 @@ export const questions: BaseQuizQuestion[] = [
       '"Normal" language questions play directly to the strengths of an LLM, and so it gets it exactly right every single time! In fact, the LLM doesn\'t actually "know" (or care!) that these options are in different languages. It can articulate that fact to a human, but to the language model, these are just more data points.',
   },
   {
-    question: 'What is 23 * 24 * 102 * 407 + 1?',
-    answers: ['22915726', '22915727', '22915728', '22915729'],
-    correctAnswerIndex: 3,
+    question: 'Which of these is closest to the square root of 463?',
+    answers: ['21.51743', '21.51744', '21.51745', '21.51746'],
+    correctAnswerIndex: 0,
     explanation: [
       "An LLM can't really do arithmetic. For simple or common problems, it can easily match against problems it's seen before.",
       "But for complex problems it hasn't seen before, it has nothing to match against.",
-      "In this particular case, the multiplication is simple enough that it doesn't have much trouble with it -- but the addition at the end throws things off.",
+      "It does its best matching against similar problems, but that often isn't enough to actually answer the question.",
     ].join(' '),
   },
   {
