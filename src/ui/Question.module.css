@@ -68,8 +68,7 @@
 .answer {
   align-items: center;
   display: flex;
-  background-color: #ffffff33;
-  border: 1px #ffffff00 solid;
+  border: 2px #ffffff33 solid;
   border-radius: 12px;
   box-sizing: border-box;
   color: #fff;
@@ -82,7 +81,7 @@
 }
 
 .selectedAnswer {
-  border: 1px #ffffff88 solid;
+  border: 2px #ffffffcc solid;
   top: 0;
 }
 
