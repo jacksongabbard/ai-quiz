@@ -66,12 +66,22 @@
 }
 
 .poweredBy {
-  font-size: 14px;
-  line-height: 21px;
+  align-items: center;
+  font-size: 12px;
+  line-height: 18px;
   text-align: center;
   padding: 24px;
+  display: flex;
+  margin: 0 auto;
+  text-align: left;
+  gap: 12px;
+}
+
+.poweredBy,
+.poweredBy:link {
+  color: #fff;
+  text-decoration: none;
 }
 
 .logo {
-  margin-top: 12px;
 }
