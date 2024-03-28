@@ -23,10 +23,10 @@ export function Start({
     >
       <div className={styles.start}>
         <div>
-          <TickerText text={questions.length + ' "tricky" questions'} />
+          <TickerText text={questions.length + ' tricky questions'} />
         </div>
         <div>
-          <TickerText text={'1 "advanced" AI'} delayBy={30} />
+          <TickerText text={'1 advanced AI'} delayBy={30} />
         </div>
         <div className={styles.lastItem}>
           <TickerText text={'Can you help it'} delayBy={60} />
