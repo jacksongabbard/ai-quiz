@@ -11,6 +11,8 @@
   gap: 12px;
   width: min(80vw, 1024px);
   padding: 10vh 0;
+
+  scroll-snap-align: start;
 }
 
 @media (max-width: 1024px) {
