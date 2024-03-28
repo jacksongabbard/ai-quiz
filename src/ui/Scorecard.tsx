@@ -9,6 +9,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { type ClientAnswers, resetTokenAndRestartGame } from './Quiz';
 import type { BaseQuizQuestion } from '@/lib/questions';
 import { parseThreadID } from '@/lib/threadID';
+import { title } from '@/lib/meta';
 
 const emojiNumbers = [
   '0️⃣1️⃣',
@@ -76,7 +77,7 @@ export function Scorecard({
   }, [readOnly]);
 
   let points = 0;
-  let copyString = `${questions.length} Tricky CoLLMaborative Quiz Questions\n`;
+  let copyString = title;
   const output: React.ReactNode[] = [];
   for (let i = 0; i < questions.length; i++) {
     const q = questions[i];

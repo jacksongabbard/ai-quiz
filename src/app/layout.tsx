@@ -1,13 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { questions } from '@/lib/questions';
+import { description, title } from '@/lib/meta';
 
-const description =
-  'Can you and an LLM work together to win? ' +
-  'You and your GPT-4-powered teammate are pitted against 7 nasty questions. ' +
-  'Will the LLM help or hinder you?';
 export const metadata: Metadata = {
-  title: `${questions.length} Tricky CoLLMaborative Quiz Questions`,
+  title,
   description,
   icons: {
     icon: '/favicon-32x32.png',
@@ -16,7 +12,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    title: `${questions.length} Tricky CoLLMaborative Quiz Questions`,
+    title,
     description,
     images: {
       url: 'https://quiz.cord.com/opengraph-image.png',
@@ -24,7 +20,7 @@ export const metadata: Metadata = {
     url: 'https://quiz.cord.com',
   },
   twitter: {
-    title: `${questions.length} Tricky CoLLMaborative Quiz Questions`,
+    title,
     description,
     images: {
       url: 'https://quiz.cord.com/opengraph-image.png',
