@@ -6,12 +6,9 @@ import {
 } from '@/lib/questions';
 import { fetchCordRESTApi } from '@/lib/fetchCordRESTApi';
 import { uuid } from '@/lib/uuid';
-import type {
-  CoreMessageData,
-  MessageContent,
-  ServerUserData,
-} from '@cord-sdk/types';
+import type { CoreMessageData, MessageContent } from '@cord-sdk/types';
 import { MessageNodeType } from '@cord-sdk/types';
+import { loadGameProgress } from './progress';
 
 const openai = new OpenAI({
   apiKey: OPENAI_API_SECRET,
@@ -70,18 +67,13 @@ async function getSavedQuestion(
   id: string,
   questionNumber: number,
 ): Promise<BaseQuizQuestion> {
-  const userData = await fetchCordRESTApi<ServerUserData>(
-    '/v1/users/' + 'b:' + id,
-    'GET',
-  );
-
-  try {
-    const questions = JSON.parse(String(userData.metadata.questions));
-    const question = questions[questionNumber];
+  const progress = await loadGameProgress(id);
+  if (progress) {
+    const question = progress.questions[questionNumber];
     if (question) {
       return question;
     }
-  } catch (_e) {}
+  }
 
   return productionQuestions[questionNumber];
 }
