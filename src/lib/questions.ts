@@ -65,6 +65,7 @@ export const questions: BaseQuizQuestion[] = [
   },
   {
     question: [
+      '↓',
       'C A P T C H A',
       'H N I H O E N',
       'O D C E S A S',
