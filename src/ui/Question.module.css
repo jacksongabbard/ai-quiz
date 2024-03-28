@@ -81,10 +81,6 @@
   text-align: left;
 }
 
-.answer:active {
-  border: 1px #ffffff77 solid;
-}
-
 .selectedAnswer {
   border: 1px #ffffff88 solid;
   top: 0;
@@ -132,6 +128,7 @@
 
 .submit:disabled {
   background: #ffffff11;
+  color: #ffffff99;
 }
 
 .submit:active {
