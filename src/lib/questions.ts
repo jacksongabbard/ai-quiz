@@ -84,6 +84,20 @@ export const questions: BaseQuizQuestion[] = [
     ].join(' '),
   },
   {
+    question:
+      'In standard American English, which of the following rhymes with:\n' +
+      '"through rough bough"',
+    answers: ['"crow fluff bought"', '"tough trow now"', '"crew stuff wow"'],
+    correctAnswerIndex: 2,
+    explanation: [
+      'While humans have ears and a brain that is great at processing',
+      'similar sounds, LLMs have no equivalent. They rely on patterns in text.',
+      'This means that LLMs have no good way to "understand" sounds apart from',
+      'describing the sounds to itself and hoping that the descriptions yield the',
+      'correct answer.',
+    ].join(' '),
+  },
+  {
     question: [
       `Where should the next move be?`,
       '',
