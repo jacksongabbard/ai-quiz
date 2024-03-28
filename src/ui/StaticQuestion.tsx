@@ -26,10 +26,11 @@ type Props = {
 function SubmitButton({
   final,
   idx,
+  qq,
   botAnswer,
   onSubmit,
   Text,
-}: Pick<Props, 'final' | 'idx' | 'botAnswer' | 'onSubmit' | 'Text'>) {
+}: Pick<Props, 'final' | 'idx' | 'qq' | 'botAnswer' | 'onSubmit' | 'Text'>) {
   if (final) {
     return null;
   }
@@ -48,7 +49,13 @@ function SubmitButton({
         className={styles.submit}
         onClick={() => onSubmit(idx, botAnswer)}
       >
-        <Text text="Final answer?" />
+        <Text
+          text={
+            botAnswer && botAnswer !== qq.correctAnswerIndex
+              ? 'Incorrect -- submit anyway?'
+              : 'Submit answer'
+          }
+        />
       </button>
     </div>
   );
@@ -161,6 +168,7 @@ export default function StaticQuestion({
           <SubmitButton
             final={final}
             idx={idx}
+            qq={qq}
             botAnswer={botAnswer}
             onSubmit={onSubmit}
             Text={Text}
