@@ -168,37 +168,30 @@ export function Scorecard({
               </button>
             )}
           </div>
-          {shareURL && (
-            <div className={classNames(styles.section, styles.buttons)}>
-              <a
-                // Don't need URL here since it's already part of the copyString.
-                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(copyString)}`}
-                target="_blank"
-                className={styles.shareLink}
-              >
-                <Image
-                  src="/twitter.svg"
-                  width={18}
-                  height={18}
-                  alt="Twitter Logo"
-                />
-                Share to Twitter
-              </a>
-              <a
-                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(GAME_URL)}`}
-                target="_blank"
-                className={styles.shareLink}
-              >
-                <Image
-                  src="/fb.svg"
-                  width={18}
-                  height={18}
-                  alt="Facebook Logo"
-                />
-                Share to Facebook
-              </a>
-            </div>
-          )}
+          <div className={classNames(styles.section, styles.buttons)}>
+            <a
+              // Don't need URL here since it's already part of the copyString.
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(copyString)}`}
+              target="_blank"
+              className={styles.shareLink}
+            >
+              <Image
+                src="/twitter.svg"
+                width={18}
+                height={18}
+                alt="Twitter Logo"
+              />
+              Share to Twitter
+            </a>
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(GAME_URL)}`}
+              target="_blank"
+              className={styles.shareLink}
+            >
+              <Image src="/fb.svg" width={18} height={18} alt="Facebook Logo" />
+              Share to Facebook
+            </a>
+          </div>
           <div className={styles.section}>
             <button onClick={resetTokenAndRestartGame}>Play Again</button>
           </div>
