@@ -3,7 +3,6 @@
   display: flex;
   margin: 0 auto;
   min-height: 100vh;
-  max-height: 100vh;
   padding: 12px;
   position: relative;
 
@@ -18,7 +17,6 @@
     flex-direction: column;
     gap: 12px;
     width: min(80vw, 500px);
-    max-height: unset;
   }
   body .cordThread {
     height: 35vh;
