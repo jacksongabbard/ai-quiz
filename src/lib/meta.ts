@@ -1,7 +1,7 @@
 import { questions } from '@/lib/questions';
 
-export const title = `What an LLM can and cannot do: a ${questions.length} question quiz`;
+export const title = `How smart is GPT-4 really? ${questions.length} quiz questions to change your mind`;
 export const description =
-  'Can you and an LLM work together to win? ' +
-  'You and your GPT-4-powered teammate are pitted against 7 nasty questions. ' +
-  'Will the LLM help or hinder you?';
+  'How smart is GPT-4 really? ' +
+  `You and your GPT-4-powered teammate are pitted against ${questions.length} nasty questions. ` +
+  'Which questions will answer effortlessly? Which questions will it miss the obvious?';
