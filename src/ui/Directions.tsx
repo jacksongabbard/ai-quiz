@@ -39,15 +39,15 @@ export function Directions({
           </div>
           <div>
             For some questions, GPT-4 will answer faster and better than any
-            human could. For these questions, bask in the AI's skill and move
-            on.
+            human could. For these questions, bask in the AI&apos;s skill and
+            move on.
           </div>
           <div>
             But for many questions, GPT-4 will get confused (sometimes very
             confused!) and will not give the correct answer. Chat back and forth
             with GPT-4 and help it figure out the correct answer. You can skip
-            questions or move on even when GPT-4 is wrong, but it's much more
-            fun to try to discuss with it and help it figure out the right
+            questions or move on even when GPT-4 is wrong, but it&apos;s much
+            more fun to try to discuss with it and help it figure out the right
             answer!
           </div>
           <div>
