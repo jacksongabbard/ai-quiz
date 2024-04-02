@@ -29,6 +29,8 @@ const emojiNumbers = [
   '1️⃣5️⃣',
 ];
 
+const GAME_URL = 'https://quiz.cord.com/';
+
 export function getShareURL(firstThreadID: string | undefined) {
   if (typeof window === 'undefined') {
     return null;
@@ -77,7 +79,7 @@ export function Scorecard({
   }, [readOnly]);
 
   let points = 0;
-  let copyString = title;
+  let copyString = title + '\n';
   const output: React.ReactNode[] = [];
   for (let i = 0; i < questions.length; i++) {
     const q = questions[i];
@@ -104,9 +106,7 @@ export function Scorecard({
     ' (' +
     Math.round((points / questions.length) * 100) +
     '%).\n\n';
-  copyString += 'Play here! https://quiz.cord.com/\n';
-  copyString += '\n';
-  copyString += 'See this game: ' + shareURL + '\n';
+  copyString += `Play here! ${GAME_URL}\n`;
 
   const didSendResult = useRef(false);
   useEffect(() => {
