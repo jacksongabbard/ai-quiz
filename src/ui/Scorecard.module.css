@@ -30,6 +30,31 @@
   text-align: center;
 }
 
+.buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.shareLink {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  background: #ffffff33;
+  color: #fff;
+  font-size: 14px;
+  line-height: 18px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.shareLink:hover {
+  background: #ffffff55;
+}
+
 .heading {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
