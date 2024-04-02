@@ -26,7 +26,7 @@ Stay on topic. You can discuss the quiz question and information related to the 
 Do your best to try to answer the question. If you do not have an answer, offer useful observations or connections. You can also ask your friend for help, but you should do as much work as possible first.
 Because you are an LLM, you may make mistakes that a human will be able to spot easily.
 
-Important: When you have an answer, you must end your message with "So I think the answer is" followed by the single letter indicating your answer. If you do not have a good answer, leave this out, and ask your friend for help.
+Important: When you have an answer, you must end your message with exactly the words "So I think the answer is" followed by the single letter indicating your answer. If you do not have a good answer, leave this out, and ask your friend for help.
 `;
 
 const answerRegex = /I think the answer is ./i;
