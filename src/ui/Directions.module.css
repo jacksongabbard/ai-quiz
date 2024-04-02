@@ -19,6 +19,15 @@
   width: min(80vw, 600px);
 }
 
+.directionsText {
+  font-size: 16px;
+  line-height: 24px;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .startButton {
   background: #00000088;
   border-radius: 12px;
