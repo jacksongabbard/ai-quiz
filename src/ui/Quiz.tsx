@@ -7,6 +7,7 @@ import Question from '@/ui/Question';
 import { Start } from '@/ui/Start';
 import { Scorecard, getShareURL } from '@/ui/Scorecard';
 import type { InitResponse, QuizData } from '@/app/api/init/route';
+import { Directions } from './Directions';
 
 const TOKEN_LOCALSTORAGE = 'cordAccessToken';
 export function resetTokenAndRestartGame() {
@@ -22,6 +23,7 @@ export function Quiz() {
   const [quizData, setQuizData] = useState<QuizData>();
   const [currentQuestion, setCurrentQuestion] = useState(-1);
   const [answers, setAnswers] = useState<ClientAnswers>([]);
+  const [showDirections, setShowDirections] = useState(false);
   const [aboutToResume, setAboutToResume] = useState(false);
 
   const didFetch = useRef(false);
@@ -62,6 +64,7 @@ export function Quiz() {
         } else {
           setAnswers(resume);
           setCurrentQuestion(resume.length);
+          setShowDirections(true);
           setAboutToResume(true);
         }
       }
@@ -115,13 +118,27 @@ export function Quiz() {
       onStart={
         aboutToResume
           ? () => setAboutToResume(false)
-          : currentQuestion === -1 && questions.length > 0
-            ? showNextQuestion
+          : !showDirections && currentQuestion === -1 && questions.length > 0
+            ? () => setShowDirections(true)
             : undefined
       }
       onRestart={aboutToResume ? resetTokenAndRestartGame : undefined}
     />,
   ];
+
+  if (showDirections) {
+    content.push(
+      <Directions
+        key="directions"
+        label="Let's go!"
+        onStart={
+          currentQuestion === -1 && questions.length > 0
+            ? showNextQuestion
+            : undefined
+        }
+      />,
+    );
+  }
 
   for (let i = 0; i <= Math.min(questions.length - 1, currentQuestion); i++) {
     content.push(

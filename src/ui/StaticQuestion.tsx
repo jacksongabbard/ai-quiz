@@ -7,7 +7,7 @@ import { RefObject } from 'react';
 import styles from '@/ui/Question.module.css';
 import { CordLogo } from '@/ui/CordLogo';
 
-const startingAngle = 256;
+const startingAngle = 256 - 3 * 10;
 
 type Props = {
   active: boolean;
