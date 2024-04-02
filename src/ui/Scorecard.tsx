@@ -144,6 +144,10 @@ export function Scorecard({
             {Math.round((points / questions.length) * 100)}%).
           </div>
           <div className={styles.section}>{output}</div>
+          <div className={styles.section}>
+            Did you learn something? Gain a better understanding of how GPT-4
+            and other LLMs work? Share this quiz with your friends:
+          </div>
           <div className={classNames(styles.section, styles.buttons)}>
             <button onClick={copyScores}>
               {!copiedScores ? (
