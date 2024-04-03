@@ -27,13 +27,13 @@ export function Directions({
       <div className={styles.directions}>
         <div className={styles.directionsText}>
           <p>
-            This is a quiz. But not you! It's designed to explore what GPT-4 and
-            other Large Language Models (LLMs) are good at &mdash; and what they
-            are not.
+            This is a quiz. But not you! It&apos;s designed to explore what
+            GPT-4 and other Large Language Models (LLMs) are good at &mdash; and
+            what they are not.
           </p>
           <p>
-            You'll see a series of questions. After each question is revealed,
-            GPT-4 will give its thoughts.
+            You&apos;ll see a series of questions. After each question is
+            revealed, GPT-4 will give its thoughts.
           </p>
           <p>
             Sometimes GPT-4 will get it right away.
