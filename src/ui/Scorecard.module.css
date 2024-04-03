@@ -30,20 +30,33 @@
   text-align: center;
 }
 
+.small {
+  font-size: 16px;
+  line-height: 24px;
+}
+
 .buttons {
   display: flex;
   gap: 12px;
   justify-content: center;
 }
 
-.shareLink {
-  display: inline-flex;
-  gap: 4px;
+.buttons button,
+.buttons a {
   align-items: center;
-  background: #ffffff33;
-  color: #fff;
+  flex: 1;
+  min-height: 54px;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
   font-size: 14px;
   line-height: 18px;
+  gap: 12px;
+}
+
+.shareLink {
+  background: #ffffff33;
+  color: #fff;
   text-decoration: none;
   cursor: pointer;
   border: none;
@@ -53,6 +66,11 @@
 
 .shareLink:hover {
   background: #ffffff55;
+}
+
+.buttons button.playAgain {
+  text-align: center;
+  justify-content: center;
 }
 
 .heading {

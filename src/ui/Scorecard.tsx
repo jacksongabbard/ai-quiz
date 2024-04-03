@@ -144,9 +144,13 @@ export function Scorecard({
             {Math.round((points / questions.length) * 100)}%).
           </div>
           <div className={styles.section}>{output}</div>
-          <div className={styles.section}>
-            Did you learn something? Gain a better understanding of how GPT-4
-            and other LLMs work? Share this quiz with your friends:
+          <div className={classNames([styles.section, styles.small])}>
+            Did you learn something?
+            <br />
+            Gain a better understanding of how GPT-4 and other LLMs work?
+            <br />
+            <br />
+            Share this quiz with your friends:
           </div>
           <div className={classNames(styles.section, styles.buttons)}>
             <button onClick={copyScores}>
@@ -175,7 +179,9 @@ export function Scorecard({
           <div className={classNames(styles.section, styles.buttons)}>
             <a
               // Don't need URL here since it's already part of the copyString.
-              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(copyString)}`}
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                copyString,
+              )}`}
               target="_blank"
               className={styles.shareLink}
             >
@@ -188,7 +194,9 @@ export function Scorecard({
               Share to Twitter
             </a>
             <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(GAME_URL)}`}
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                GAME_URL,
+              )}`}
               target="_blank"
               className={styles.shareLink}
             >
@@ -196,8 +204,13 @@ export function Scorecard({
               Share to Facebook
             </a>
           </div>
-          <div className={styles.section}>
-            <button onClick={resetTokenAndRestartGame}>Play Again</button>
+          <div className={classNames([styles.section, styles.buttons])}>
+            <button
+              onClick={resetTokenAndRestartGame}
+              className={styles.playAgain}
+            >
+              Play Again?
+            </button>
           </div>
           <div className={classNames(styles.section, styles.footer)}></div>
         </div>
