@@ -1,6 +1,6 @@
-import { CORD_API_SECRET } from '@/lib/env';
+//import { CORD_API_SECRET } from '@/lib/env';
 import { WebhookWrapperProperties } from '@cord-sdk/types';
-import { validateWebhookSignature } from '@cord-sdk/server';
+//import { validateWebhookSignature } from '@cord-sdk/server';
 import { NextResponse } from 'next/server';
 import { addBotMessageToThread } from '@/lib/openai';
 import { parseThreadID } from '@/lib/threadID';
@@ -12,10 +12,12 @@ export async function POST(req: Request) {
   const data: WebhookWrapperProperties<'thread-message-added'> =
     await req.json();
 
+  /*
   validateWebhookSignature(
     { header: (h) => req.headers.get(h) ?? '', body: data },
     CORD_API_SECRET,
   );
+  */
 
   // For all types refer to https://docs.cord.com/reference/events-webhook
   let type = '';
