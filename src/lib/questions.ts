@@ -40,7 +40,7 @@ export const questions: BaseQuizQuestion[] = [
     answers: ['The Milky Way', 'Alan Turing', 'Reggae', 'Scotland'],
     correctAnswerIndex: 0,
     explanation: [
-      "An LLM can only pattern match against what it's seen before. It has no ability to reason or think latteraly (or read vertically).",
+      "An LLM can only pattern match against what it's seen before. It has no ability to reason or think laterally (or read vertically).",
       "In this case, while it's seen word searches and acrostics before, it doesn't really understand them, so its pattern matching goes completely haywire.",
       "It can't read vertically, and sees all sorts of things that aren't there.",
       "If you didn't notice, you can convince it of just about any answer by saying that it appears in the puzzle, and it will agree!",
