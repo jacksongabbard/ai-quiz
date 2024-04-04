@@ -1,4 +1,3 @@
-import { questions } from '@/lib/questions';
 import styles from '@/ui/Start.module.css';
 
 import { TickerText } from '@/ui/TickerText';
