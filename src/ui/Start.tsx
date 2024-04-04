@@ -22,16 +22,25 @@ export function Start({
       }}
     >
       <div className={styles.start}>
-        <div>
-          <TickerText text={questions.length + ' tricky questions'} />
+        <div
+          style={{
+            fontSize: 28,
+            lineHeight: '40px',
+            marginBottom: '36px',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          Exploring LLM Weirdness:
+          <br /> A Quiz Game
         </div>
         <div>
-          <TickerText text={'1 advanced AI'} delayBy={30} />
+          <TickerText text={'9 questions'} delayBy={30} />
+        </div>
+        <div>
+          <TickerText text={'1 advanced AI'} delayBy={60} />
         </div>
         <div className={styles.lastItem}>
-          <TickerText text={'How smart is'} delayBy={60} />
-          <br />
-          <TickerText text={'GPT-4 really?'} delayBy={75} />
+          <TickerText text={'How hard could it be?'} delayBy={90} />
         </div>
         <button
           onClick={onStart}

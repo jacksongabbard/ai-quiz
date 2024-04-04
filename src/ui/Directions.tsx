@@ -27,7 +27,7 @@ export function Directions({
       <div className={styles.directions}>
         <div className={styles.directionsText}>
           <p>
-            This is a quiz. But not you! It&apos;s designed to explore what
+            This is a quiz. But not for you! It&apos;s designed to explore what
             GPT-4 and other Large Language Models (LLMs) are good at &mdash; and
             what they are not.
           </p>
