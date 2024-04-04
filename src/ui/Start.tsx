@@ -20,15 +20,6 @@ export function Start({
         backgroundColor: `hsl(${256 - 10}, 66%, 34%)`,
       }}
     >
-      <div className={styles.banner}>
-        <p>
-          We&apos;re currently experiencing the full might of{' '}
-          <strong>r/programming</strong>.<br />
-          This quiz might be very, very slow while we unblock some pipes.
-          <br />
-          Sorry and thank you!
-        </p>
-      </div>
       <div className={styles.start}>
         <div
           style={{
