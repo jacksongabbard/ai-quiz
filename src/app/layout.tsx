@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title,
     description,
     images: {
-      url: 'https://quiz.cord.com/opengraph-image-9q.png',
+      url: 'https://quiz.cord.com/opengraph-image-llm-weird.png',
     },
     url: 'https://quiz.cord.com',
   },
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     title,
     description,
     images: {
-      url: 'https://quiz.cord.com/opengraph-image-9q.png',
+      url: 'https://quiz.cord.com/opengraph-image-llm-weird.png',
     },
   },
 };
