@@ -1,4 +1,5 @@
 .questionContainer {
+  align-items: stretch;
   box-sizing: border-box;
   display: flex;
   margin: 0 auto;
@@ -7,13 +8,14 @@
   position: relative;
 
   flex-direction: row;
-  gap: 12px;
+  gap: 20px;
   width: min(80vw, 1024px);
   padding: 10vh 0;
 }
 
 @media (max-width: 1024px) {
   .questionContainer {
+    align-items: unset;
     flex-direction: column;
     gap: 12px;
     width: min(80vw, 500px);
@@ -24,6 +26,12 @@
     flex-grow: 0;
     flex-shrink: 0;
     overflow: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cordThread {
+    min-height: max(80vh, 100%);
   }
 }
 
