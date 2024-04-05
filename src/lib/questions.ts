@@ -72,7 +72,7 @@ export const questions: BaseQuizQuestion[] = [
     answers: ['tatlı rüzgar', '放屁', 'తీపి గాలి', 'afẹfẹ didun'],
     correctAnswerIndex: 1,
     explanation:
-      '"Normal" language questions play directly to the strengths of an LLM, and so it gets it exactly right every single time! In fact, the LLM doesn\'t actually "know" (or care!) that these options are in different languages.',
+      '"Normal" language questions play directly to the strengths of an LLM, and so it gets it exactly right every single time! In fact, the LLM doesn\'t even care that these options are in different languages. The LLM\'s internal representation of the meaning of these tokens goes far beyond the lines and squiggles that humans see.',
   },
   {
     question: 'Which of these is closest to the square root of 463?',
