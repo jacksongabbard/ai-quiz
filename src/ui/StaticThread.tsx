@@ -33,7 +33,14 @@ function StaticMessage({ message }: { message: CoreMessageData }) {
 
 export function StaticThread({ thread }: { thread: CoreMessageData[] }) {
   return (
-    <div className={classNames(questionStyles.cordThread, styles.staticThread)}>
+    <div
+      className={classNames(
+        questionStyles.cordThread,
+        styles.staticThread,
+        'cord-component',
+        'cord-v1',
+      )}
+    >
       {thread.map((m) => (
         <StaticMessage key={m.id} message={m} />
       ))}{' '}
