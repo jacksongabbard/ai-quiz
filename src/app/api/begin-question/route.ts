@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
-import { addBotMessageToThread } from '@/lib/openai';
+import { BOT_ID, ensureDidInit } from '@/lib/openai';
 import { MessageNodeType } from '@cord-sdk/types';
 import { addContentToClack } from '@/lib/clack';
 import { parseThreadID } from '@/lib/threadID';
 import { assertGameNotLocked } from '@/lib/lock';
 import { saveGameProgress } from '@/lib/progress';
 import { SERVER } from '@/lib/env';
+import { forceRespond } from '@/lib/sdk-js-experimental-chatbot-packages/chatbot-base/bot';
 
 export const maxDuration = 180;
 
@@ -43,11 +44,13 @@ export async function POST(req: Request) {
     throw new Error('Missing threadID');
   }
 
+  await ensureDidInit();
+
   const [id] = parseThreadID(threadID);
   await assertGameNotLocked(id);
 
   await Promise.all([
-    addBotMessageToThread(threadID),
+    forceRespond(BOT_ID, threadID),
     saveGameProgress(id, data?.answers ?? []),
     addGameProgressToClack(threadID),
   ]);
