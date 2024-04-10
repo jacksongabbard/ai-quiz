@@ -1,5 +1,5 @@
 import type { ClientAnswers } from '@/ui/Quiz';
-import { EntityMetadata, ServerUserData } from '@cord-sdk/types';
+import { EntityMetadata, ServerGroupData } from '@cord-sdk/types';
 import { questions as productionQuestions } from './questions';
 import type { BaseQuizQuestion } from './questions';
 import { fetchCordRESTApi } from './fetchCordRESTApi';
@@ -11,9 +11,9 @@ export async function saveGameProgress(
 ) {
   const oldProgress = await loadGameProgress(id);
 
-  const bot = 'b:' + id;
+  const group = 'g:' + id;
   await fetchCordRESTApi(
-    '/v1/users/' + bot,
+    '/v1/groups/' + group,
     'PUT',
     JSON.stringify({
       metadata: {
@@ -30,19 +30,21 @@ export async function saveGameProgress(
 export async function loadGameProgress(
   id: string,
 ): Promise<{ answers: ClientAnswers; questions: BaseQuizQuestion[] } | null> {
-  const bot = 'b:' + id;
+  const group = 'g:' + id;
 
   try {
-    const botData = await fetchCordRESTApi<ServerUserData>(
-      '/v1/users/' + bot,
+    const groupData = await fetchCordRESTApi<ServerGroupData>(
+      '/v1/groups/' + group,
       'GET',
     );
 
     const questions: BaseQuizQuestion[] = JSON.parse(
-      String(botData.metadata.questions),
+      String(groupData.metadata!.questions),
     );
 
-    const answers: ClientAnswers = JSON.parse(String(botData.metadata.answers));
+    const answers: ClientAnswers = JSON.parse(
+      String(groupData.metadata!.answers),
+    );
 
     return { questions, answers };
   } catch (_e) {
