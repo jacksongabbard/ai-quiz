@@ -4,6 +4,9 @@ import { CLACK_API_SECRET, CLACK_APPLICATION_ID } from '@/lib/env';
 import type { MessageContent } from '@cord-sdk/types';
 
 export async function addContentToClack(id: string, content: MessageContent) {
+  // CLACK LOGGING DISABLED TO NOT SPAM THE CHANNEL WITH STUFF WE DO NOT CARE
+  // ABOUT.
+  return;
   const channel = 'ai-quiz-game-events';
   const clackThreadID = `ai-quiz-game-${id}`;
 
