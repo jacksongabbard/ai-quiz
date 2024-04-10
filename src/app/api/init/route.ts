@@ -12,6 +12,7 @@ import { MessageNodeType } from '@cord-sdk/types';
 import * as jwt from 'jsonwebtoken';
 import type { ClientAnswers } from '@/ui/Quiz';
 import { loadGameProgress } from '@/lib/progress';
+import { BOT_ID } from '@/lib/openai';
 
 async function logToClack(req: Request, id: string) {
   let ip: string = 'no-ip';
@@ -73,7 +74,6 @@ async function createNewQuizData(req: Request): Promise<InitResponse> {
   const id = uuid();
 
   const human = 'h:' + id;
-  const bot = 'b:' + id;
   const group = 'g:' + id;
   const thread = async (n: number) => {
     const threadID = 't:' + id + ':' + String(n);
@@ -112,11 +112,9 @@ async function createNewQuizData(req: Request): Promise<InitResponse> {
       }),
     ),
     fetchCordRESTApi(
-      '/v1/users/' + bot,
+      '/v1/users/' + BOT_ID,
       'PUT',
       JSON.stringify({
-        name: 'GPT-4',
-        profilePictureURL: SERVER + '/bot-black.svg',
         addGroups: [group],
       }),
     ),

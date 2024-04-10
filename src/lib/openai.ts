@@ -10,6 +10,8 @@ import type { CoreMessageData, MessageContent } from '@cord-sdk/types';
 import { MessageNodeType } from '@cord-sdk/types';
 import { loadGameProgress } from './progress';
 
+export const BOT_ID = 'gpt4';
+
 const openai = new OpenAI({
   apiKey: OPENAI_API_SECRET,
 });
@@ -119,7 +121,6 @@ export async function addBotMessageToThread(threadID: string) {
     getMessagesInThread(threadID),
   ]);
 
-  const botID = 'b:' + id;
   const messageID = uuid();
 
   const openaiMessages: OpenAI.ChatCompletionMessageParam[] = [
@@ -146,10 +147,10 @@ export async function addBotMessageToThread(threadID: string) {
   await fetchCordRESTApi(
     `/v1/threads/${threadID}/messages`,
     'POST',
-    JSON.stringify({ id: messageID, authorID: botID, content: [] }),
+    JSON.stringify({ id: messageID, authorID: BOT_ID, content: [] }),
   );
 
-  await typing(threadID, botID, true);
+  await typing(threadID, BOT_ID, true);
 
   let full = '';
   for await (const chunk of stream) {
@@ -159,7 +160,7 @@ export async function addBotMessageToThread(threadID: string) {
     }
 
     await Promise.all([
-      typing(threadID, botID, true),
+      typing(threadID, BOT_ID, true),
       fetchCordRESTApi(
         `/v1/threads/${threadID}/messages/${messageID}`,
         'PUT',
@@ -173,6 +174,6 @@ export async function addBotMessageToThread(threadID: string) {
 
   await Promise.all([
     maybeUpdateBotAnswer(threadID, full),
-    typing(threadID, botID, false),
+    typing(threadID, BOT_ID, false),
   ]);
 }
