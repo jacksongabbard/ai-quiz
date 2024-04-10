@@ -83,23 +83,13 @@ export function Quiz() {
     if (nextQuestion >= questions.length) {
       return;
     }
-    let delay = questions[nextQuestion].question.length;
-    for (let i = 0; i < questions[nextQuestion].answers.length; i++) {
-      delay += questions[nextQuestion].answers[i].length;
-    }
-
-    // This is the same as the ticker text,
-    // but give 2 seconds of wait time for reading
-    const ms = delay * 35 + 2000;
-    setTimeout(() => {
-      void fetch('/api/begin-question', {
-        body: JSON.stringify({
-          threadID: questions[nextQuestion].cordThreadID,
-          answers,
-        }),
-        method: 'POST',
-      });
-    }, ms);
+    void fetch('/api/begin-question', {
+      body: JSON.stringify({
+        threadID: questions[nextQuestion].cordThreadID,
+        answers,
+      }),
+      method: 'POST',
+    });
   }, [answers, questions, currentQuestion]);
 
   const onSubmit = useCallback(
