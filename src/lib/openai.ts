@@ -13,8 +13,8 @@ import { loadGameProgress } from './progress';
 import {
   ChatBot,
   eventIsFromBot,
-  init,
-  register,
+  chatbots,
+  ChatBotRegistry,
 } from './sdk-js-experimental-chatbot-packages/chatbot-base/bot';
 import {
   messageToOpenaiMessage,
@@ -122,13 +122,12 @@ const bot: ChatBot = {
   },
 };
 
-let didInit = false;
-export async function ensureDidInit() {
-  if (didInit) {
-    return;
+let registry: ChatBotRegistry | undefined = undefined;
+export async function getChatbotRegistry(): Promise<ChatBotRegistry> {
+  if (!registry) {
+    registry = chatbots(CORD_APPLICATION_ID, CORD_API_SECRET);
+    await registry.register(BOT_ID, bot);
   }
 
-  didInit = true;
-  init(CORD_APPLICATION_ID, CORD_API_SECRET);
-  await register(BOT_ID, bot);
+  return registry;
 }

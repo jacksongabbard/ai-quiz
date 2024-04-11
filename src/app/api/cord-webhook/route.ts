@@ -1,11 +1,10 @@
 import { NextResponse } from 'next/server';
-import { ensureDidInit } from '@/lib/openai';
-import { webhookReceived } from '@/lib/sdk-js-experimental-chatbot-packages/chatbot-base/bot';
+import { getChatbotRegistry } from '@/lib/openai';
 
 export const maxDuration = 180;
 
 export async function POST(req: Request) {
-  await ensureDidInit();
-  const didHandle = await webhookReceived(req);
+  const registry = await getChatbotRegistry();
+  const didHandle = await registry.webhookReceived(req);
   return didHandle ? NextResponse.json(true) : NextResponse.error();
 }
