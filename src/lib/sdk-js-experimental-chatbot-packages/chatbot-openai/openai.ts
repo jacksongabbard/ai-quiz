@@ -12,24 +12,41 @@ export function messageToOpenaiMessage(
   };
 }
 
+type CompletionParams = Omit<
+  OpenAI.ChatCompletionCreateParamsStreaming,
+  'stream'
+>;
+
 export function openaiCompletion(
   apiKey: string,
   getOpenaiMessages: (
     ...p: Parameters<ChatBot['getResponse']>
   ) =>
     | OpenAI.ChatCompletionMessageParam[]
-    | Promise<OpenAI.ChatCompletionMessageParam[]>,
+    | Promise<OpenAI.ChatCompletionMessageParam[]>
+    | CompletionParams
+    | Promise<CompletionParams>,
 ): ChatBot['getResponse'] {
   const openai = new OpenAI({
     apiKey,
   });
 
   return async function* response(messages, thread) {
-    const openaiMessages = await getOpenaiMessages(messages, thread);
+    const completionParamsOrMessages = await getOpenaiMessages(
+      messages,
+      thread,
+    );
 
+    const completionParams: CompletionParams = Array.isArray(
+      completionParamsOrMessages,
+    )
+      ? {
+          model: 'gpt-4-0613',
+          messages: completionParamsOrMessages,
+        }
+      : completionParamsOrMessages;
     const stream = await openai.chat.completions.create({
-      model: 'gpt-4-0613',
-      messages: openaiMessages,
+      ...completionParams,
       stream: true,
     });
 

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.3",
     "@cord-sdk/react": "^1.37.0",
     "@cord-sdk/server": "^1.37.0",
     "@vercel/analytics": "^1.2.2",

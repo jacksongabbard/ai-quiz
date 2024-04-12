@@ -22,8 +22,13 @@ import {
 } from './sdk-js-experimental-chatbot-packages/chatbot-openai/openai';
 import { parseThreadID } from './threadID';
 import { assertGameNotLocked } from './lock';
+import {
+  anthropicCompletion,
+  messageToAnthropicMessage,
+} from './sdk-js-experimental-chatbot-packages/chatbot-anthropic/anthropic';
 
-export const BOT_ID = 'gpt4';
+const USE_CLAUDE = !!process.env.ANTHROPIC_API_SECRET;
+export const BOT_ID = USE_CLAUDE ? 'claude-3-haiku' : 'gpt4';
 
 const baseSystemPrompt = `
 You are playing a quiz game with your friend. You should use all your knowledge and capabilities to help answer the question. You prefer to keep your messages to one to three short sentences and mildly funny.
@@ -74,9 +79,53 @@ async function getSavedQuestion(
   return productionQuestions[questionNumber];
 }
 
+let getResponse: ChatBot['getResponse'];
+if (USE_CLAUDE) {
+  getResponse = anthropicCompletion(
+    process.env.ANTHROPIC_API_SECRET!,
+    async (messages, thread) => {
+      const [sigil, id, questionNumber] = thread.id.split(':');
+      if (sigil !== 't' || questionNumber === undefined) {
+        throw new Error('Invalid threadID');
+      }
+
+      const question = await getSavedQuestion(id, Number(questionNumber));
+      return {
+        max_tokens: 1024,
+        model: 'claude-3-haiku-20240307',
+        system: questionSystemPrompt(question),
+        messages: [
+          { role: 'user', content: "I'm not sure, what do you think?" },
+          ...messages.map(messageToAnthropicMessage),
+        ],
+      };
+    },
+  );
+} else {
+  getResponse = openaiCompletion(
+    OPENAI_API_SECRET,
+    async (messages, thread) => {
+      const [sigil, id, questionNumber] = thread.id.split(':');
+      if (sigil !== 't' || questionNumber === undefined) {
+        throw new Error('Invalid threadID');
+      }
+
+      const question = await getSavedQuestion(id, Number(questionNumber));
+      return [
+        {
+          role: 'system',
+          content: questionSystemPrompt(question),
+        },
+        { role: 'user', content: "I'm not sure, what do you think?" },
+        ...messages.map(messageToOpenaiMessage),
+      ];
+    },
+  );
+}
+
 const bot: ChatBot = {
   cordUser: {
-    name: 'GPT-4',
+    name: USE_CLAUDE ? 'Claude 3 Haiku' : 'GPT-4',
     profilePictureURL: SERVER + '/bot-black.svg',
   },
   async shouldRespondToEvent(event) {
@@ -88,22 +137,7 @@ const bot: ChatBot = {
     await assertGameNotLocked(id);
     return true;
   },
-  getResponse: openaiCompletion(OPENAI_API_SECRET, async (messages, thread) => {
-    const [sigil, id, questionNumber] = thread.id.split(':');
-    if (sigil !== 't' || questionNumber === undefined) {
-      throw new Error('Invalid threadID');
-    }
-
-    const question = await getSavedQuestion(id, Number(questionNumber));
-    return [
-      {
-        role: 'system',
-        content: questionSystemPrompt(question),
-      },
-      { role: 'user', content: "I'm not sure, what do you think?" },
-      ...messages.map(messageToOpenaiMessage),
-    ];
-  }),
+  getResponse,
   async onResponseSent(response, messages, thread) {
     const matches = response.plaintext.match(answerRegex) ?? [];
     if (matches.length < 1) {
