@@ -1,5 +1,9 @@
 import type { ClientAnswers } from '@/ui/Quiz';
-import { EntityMetadata, ServerUserData } from '@cord-sdk/types';
+import {
+  EntityMetadata,
+  ServerGroupData,
+  ServerUserData,
+} from '@cord-sdk/types';
 import { questions as productionQuestions } from './questions';
 import type { BaseQuizQuestion } from './questions';
 import { fetchCordRESTApi } from './fetchCordRESTApi';
@@ -11,9 +15,9 @@ export async function saveGameProgress(
 ) {
   const oldProgress = await loadGameProgress(id);
 
-  const bot = 'b:' + id;
+  const group = 'g:' + id;
   await fetchCordRESTApi(
-    '/v1/users/' + bot,
+    '/v1/groups/' + group,
     'PUT',
     JSON.stringify({
       metadata: {
@@ -33,20 +37,24 @@ export async function loadGameProgress(id: string): Promise<{
   locked: boolean;
 } | null> {
   const bot = 'b:' + id;
+  const group = 'g:' + id;
 
   try {
-    const botData = await fetchCordRESTApi<ServerUserData>(
-      '/v1/users/' + bot,
-      'GET',
-    );
+    // We used to store on the bot, now on the group. Fetch both for BC.
+    const [botData, groupData] = await Promise.all([
+      fetchCordRESTApi<ServerUserData>('/v1/users/' + bot, 'GET'),
+      fetchCordRESTApi<ServerGroupData>('/v1/groups/' + group, 'GET'),
+    ]);
+
+    const combinedMetadata = { ...botData.metadata, ...groupData.metadata };
 
     const questions: BaseQuizQuestion[] = JSON.parse(
-      String(botData.metadata.questions),
+      String(combinedMetadata.questions),
     );
 
-    const answers: ClientAnswers = JSON.parse(String(botData.metadata.answers));
+    const answers: ClientAnswers = JSON.parse(String(combinedMetadata.answers));
 
-    return { questions, answers, locked: !!botData.metadata.locked };
+    return { questions, answers, locked: !!combinedMetadata.locked };
   } catch (_e) {
     return null;
   }
