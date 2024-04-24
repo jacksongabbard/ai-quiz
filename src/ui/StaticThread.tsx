@@ -5,7 +5,7 @@ import type { CoreMessageData } from '@cord-sdk/types';
 
 import questionStyles from '@/ui/Question.module.css';
 import styles from '@/ui/StaticThread.module.css';
-import { experimental } from '@cord-sdk/react';
+import { betaV2 } from '@cord-sdk/react';
 import classNames from 'classnames';
 
 function StaticMessage({ message }: { message: CoreMessageData }) {
@@ -22,10 +22,11 @@ function StaticMessage({ message }: { message: CoreMessageData }) {
       <div className="cord-author-name cord-font-body-emphasis">
         {isHuman ? 'You' : 'GPT-4'}
       </div>
-      <experimental.MessageContent
+      <betaV2.MessageContent
         content={message.content as any}
         attachments={[]}
         edited={false}
+        authorData={undefined}
       />
     </div>
   );
