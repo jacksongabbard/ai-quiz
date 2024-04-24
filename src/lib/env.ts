@@ -12,6 +12,7 @@ export const CORD_API_SECRET = env('CORD_API_SECRET');
 
 export const CLACK_APPLICATION_ID = env('CLACK_APPLICATION_ID');
 export const CLACK_API_SECRET = env('CLACK_API_SECRET');
+export const CLACK_CHANNEL = env('CLACK_CHANNEL');
 
 export const CORD_SERVER = env('CORD_SERVER');
 
