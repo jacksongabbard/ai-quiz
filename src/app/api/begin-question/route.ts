@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { addBotMessageToThread } from '@/lib/openai';
+import { BOT_ID, getBots } from '@/lib/openai';
 import { MessageNodeType } from '@cord-sdk/types';
 import { addContentToClack } from '@/lib/clack';
 import { parseThreadID } from '@/lib/threadID';
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
   await assertGameNotLocked(id);
 
   await Promise.all([
-    addBotMessageToThread(threadID),
+    getBots().then((bots) => bots.forceRespond(BOT_ID, threadID)),
     saveGameProgress(id, data?.answers ?? []),
     addGameProgressToClack(threadID),
   ]);

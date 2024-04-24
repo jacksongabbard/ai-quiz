@@ -1,20 +1,39 @@
-import { OpenAI } from 'openai';
-import { OPENAI_API_SECRET } from '@/lib/env';
+import {
+  CORD_API_SECRET,
+  CORD_APPLICATION_ID,
+  OPENAI_API_SECRET,
+  SERVER,
+} from '@/lib/env';
 import {
   BaseQuizQuestion,
   questions as productionQuestions,
 } from '@/lib/questions';
 import { fetchCordRESTApi } from '@/lib/fetchCordRESTApi';
-import { uuid } from '@/lib/uuid';
-import type { CoreMessageData, MessageContent } from '@cord-sdk/types';
-import { MessageNodeType } from '@cord-sdk/types';
 import { loadGameProgress } from './progress';
+import {
+  type ChatbotRegistry,
+  type Chatbot,
+  chatbots,
+  eventIsFromBot,
+} from '@cord-sdk/chatbot-base';
+import {
+  openaiCompletion,
+  messageToOpenaiMessage,
+} from '@cord-sdk/chatbot-openai';
+import { parseThreadID } from './threadID';
+import { assertGameNotLocked } from './lock';
 
 export const BOT_ID = 'gpt4';
 
-const openai = new OpenAI({
-  apiKey: OPENAI_API_SECRET,
-});
+let bots: ChatbotRegistry;
+export async function getBots() {
+  if (!bots) {
+    bots = chatbots(CORD_APPLICATION_ID, CORD_API_SECRET);
+    await bots.register(BOT_ID, bot);
+  }
+
+  return bots;
+}
 
 const baseSystemPrompt = `
 You are playing a quiz game with your friend. You should use all your knowledge and capabilities to help answer the question. You prefer to keep your messages to one to three short sentences and mildly funny.
@@ -50,21 +69,6 @@ function questionSystemPrompt(q: BaseQuizQuestion): string {
   return prompt;
 }
 
-async function typing(threadID: string, userID: string, present: boolean) {
-  return await fetchCordRESTApi(
-    `/v1/threads/${threadID}`,
-    'PUT',
-    JSON.stringify({ typing: present ? [userID] : [] }),
-  );
-}
-
-function stringToMessageContent(s: string): MessageContent {
-  return s.split('\n').map((ss) => ({
-    type: MessageNodeType.PARAGRAPH,
-    children: [{ text: ss }],
-  }));
-}
-
 async function getSavedQuestion(
   id: string,
   questionNumber: number,
@@ -80,100 +84,53 @@ async function getSavedQuestion(
   return productionQuestions[questionNumber];
 }
 
-async function getMessagesInThread(
-  threadID: string,
-): Promise<OpenAI.ChatCompletionMessageParam[]> {
-  const messages: CoreMessageData[] = await fetchCordRESTApi(
-    `/v1/threads/${threadID}/messages?sortDirection=ascending`,
-  );
+const bot: Chatbot = {
+  cordUser: {
+    name: 'GPT-4',
+    profilePictureURL: SERVER + '/bot-black.svg',
+  },
 
-  return messages.map((m) => ({
-    role: m.authorID.startsWith('h:') ? 'user' : 'assistant',
-    content: m.plaintext,
-  }));
-}
-
-async function maybeUpdateBotAnswer(threadID: string, full: string) {
-  const matches = full.match(answerRegex) ?? [];
-  if (matches.length < 1) {
-    return;
-  }
-
-  const match = matches[matches.length - 1];
-  const botAnswer = match.charCodeAt(match.length - 1) - asciiCapitalsOffset;
-
-  console.log('updating bot answer for thread', threadID, botAnswer);
-  await fetchCordRESTApi(
-    `/v1/threads/${threadID}`,
-    'PUT',
-    JSON.stringify({ metadata: { botAnswer } }),
-  );
-}
-
-export async function addBotMessageToThread(threadID: string) {
-  const [sigil, id, questionNumber] = threadID.split(':');
-  if (sigil !== 't' || questionNumber === undefined) {
-    throw new Error('Invalid threadID');
-  }
-
-  const [question, existingMessages] = await Promise.all([
-    getSavedQuestion(id, Number(questionNumber)),
-    getMessagesInThread(threadID),
-  ]);
-
-  const messageID = uuid();
-
-  const openaiMessages: OpenAI.ChatCompletionMessageParam[] = [
-    {
-      role: 'system',
-      content: questionSystemPrompt(question),
-    },
-    { role: 'user', content: "I'm not sure, what do you think?" },
-    ...existingMessages,
-  ];
-
-  console.log(
-    'calling openai to add a message to thread',
-    threadID,
-    existingMessages.length,
-    messageID,
-  );
-  const stream = await openai.chat.completions.create({
-    model: 'gpt-4-0613',
-    messages: openaiMessages,
-    stream: true,
-  });
-
-  await fetchCordRESTApi(
-    `/v1/threads/${threadID}/messages`,
-    'POST',
-    JSON.stringify({ id: messageID, authorID: BOT_ID, content: [] }),
-  );
-
-  await typing(threadID, BOT_ID, true);
-
-  let full = '';
-  for await (const chunk of stream) {
-    const content = chunk.choices[0].delta.content;
-    if (content !== undefined) {
-      full += content;
+  async shouldRespondToEvent(event) {
+    if (eventIsFromBot(event)) {
+      return false;
     }
 
-    await Promise.all([
-      typing(threadID, BOT_ID, true),
-      fetchCordRESTApi(
-        `/v1/threads/${threadID}/messages/${messageID}`,
-        'PUT',
-        JSON.stringify({
-          content: stringToMessageContent(full),
-          updatedTimestamp: null,
-        }),
-      ),
-    ]);
-  }
+    const [id] = parseThreadID(event.event.threadID);
+    await assertGameNotLocked(id);
+    return true;
+  },
 
-  await Promise.all([
-    maybeUpdateBotAnswer(threadID, full),
-    typing(threadID, BOT_ID, false),
-  ]);
-}
+  getResponse: openaiCompletion(OPENAI_API_SECRET, async (messages, thread) => {
+    const [sigil, id, questionNumber] = thread.id.split(':');
+    if (sigil !== 't' || questionNumber === undefined) {
+      throw new Error('Invalid threadID');
+    }
+
+    const question = await getSavedQuestion(id, Number(questionNumber));
+    return [
+      {
+        role: 'system',
+        content: questionSystemPrompt(question),
+      },
+      { role: 'user', content: "I'm not sure, what do you think?" },
+      ...messages.map(messageToOpenaiMessage),
+    ];
+  }),
+
+  async onResponseSent(response, messages, thread) {
+    const matches = response.plaintext.match(answerRegex) ?? [];
+    if (matches.length < 1) {
+      return;
+    }
+
+    const match = matches[matches.length - 1];
+    const botAnswer = match.charCodeAt(match.length - 1) - asciiCapitalsOffset;
+
+    console.log('updating bot answer for thread', thread.id, botAnswer);
+    await fetchCordRESTApi(
+      `/v1/threads/${thread.id}`,
+      'PUT',
+      JSON.stringify({ metadata: { botAnswer } }),
+    );
+  },
+};

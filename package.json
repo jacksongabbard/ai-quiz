@@ -9,13 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@cord-sdk/chatbot-base": "file:cord-sdk-chatbot-base-1.42.2.tgz",
+    "@cord-sdk/chatbot-openai": "file:cord-sdk-chatbot-openai-1.42.2.tgz",
     "@cord-sdk/react": "^1.42.2",
     "@cord-sdk/server": "^1.42.2",
     "@vercel/analytics": "^1.2.2",
     "classnames": "^2.5.1",
     "jsonwebtoken": "^9.0.2",
     "next": "14.1.4",
-    "openai": "^4.29.2",
     "react": "^18",
     "react-dom": "^18",
     "uuid": "^9.0.1"
