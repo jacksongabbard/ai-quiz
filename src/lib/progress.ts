@@ -27,9 +27,11 @@ export async function saveGameProgress(
   );
 }
 
-export async function loadGameProgress(
-  id: string,
-): Promise<{ answers: ClientAnswers; questions: BaseQuizQuestion[] } | null> {
+export async function loadGameProgress(id: string): Promise<{
+  answers: ClientAnswers;
+  questions: BaseQuizQuestion[];
+  locked: boolean;
+} | null> {
   const bot = 'b:' + id;
 
   try {
@@ -44,7 +46,7 @@ export async function loadGameProgress(
 
     const answers: ClientAnswers = JSON.parse(String(botData.metadata.answers));
 
-    return { questions, answers };
+    return { questions, answers, locked: !!botData.metadata.locked };
   } catch (_e) {
     return null;
   }
