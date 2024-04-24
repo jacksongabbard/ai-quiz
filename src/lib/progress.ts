@@ -42,11 +42,13 @@ export async function loadGameProgress(id: string): Promise<{
   try {
     // We used to store on the bot, now on the group. Fetch both for BC.
     const [botData, groupData] = await Promise.all([
-      fetchCordRESTApi<ServerUserData>('/v1/users/' + bot, 'GET'),
+      fetchCordRESTApi<ServerUserData>('/v1/users/' + bot, 'GET').catch(
+        (_e) => null,
+      ),
       fetchCordRESTApi<ServerGroupData>('/v1/groups/' + group, 'GET'),
     ]);
 
-    const combinedMetadata = { ...botData.metadata, ...groupData.metadata };
+    const combinedMetadata = { ...botData?.metadata, ...groupData.metadata };
 
     const questions: BaseQuizQuestion[] = JSON.parse(
       String(combinedMetadata.questions),
