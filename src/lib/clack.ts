@@ -8,6 +8,10 @@ import {
 import type { MessageContent } from '@cord-sdk/types';
 
 export async function addContentToClack(id: string, content: MessageContent) {
+  if (!CLACK_APPLICATION_ID || !CLACK_API_SECRET || !CLACK_CHANNEL) {
+    return;
+  }
+
   const clackThreadID = `${CLACK_CHANNEL}-${id}`;
 
   await fetchCordRESTApi(

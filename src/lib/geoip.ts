@@ -1,7 +1,7 @@
 import { IPSTACK_API_SECRET } from '@/lib/env';
 
 export async function ipToLocation(ip: string): Promise<object | string> {
-  if (!process.env.IPSTACK_API_SECRET) {
+  if (!IPSTACK_API_SECRET) {
     return ip;
   }
 

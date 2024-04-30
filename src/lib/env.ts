@@ -10,13 +10,13 @@ function env(k: string): string {
 export const CORD_APPLICATION_ID = env('CORD_APPLICATION_ID');
 export const CORD_API_SECRET = env('CORD_API_SECRET');
 
-export const CLACK_APPLICATION_ID = env('CLACK_APPLICATION_ID');
-export const CLACK_API_SECRET = env('CLACK_API_SECRET');
-export const CLACK_CHANNEL = env('CLACK_CHANNEL');
+export const CLACK_APPLICATION_ID = process.env.CLACK_APPLICATION_ID;
+export const CLACK_API_SECRET = process.env.CLACK_API_SECRET;
+export const CLACK_CHANNEL = process.env.CLACK_CHANNEL;
 
 export const CORD_SERVER = env('CORD_SERVER');
 
 export const OPENAI_API_SECRET = env('OPENAI_API_SECRET');
 export const SERVER = env('SERVER');
 
-export const IPSTACK_API_SECRET = env('IPSTACK_API_SECRET');
+export const IPSTACK_API_SECRET = process.env.IPSTACK_API_SECRET;
